@@ -3,11 +3,12 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string>
+#include <string.h>
 #include <unistd.h>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-#include "network.hpp"
+#include "netlib.hpp"
 #include "guilib.hpp"
 #include "gamelib.hpp"
 
@@ -23,8 +24,9 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 
-
 #include <fcntl.h>
+
+#include <pthread.h>
 
 
 using namespace sf;
@@ -43,6 +45,10 @@ Game::Game()
 
 void Game::init()
 {   
+       m_buffer.R_port=1040;
+       
+       pthread_create(&m_thread_server, NULL,tcpWatchdog,(void *) &m_buffer);       
+       
        m_font.loadFromFile(GAME_FONT_TITLE);
        m_title.setFont(m_font);
        m_title.setString(GAME_NAME);
@@ -54,6 +60,9 @@ void Game::init()
        button.setFont(GAME_FONT_BUTTON);
        button.setTexture(GAME_THEME_BUTTON);
        
+       m_arrayConnectionTexture.loadFromFile(GAME_THEME_ARRAY);
+       
+       
        m_state=0;
 }
 
@@ -61,8 +70,7 @@ void Game::menu()
 {
        createMenu();
        
-       string text="hey";
-       //Textbox bar(&text,)
+       
        
        while(window.isOpen())
        {
@@ -97,9 +105,16 @@ void Game::menu()
               window.clear(Color(48,48,48));
               //window.draw(button);
               
+              
+              for(int i=0;i<m_arraySprites.size();i++)
+                     window.draw(*m_arraySprites[i]);
+              for(int i=0;i<m_arrayText.size();i++)
+              {
+                     window.draw(*m_arrayText[i]);
+              }
+              
              int nbButt=button.getNbOfBt();
              int select=0;
-             
               for(int i=0;i<nbButt;i++)
                      select+=buttons[i]->update(window);
               if(select)
@@ -127,11 +142,21 @@ void Game::menu()
                             break;
                             
                             case JOIN_BUTT:
-                                   m_state=GAME_ONLINE;
-                                   return ;
+                                   m_state=CREATION_MENU;
+                                   m_host=0;
+                                   createMenu();
                             break;
                             
                             case HOST_BUTT:
+                                   m_state=CREATION_MENU;
+                                   m_host=1;
+                                   m_nbPlayer=1;
+                                   if(!fork())
+                                   {
+                                          startServer();
+                                          exit(0);
+                                   }
+                                   createMenu();
                             break;
                             
                             case SAVE_BUTT:
@@ -150,7 +175,6 @@ void Game::menu()
 
 void Game::createMenu()
 {
-       cout<<buttons.size()<<endl;
        m_title.setPosition(Vector2f(window.getSize().x/2-170, window.getSize().y/7));
        for(int i=buttons.size()-1;i>-1;i--)
        {
@@ -190,6 +214,80 @@ void Game::createMenu()
                      }
               }
               break;
+              case CREATION_MENU:
+              {
+                     string buttonsLabel[]={"start","back"};
+                     int buttonIndex[]={START_BUTT,BACK_BUTT};
+                     for(int i=0;i<2;i++)
+                     {
+                            buttons.push_back(new Button(buttonsLabel[i],Vector2f(20+window.getSize().x*7/9,window.getSize().y*(i+8)/10),buttonIndex[i]));
+                     }
+                     if(!m_host)
+                            buttons[0]->disable();
+                     m_arraySprites.push_back(new Sprite);
+                     m_arraySprites[0]->setTexture(m_arrayConnectionTexture);
+                     m_arraySprites[0]->setTextureRect(sf::IntRect(0, 0, 651,37 ));
+                     m_arraySprites[0]->setPosition(Vector2f(window.getSize().x/2-350,window.getSize().y*3/10));
+                     
+                     for(int i=0;i<m_nbPlayer;i++)
+                     {      
+                            int n=5;
+                            
+                            m_arraySprites.push_back(new Sprite);
+                            m_arraySprites[i+1]->setTexture(m_arrayConnectionTexture);
+                            m_arraySprites[i+1]->setTextureRect(sf::IntRect(1, 38, 649,50 ));
+                            m_arraySprites[i+1]->setPosition(Vector2f(window.getSize().x/2-350+1,window.getSize().y*3/10+37+50*i));
+                            
+                            //Player number
+                            m_arrayText.push_back(new Text);
+                            m_arrayText[n*i]->setFont(m_font);
+                            char no[]="1";
+                            no[0]='1'+i;
+                            m_arrayText[n*i]->setString(no);
+                            m_arrayText[n*i]->setCharacterSize(15);
+                            m_arrayText[n*i]->setPosition(Vector2f(window.getSize().x/2-330,window.getSize().y*3/10+50+50*i));
+                            m_arrayText[n*i]->setColor(Color(0,0,0));
+                            
+                            //Player name
+                            m_arrayText.push_back(new Text);
+                            m_arrayText[n*i+1]->setFont(m_font);
+                            m_arrayText[n*i+1]->setString("aightech");
+                            m_arrayText[n*i+1]->setCharacterSize(15);
+                            m_arrayText[n*i+1]->setPosition(Vector2f(window.getSize().x/2-300,window.getSize().y*3/10+50+50*i));
+                            m_arrayText[n*i+1]->setColor(Color(0,0,0));
+                            
+                            //Player IPaddress
+                            m_arrayText.push_back(new Text);
+                            m_arrayText[n*i+2]->setFont(m_font);
+                            char IP[]="192.168.0.1";
+                            m_arrayText[n*i+2]->setString(IP);
+                            m_arrayText[n*i+2]->setCharacterSize(15);
+                            m_arrayText[n*i+2]->setPosition(Vector2f(window.getSize().x/2-100,window.getSize().y*3/10+50+50*i));
+                            m_arrayText[n*i+2]->setColor(Color(0,0,0));
+                            
+                            //Player Port no
+                            m_arrayText.push_back(new Text);
+                            m_arrayText[n*i+3]->setFont(m_font);
+                            char port[]="2027";
+                            m_arrayText[n*i+3]->setString(port);
+                            m_arrayText[n*i+3]->setCharacterSize(15);
+                            m_arrayText[n*i+3]->setPosition(Vector2f(window.getSize().x/2+70,window.getSize().y*3/10+50+50*i));
+                            m_arrayText[n*i+3]->setColor(Color(0,0,0));
+                            
+                            //Player Port no
+                            m_arrayText.push_back(new Text);
+                            m_arrayText[n*i+4]->setFont(m_font);
+                            char date[]="17h25m23";
+                            m_arrayText[n*i+4]->setString(date);
+                            m_arrayText[n*i+4]->setCharacterSize(15);
+                            m_arrayText[n*i+4]->setPosition(Vector2f(window.getSize().x/2+170,window.getSize().y*3/10+50+50*i));
+                            m_arrayText[n*i+4]->setColor(Color(0,0,0));
+                            
+                            buttons.push_back(new Button("X",Vector2f(window.getSize().x/2+305,window.getSize().y*3/10+35+50*i),KILL_P1_BUTT+i));
+                     }
+                     
+              }
+              break;
        }
 }
 
@@ -220,6 +318,7 @@ void Game::onlineGame()
               
              int nbButt=button.getNbOfBt();
              int select=0;
+             
               for(int i=0;i<nbButt;i++)
                      select+=buttons[i]->update(window);
               if(select)
@@ -333,69 +432,134 @@ void Game::createGameContext()
               
 }
 
-void startServer()
+void Game::startServer()
 {
-
-
-       socklen_t clilen;
-       struct sockaddr_in serv_addr, cli_addr;
-       sockfd = socket(AF_INET, SOCK_STREAM, 0);
-       if (sockfd < 0) error("ERROR opening socket");
+       // Receiving server variables - Initialization//
+       serv_sfd = socket(AF_INET, SOCK_STREAM, 0);
+       if (serv_sfd < 0) printf("ERROR opening socket\n");
        bzero((char *) &serv_addr, sizeof(serv_addr));
-       portno = atoi(argv[1]);
+       serv_portNo = 1030;
        serv_addr.sin_family = AF_INET;
        serv_addr.sin_addr.s_addr = INADDR_ANY;
-       serv_addr.sin_port = htons(portno);
+       serv_addr.sin_port = htons(serv_portNo);
 
-       if (bind(sockfd, (struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) 
+       if (bind(serv_sfd, (struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) 
               printf("error(ERROR on binding\n");
 
-       listen(sockfd,5);//define la taille de la liste d'attente
-       clilen = sizeof(cli_addr);
-       //////
+       listen(serv_sfd,5);
+       serv_clilen = sizeof(serv_clientAddr[0]);
        
+       serv_clientPortNo[0]=m_buffer.R_port;
+       sprintf(serv_clientIPAddr[0],"%s","127.0.0.1");
+       // ------------------------------------------ //
        
-     
        while (1)
        {    
-              newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);      
-              if (newsockfd < 0) printf("error(ERROR on binding\n");
-
-              bzero(buffer,256);
-              n=read(newsockfd,buffer,255);
-              if (n < 0) printf("error(ERROR on binding\n");
-              printf("Address %s on port %d :\n",inet_ntoa(serv_addr.sin_addr), ntohs(cli_addr.sin_port));
-              printf("request:%s\n",strchr(buffer,'G')+1);
-              switch(atoi(strchr(buffer,'G')+1))
+              serv_cpsfd = accept(serv_sfd, (struct sockaddr *) &serv_clientAddr[0], &serv_clilen);      
+              if (serv_cpsfd < 0) 
               {
-                     case 0:
-                            printf("server ?\n");
-                            strcpy(buffer,"G0Q0P0O0");
-                            n = write(newsockfd,buffer,strlen(buffer));
-                            printf("reply: yes\n");
-                     break;
-                     case 1:
-                            printf("join ?\n");
-                            if(0)
-                            {
-                                   strcpy(buffer,"G1Q0P0O0");
-                                   n = write(newsockfd,buffer,strlen(buffer));
-                                   printf("reply: yes\n");
-                            }
-                            else
-                            {
-                                   strcpy(buffer,"G-1Q0P0O0");
-                                   n = write(newsockfd,buffer,strlen(buffer));
-                                   printf("reply: no\n");
-                            }
-                     break;
+                     printf("error(ERROR on binding\n");
+                     exit(0);
               }
 
-              close(newsockfd);
+              bzero(serv_buff.Rx,SIZE_BUFF);
+              if(read(serv_cpsfd,serv_buff.Rx,SIZE_BUFF)>0)
+              {
+                     printf("Server: Address %s on port %d :\n",inet_ntoa(serv_clientAddr[0].sin_addr), ntohs(serv_clientAddr[0].sin_port));
+                     printf("Server: request:%s\n",serv_buff.Rx);//strchr(serv_RxBuff,'G')+1);
+                     switch(atoi(strchr(serv_buff.Rx,'G')+1))
+                     {
+                            case 0:
+                                   printf("server ?\n");
+                                   strcpy(serv_buff.Tx,"G0Q0P0O0");
+                                   write(serv_cpsfd,serv_buff.Tx,strlen(serv_buff.Tx));
+                                   printf("reply: yes\n");
+                            break;
+                            case 1:
+                                   printf("Server: join ?\n");
+                                   if(m_nbPlayer<4)
+                                   {
+                                          strcpy(serv_buff.Tx,"G1Q0P0O0");
+                                          serv_buff.T_flag=1;
+                                          write(serv_cpsfd,serv_buff.Tx,strlen(serv_buff.Tx));
+                                          printf("reply: yes\n");
+                                          m_nbPlayer++;
+                                          sendTCP(serv_clientIPAddr[0],serv_clientPortNo[0],&serv_buff);
+                                          
+                                   }
+                                   else
+                                   {
+                                          strcpy(serv_buff.Tx,"G-1Q0P0O0");
+                                          write(serv_cpsfd,serv_buff.Tx,strlen(serv_buff.Tx));
+                                          printf("reply: no\n");
+                                   }
+                            break;
+                     }
+              }
+              close(serv_cpsfd);
      	}
      
-     close(sockfd);
-     return 0; 
+     close(serv_sfd);
+     
+}
+
+void * Game::tcpWatchdog(void * p_data)
+{
+       printf("TCP started\n");
+       // Receiving server variables - Declaration//
+       Buffer * buff= (Buffer *) p_data;
+       int _sfd;
+       int _cpsfd;
+       struct sockaddr_in _addr;
+       struct sockaddr_in _clientAddr;
+       socklen_t _clilen;
+       // --------------------------- //
+       
+       
+       // Receiving server variables - Initialization //
+       _sfd = socket(AF_INET, SOCK_STREAM, 0);
+       if (_sfd < 0) printf("ERROR opening socket\n");
+       
+       bzero((char *) &_addr, sizeof(_addr));
+       _addr.sin_family = AF_INET;
+       _addr.sin_addr.s_addr = INADDR_ANY;
+       _addr.sin_port = htons(buff->R_port);
+
+       if (bind(_sfd, (struct sockaddr *) &_addr,sizeof(_addr)) < 0) 
+              printf("error(ERROR on binding\n");
+
+       listen(_sfd,5);
+       _clilen = sizeof(_clientAddr);
+       buff->R_flag=0;
+       // --------------------------------------------- //
+       
+       
+       while (1)
+       {    
+              if(!buff->R_flag)//if the last data received has been process
+              { 
+                     _cpsfd = accept(_sfd, (struct sockaddr *) &_clientAddr, &_clilen); //wait for a connection
+                     if (_cpsfd < 0) //if the connection went wrong.
+                     {
+                            printf("error(ERROR on binding\n");
+                            exit(0);
+                     }
+                     
+                     bzero(buff->Rx,SIZE_BUFF);
+                     if(read(_cpsfd,buff->Rx,SIZE_BUFF)>0)
+                     {
+                            buff->R_flag=1;
+                            printf("watch : Address %s on port %d :\n",inet_ntoa(_clientAddr.sin_addr), ntohs(_clientAddr.sin_port));
+                            printf("watch : %s\n",buff->Rx);
+                     }
+                     else
+                            printf("watch : Nothing was received.\n\n");
+                            
+                     close(_cpsfd);
+              }
+       }
+ 
+       return NULL;
 }
 
 

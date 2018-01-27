@@ -4,11 +4,13 @@
 #define MAIN_MENU 0
 #define OPTION_MENU 1
 #define LAN_MENU 2
-#define GAME_ONLINE 3
-#define MAIN_GAME 4
-#define GENPOLL_GAME 5
+#define CREATION_MENU 3
+#define GAME_ONLINE 4
+#define MAIN_GAME 5
+
 #define INQUIRY_GAME 6
 #define DENOUNCE_GAME 7
+#define GENPOLL_GAME 8
 
 #define GAME_NAME "SHERLOCK 13"
 #define WIN_W 1200
@@ -19,6 +21,7 @@
 
 #define GAME_FONT_BUTTON "media/fonts/SHERLOCKED.ttf"
 #define GAME_THEME_BUTTON "media/theme/button.png"
+#define GAME_THEME_ARRAY "media/theme/arrayConnection.png"
 
 #define LANPORT 1027
 
@@ -41,11 +44,29 @@
 #define EYE_BUTT 17
 #define PIPE_BUTT 18
 #define FIST_BUTT 19
+#define START_BUTT 20
+
+#define KILL_P1_BUTT 21
+#define KILL_P2_BUTT 22
+#define KILL_P3_BUTT 23
+#define KILL_P4_BUTT 24
+
 #define _BUTT 20
 
 #define NB_OBJ 8
 
-#define SIZE_BUFF 256
+
+
+
+#include <sys/types.h> 
+#include <sys/socket.h>
+#include <sys/ioctl.h>
+#include <netinet/in.h>
+#include <net/if.h>
+#include <sys/wait.h>
+
+#include <netdb.h>
+#include <arpa/inet.h>
 
 using namespace sf;
 using namespace std;
@@ -78,7 +99,6 @@ class Game
        
        void startServer();
        
-       
        private:
        float time;
        int m_state;
@@ -87,19 +107,31 @@ class Game
        
        int m_host;
        
-       char serv_RxBuff[SIZE_BUFF];
-       char serv_TxBuff[SIZE_BUFF];
        int serv_portNo;
        int serv_clientPortNo[4];
        char serv_clientIPAddr[4][16];
        int serv_sfd;
        int serv_cpsfd;
        struct sockaddr_in serv_addr;
-       struct sockaddr_in serv_clientAddr;
+       struct sockaddr_in serv_clientAddr[4];
+       socklen_t serv_clilen;
        
-       char RxBuff[SIZE_BUFF];
-       char TxBuff[SIZE_BUFF];
+       
+       Buffer serv_buff;
        int portNo;
+       
+       Buffer m_buffer;
+       static void * tcpWatchdog(void * p_data);
+       pthread_t m_thread_server;
+       
+       
+       int m_nbPlayer;
+       Texture m_arrayConnectionTexture;
+       vector<Sprite*> m_arraySprites;
+       vector<Text*> m_arrayText;
+       char m_arrayPlayersNames[4][20];
+       char m_arrayPlayersIPaddr[4][20];
+       int m_arrayPlayersPort[4];
        
        
        RenderWindow window;
@@ -107,6 +139,7 @@ class Game
        Font m_font;
        Texture m_buttonTexture;
        Button button;
+       
        
        vector<Button *> buttons;
        

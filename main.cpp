@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-#include "src/network.hpp"
+#include "src/netlib.hpp"
 #include "src/guilib.hpp"
 #include "src/gamelib.hpp"
 
@@ -27,10 +27,6 @@ int main()
        Game game;
        game.init();
        game.menu();
-       
-       if(game.isHost())
-              if(!fork())
-                     game.startServer();
        
        switch(game.getState())
        {
