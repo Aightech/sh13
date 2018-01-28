@@ -30,5 +30,6 @@ typedef struct _Buffer{//the buffer
     \param port the port of the destinaion.
 */
 int sendTCP(char *IPaddress,int port, Buffer *buff);
+void scanServers();
 
 #endif 	  

@@ -70,3 +70,76 @@ int sendTCP(char *IPaddress, int port, Buffer *buff)
        return flag;
        
 }
+
+void scanServers()
+{
+       // --- Find the default IP interface --- //
+       FILE *f;
+       char line[100] , *iface , *c;
+       f = fopen("/proc/net/route" , "r");
+       while(fgets(line , 100 , f))
+       {
+              iface = strtok(line , " \t");
+              c = strtok(NULL , " \t");
+              if(iface!=NULL && c!=NULL && strcmp(c , "00000000") == 0)
+                     break;
+       } 
+       fclose(f);
+       // ------------------------------------- //
+       
+       
+       // --- Find the IP address of the default interface --- //
+       int fd;
+       struct ifreq ifr;
+
+       fd = socket(AF_INET, SOCK_DGRAM, 0);
+       ifr.ifr_addr.sa_family = AF_INET;           //Type of address to retrieve - IPv4 IP address
+       strncpy(ifr.ifr_name , iface , IFNAMSIZ-1); //Copy the interface name in the ifreq structure
+       ioctl(fd, SIOCGIFADDR, &ifr);               //Get the ip address
+       close(fd);
+       char addressIP[16];
+       strcpy(addressIP,inet_ntoa(( (struct sockaddr_in *)&ifr.ifr_addr)->sin_addr) );
+       // --------------------------------------------------- //
+       
+       //display result
+       printf("Default interface is : %s \n" , iface);
+       printf("IP address : %s\n" , addressIP );
+       
+       // --- Get The pc ID --- //
+        //look for the last point of the ip address
+       int i=0,pt=0;
+       while(i<16&&pt<3)
+              if(addressIP[i++]=='.')
+                     pt++;
+                     
+       int pc = atoi(addressIP+i); //get the host id of the computer  
+       addressIP[i]='\0';
+       // ------------------------ //
+       
+       char addr[16];
+       int range=5;
+       int sfd;
+       int sockfd, portno;
+       struct sockaddr_in serv_addr;
+       
+       for(int i=0;i<2*range;i++)
+       {
+              sprintf(addr,"%s%d" ,addressIP,pc-range+i);
+
+              sfd = socket(AF_INET, SOCK_STREAM, 0);
+              fcntl(sfd, F_SETFL, O_NONBLOCK);
+              if (sfd < 0) printf("ERROR opening socket");
+              
+              serv_addr.sin_family = AF_INET;
+              serv_addr.sin_addr.s_addr=inet_addr("127.0.0.1");
+              serv_addr.sin_port = htons(5070);
+
+              if (connect(sfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) 
+                     printf("nobody on %s\n" , addr);
+              else
+                     printf("somebody on %s\n\n" , addr);
+                     
+              close(sfd);
+       }
+       
+}

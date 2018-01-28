@@ -28,6 +28,9 @@
 
 #include <pthread.h>
 
+#define SERVERPORT 3000
+#define WATCHPORT 3001
+
 
 using namespace sf;
 using namespace std;
@@ -45,7 +48,7 @@ Game::Game()
 
 void Game::init()
 {   
-       m_buffer.R_port=1040;
+       m_buffer.R_port=WATCHPORT;
        
        pthread_create(&m_thread_server, NULL,tcpWatchdog,(void *) &m_buffer);       
        
@@ -102,16 +105,15 @@ void Game::menu()
               
               msPos=Mouse::getPosition(window);
               
+              processBuffer();
+              
               window.clear(Color(48,48,48));
-              //window.draw(button);
               
               
               for(int i=0;i<m_arraySprites.size();i++)
                      window.draw(*m_arraySprites[i]);
               for(int i=0;i<m_arrayText.size();i++)
-              {
                      window.draw(*m_arrayText[i]);
-              }
               
              int nbButt=button.getNbOfBt();
              int select=0;
@@ -126,6 +128,7 @@ void Game::menu()
                             break;
                             case LAN_BUTT:
                                    m_state=LAN_MENU;
+                                   scanServers();
                                    createMenu();
                             break;
                             case OPTION_BUTT:
@@ -438,7 +441,7 @@ void Game::startServer()
        serv_sfd = socket(AF_INET, SOCK_STREAM, 0);
        if (serv_sfd < 0) printf("ERROR opening socket\n");
        bzero((char *) &serv_addr, sizeof(serv_addr));
-       serv_portNo = 1030;
+       serv_portNo = SERVERPORT;
        serv_addr.sin_family = AF_INET;
        serv_addr.sin_addr.s_addr = INADDR_ANY;
        serv_addr.sin_port = htons(serv_portNo);
@@ -526,7 +529,7 @@ void * Game::tcpWatchdog(void * p_data)
        _addr.sin_port = htons(buff->R_port);
 
        if (bind(_sfd, (struct sockaddr *) &_addr,sizeof(_addr)) < 0) 
-              printf("error(ERROR on binding\n");
+              printf("watch: error(ERROR on binding)\n");
 
        listen(_sfd,5);
        _clilen = sizeof(_clientAddr);
@@ -541,7 +544,7 @@ void * Game::tcpWatchdog(void * p_data)
                      _cpsfd = accept(_sfd, (struct sockaddr *) &_clientAddr, &_clilen); //wait for a connection
                      if (_cpsfd < 0) //if the connection went wrong.
                      {
-                            printf("error(ERROR on binding\n");
+                            printf("watch : error(ERROR on binding)\n");
                             exit(0);
                      }
                      
@@ -560,6 +563,15 @@ void * Game::tcpWatchdog(void * p_data)
        }
  
        return NULL;
+}
+
+int Game::processBuffer()
+{
+       if(m_buffer.R_flag==1)//double check if new stuff is to read 
+       {
+              printf("main: %s",m_buffer.Rx);
+              m_buffer.R_flag=0;
+       }
 }
 
 

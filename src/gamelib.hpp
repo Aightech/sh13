@@ -23,7 +23,7 @@
 #define GAME_THEME_BUTTON "media/theme/button.png"
 #define GAME_THEME_ARRAY "media/theme/arrayConnection.png"
 
-#define LANPORT 1027
+#define LANPORT 2027
 
 #define PLAY_BUTT 1
 #define LAN_BUTT 2
@@ -121,8 +121,10 @@ class Game
        int portNo;
        
        Buffer m_buffer;
+       int processBuffer();
        static void * tcpWatchdog(void * p_data);
        pthread_t m_thread_server;
+       
        
        
        int m_nbPlayer;
