@@ -454,6 +454,7 @@ void Game::startServer()
        
        serv_clientPortNo[0]=m_buffer.R_port;
        sprintf(serv_clientIPAddr[0],"%s","127.0.0.1");
+       printf("TCP IP Host-server started on Port: %d\n", serv_portNo);
        // ------------------------------------------ //
        
        while (1)
@@ -508,7 +509,6 @@ void Game::startServer()
 
 void * Game::tcpWatchdog(void * p_data)
 {
-       printf("TCP started\n");
        // Receiving server variables - Declaration//
        Buffer * buff= (Buffer *) p_data;
        int _sfd;
@@ -530,6 +530,8 @@ void * Game::tcpWatchdog(void * p_data)
 
        if (bind(_sfd, (struct sockaddr *) &_addr,sizeof(_addr)) < 0) 
               printf("watch: error(ERROR on binding)\n");
+              
+       printf("TCP IP thread started on Port: %d\n", buff->R_port);
 
        listen(_sfd,5);
        _clilen = sizeof(_clientAddr);

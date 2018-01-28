@@ -117,7 +117,7 @@ void scanServers()
        // ------------------------ //
        
        char addr[16];
-       int range=5;
+       int range=65;
        int sfd;
        int sockfd, portno;
        struct sockaddr_in serv_addr;
@@ -132,7 +132,7 @@ void scanServers()
               
               serv_addr.sin_family = AF_INET;
               serv_addr.sin_addr.s_addr=inet_addr("127.0.0.1");
-              serv_addr.sin_port = htons(5070);
+              serv_addr.sin_port = htons(4000);
 
               if (connect(sfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) 
                      printf("nobody on %s\n" , addr);

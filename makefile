@@ -1,4 +1,4 @@
-all: sh13 
+all: sh13 clean
 
 sh13: bin/main.o bin/guilib.o bin/gamelib.o bin/netlib.o
 	g++ -o sh13 bin/main.o bin/guilib.o bin/gamelib.o bin/netlib.o -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lpthread
