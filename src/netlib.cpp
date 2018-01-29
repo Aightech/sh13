@@ -19,8 +19,14 @@
 
 #include "netlib.hpp"
 
+#include <err.h>
+#include <errno.h>
 
-int sendTCP(char *IPaddress, int port, Buffer *buff)
+#include "vector"
+#include <iostream>
+
+
+int sendTCP(const char *IPaddress, int port, Buffer *buff)
 {
        struct sockaddr_in serv_addr;
        
@@ -35,11 +41,11 @@ int sendTCP(char *IPaddress, int port, Buffer *buff)
        int flag=0;
        
        if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) //try to connect
-              printf("Couldn't connect to %s\n\n", "add");
+              printf("Couldn't connect to [%s] on port : %d\n\n", IPaddress,port);
        
        if(buff->T_flag)// if there is something to send  
        {
-              if(write(sockfd,buff->Rx,strlen(buff->Rx))==strlen(buff->Rx))
+              if(write(sockfd,buff->Tx,strlen(buff->Tx))==strlen(buff->Tx))
               {
                      buff->T_flag=0;//the data has been sent
                      if(read(sockfd,buff->Rx,255)>0)
@@ -71,8 +77,9 @@ int sendTCP(char *IPaddress, int port, Buffer *buff)
        
 }
 
-void scanServers()
+int scanServers(Server servers[5])
 {
+             
        // --- Find the default IP interface --- //
        FILE *f;
        char line[100] , *iface , *c;
@@ -116,30 +123,99 @@ void scanServers()
        addressIP[i]='\0';
        // ------------------------ //
        
+       
        char addr[16];
-       int range=65;
        int sfd;
        int sockfd, portno;
        struct sockaddr_in serv_addr;
+       int res, valopt; 
+       long arg; 
+       fd_set myset; 
+       struct timeval tv; 
+       socklen_t lon;
        
-       for(int i=0;i<2*range;i++)
+       char serv_IPaddr[255][16];
+       int h=0,s=0;
+       
+       
+       printf("scanning...\n[");
+       fflush(stdout);
+       for(int i=0;i<255;i++)
        {
-              sprintf(addr,"%s%d" ,addressIP,pc-range+i);
-
+              if(i%5==0)
+              {
+                     printf("#");
+                     fflush(stdout);
+              }
+              sprintf(addr,"%s%d" ,addressIP,i);
+              
               sfd = socket(AF_INET, SOCK_STREAM, 0);
-              fcntl(sfd, F_SETFL, O_NONBLOCK);
+              
               if (sfd < 0) printf("ERROR opening socket");
               
+              // Set non-blocking 
+              arg = fcntl(sfd, F_GETFL, NULL); 
+              arg |= O_NONBLOCK; 
+              fcntl(sfd, F_SETFL, arg);
+              
               serv_addr.sin_family = AF_INET;
-              serv_addr.sin_addr.s_addr=inet_addr("127.0.0.1");
-              serv_addr.sin_port = htons(4000);
-
-              if (connect(sfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) 
-                     printf("nobody on %s\n" , addr);
+              serv_addr.sin_addr.s_addr=inet_addr(addr);
+              serv_addr.sin_port = htons(3002);
+              if (connect(sfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0)
+              { 
+                     if (errno == EINPROGRESS) 
+                     {
+		              //printf("connect EINPROGRESS OK (expected)   ");
+		              tv.tv_sec = 0; 
+                            tv.tv_usec = 10000; 
+                            FD_ZERO(&myset); 
+                            FD_SET(sfd, &myset); 
+                            if (select(sfd+1, NULL, &myset, NULL, &tv) > 0) 
+                            { 
+                                   lon = sizeof(int); 
+                                   getsockopt(sfd, SOL_SOCKET, SO_ERROR, (void*)(&valopt), &lon); 
+                                   if(valopt==0)
+                                   { 
+                                          if(h<255)
+                                                 strcpy(serv_IPaddr[h++],addr);
+                                   }
+                                   
+                            }  
+                     }
+			
+              }
               else
                      printf("somebody on %s\n\n" , addr);
                      
+              arg = fcntl(sfd, F_GETFL, NULL); 
+              arg &= (~O_NONBLOCK); 
+              fcntl(sfd, F_SETFL, arg);       
+                     
               close(sfd);
        }
+       printf("]\n");
+       
+       
+       Buffer B;
+       strcpy(B.Tx,"G0");
+       for(i=0;i<h;i++)
+       {
+              printf("- Somebody on: %s\n",serv_IPaddr[i]);
+              B.T_flag=1;
+              sendTCP(serv_IPaddr[i],3002,&B);
+              if(strcmp(B.Rx,B.Tx)==0)
+              {
+                     printf("\tIt's a sh13 server\n");
+                     strcpy(servers[s].IPaddress,serv_IPaddr[i]);
+                     strcpy(servers[s++].name, strtok((strchr(B.Rx,'N')+1),";"));
+                     printf("\tnamed : %s\n",servers[s-1].name);
+              }
+              else
+                     printf("not a sh13 server\n");
+              
+       }
+       return s;
        
 }
+       
+

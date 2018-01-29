@@ -23,13 +23,25 @@ typedef struct _Buffer{//the buffer
 	
 }Buffer;
 
+typedef struct _Server {
+
+	char name[16];
+	char IPaddress[16];
+	int  portNo;
+	
+	int nbPlayers;
+	
+	
+	
+}Server;
+
 
 /*! \fn int sendTCP(char *IPaddress,int port, Buff *buff);
     \brief Send to the IPaddress on the port passed in argumment the buffer Tx buffer of the stuctur buff passed.
     \param IPaddress the destinaion IP address.
     \param port the port of the destinaion.
 */
-int sendTCP(char *IPaddress,int port, Buffer *buff);
-void scanServers();
+int sendTCP(const char *IPaddress,int port, Buffer *buff);
+int scanServers(Server servers[5]);
 
 #endif 	  

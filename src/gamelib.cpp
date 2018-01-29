@@ -14,6 +14,7 @@
 
 #include "vector"
 
+
 #include <sys/types.h> 
 #include <sys/socket.h>
 #include <sys/ioctl.h>
@@ -117,6 +118,7 @@ void Game::menu()
               
              int nbButt=button.getNbOfBt();
              int select=0;
+             int s=0;
               for(int i=0;i<nbButt;i++)
                      select+=buttons[i]->update(window);
               if(select)
@@ -128,7 +130,12 @@ void Game::menu()
                             break;
                             case LAN_BUTT:
                                    m_state=LAN_MENU;
-                                   scanServers();
+                                   Server servs[5];
+                                   s=scanServers(servs);
+                                   if(s==0)
+                                        printf("no server\n");  
+                                   for(int i=0;i<s;i++)
+                                          printf("IP found: %s\n",servs[i].IPaddress);
                                    createMenu();
                             break;
                             case OPTION_BUTT:
@@ -454,7 +461,8 @@ void Game::startServer()
        
        serv_clientPortNo[0]=m_buffer.R_port;
        sprintf(serv_clientIPAddr[0],"%s","127.0.0.1");
-       printf("TCP IP Host-server started on Port: %d\n", serv_portNo);
+       
+       printf("TCP IP Host-server sh13 started on Port: %d\n", serv_portNo);
        // ------------------------------------------ //
        
        while (1)
@@ -462,22 +470,23 @@ void Game::startServer()
               serv_cpsfd = accept(serv_sfd, (struct sockaddr *) &serv_clientAddr[0], &serv_clilen);      
               if (serv_cpsfd < 0) 
               {
-                     printf("error(ERROR on binding\n");
+                     printf("S:error(ERROR on accepting)\n");
                      exit(0);
               }
 
               bzero(serv_buff.Rx,SIZE_BUFF);
               if(read(serv_cpsfd,serv_buff.Rx,SIZE_BUFF)>0)
               {
-                     printf("Server: Address %s on port %d :\n",inet_ntoa(serv_clientAddr[0].sin_addr), ntohs(serv_clientAddr[0].sin_port));
-                     printf("Server: request:%s\n",serv_buff.Rx);//strchr(serv_RxBuff,'G')+1);
+                     printf("S: Address [%s] on port %d :\n",inet_ntoa(serv_clientAddr[0].sin_addr), ntohs(serv_clientAddr[0].sin_port));
+                     printf("S: Request:%s\n",serv_buff.Rx);//strchr(serv_RxBuff,'G')+1);
                      switch(atoi(strchr(serv_buff.Rx,'G')+1))
                      {
-                            case 0:
-                                   printf("server ?\n");
-                                   strcpy(serv_buff.Tx,"G0Q0P0O0");
+                            case 0://if a client ask if we are a sh13 server
+                                   printf("S: Want to know if we were a sh13 server. \n");
+                                   strcpy(serv_buff.Tx,"G0NXxpartyxX;");
+                                   serv_buff.T_flag=1;
                                    write(serv_cpsfd,serv_buff.Tx,strlen(serv_buff.Tx));
-                                   printf("reply: yes\n");
+                                   printf("S: replied our name: %s \n","name");
                             break;
                             case 1:
                                    printf("Server: join ?\n");
@@ -501,6 +510,8 @@ void Game::startServer()
                      }
               }
               close(serv_cpsfd);
+              printf("S: communication with Address [%s] on port %d Ended.\n",inet_ntoa(serv_clientAddr[0].sin_addr), ntohs(serv_clientAddr[0].sin_port));
+                     
      	}
      
      close(serv_sfd);

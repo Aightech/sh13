@@ -81,7 +81,9 @@ typedef struct _Player {
 	int obj[NB_OBJ];
 	int card[3];
 	
-}PLAYER;
+}Player;
+
+
 
 class Game
 {
