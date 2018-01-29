@@ -45,6 +45,7 @@
 #define PIPE_BUTT 18
 #define FIST_BUTT 19
 #define START_BUTT 20
+#define REFRESH_BUTT 25
 
 #define KILL_P1_BUTT 21
 #define KILL_P2_BUTT 22
@@ -56,7 +57,7 @@
 #define JOIN_S3_BUTT 33
 #define JOIN_S4_BUTT 34
 
-#define _BUTT 20
+
 
 #define NB_OBJ 8
 
@@ -109,13 +110,8 @@ class Game
        void startServer();
        
        private:
-       float time;
-       int m_state;
-       int LANport;
-       int m_turn;
        
-       int m_host;
-       
+       //server related attributes
        int serv_portNo;
        int serv_clientPortNo[4];
        char serv_clientIPAddr[4][16];
@@ -124,40 +120,46 @@ class Game
        struct sockaddr_in serv_addr;
        struct sockaddr_in serv_clientAddr[4];
        socklen_t serv_clilen;
-       
-       
        Buffer serv_buff;
-       int portNo;
        
+       //general attributes
+       float time;
+       int m_state;
+       int m_turn;
+       int m_myNo;
+       int m_host;
+       
+       //TCP related attributes
        Buffer m_buffer;
        int processBuffer();
-       static void * tcpWatchdog(void * p_data);
        pthread_t m_thread_server;
+       static void * tcpWatchdog(void * p_data);
        
+       //servers related attributes
        Server m_servers[5];
+       int m_server;
        int m_nbOfServers;
        
-       
-       
+       //Players related attributes
        int m_nbPlayer;
+       Player m_players[4];
+       int setPlayer(int no, char * name, char * IPaddr, int port);
+       
+       
+       //Graphics related attributes
        Texture m_arrayConnectionTexture;
        vector<Sprite*> m_arraySprites;
        vector<Text*> m_arrayText;
        
-       Player m_players[4];
-       int setPlayer(int no, char * name, char * IPaddr, int port);
-       
        char m_arrayPlayersNames[4][20];
        char m_arrayPlayersIPaddr[4][20];
        int m_arrayPlayersPort[4];
-       
        
        RenderWindow window;
        Text m_title;
        Font m_font;
        Texture m_buttonTexture;
        Button button;
-       
        
        vector<Button *> buttons;
        

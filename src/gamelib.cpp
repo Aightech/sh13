@@ -139,30 +139,22 @@ void Game::menu()
                                         printf("no server\n");  
                                    createMenu();
                             break;
+                            
+                            
                             case JOIN_S1_BUTT:
+                            case JOIN_S2_BUTT:
+                            case JOIN_S3_BUTT:
+                            case JOIN_S4_BUTT:
+                                   m_server=JOIN_S1_BUTT-abs(select);
+                                   
                                    sprintf(m_buffer.Tx,"G%dP%dN%s",1,m_buffer.R_port,"aight;");
                                    m_buffer.T_flag=1;
-                                   
-                                   sendTCP(m_servers[0].IPaddress,m_servers[0].portNo,&m_buffer);       
-                                   //if(atoi(strchr(m_buffer.Rx,'G')+1)==1)
-                                     //     m_state=CREATION_MENU;
+                                   sendTCP(m_servers[m_server].IPaddress,m_servers[m_server].portNo,&m_buffer); 
+                                         
+                                   if(atoi(strchr(m_buffer.Rx,'G')+1)==1)
+                                          m_state=CREATION_MENU;
                                           
                             break;
-                            
-                            
-                            case OPTION_BUTT:
-                                   m_state=OPTION_MENU;
-                                   createMenu();
-                            break;
-                            case QUIT_BUTT:
-                                   window.close();
-                            break;
-                            
-                            case BACK_BUTT:
-                                   m_state=MAIN_MENU;
-                                   createMenu();
-                            break;
-                     
                             
                             case HOST_BUTT:
                                    m_state=CREATION_MENU;
@@ -180,10 +172,54 @@ void Game::menu()
                                    createMenu();
                             break;
                             
-                            case SAVE_BUTT:
+                            case KILL_P1_BUTT: 
+                            case KILL_P2_BUTT: 
+                            case KILL_P3_BUTT: 
+                            case KILL_P4_BUTT:
+                            { 
+                                   int toKill = KILL_P1_BUTT-abs(select);
+                                   
+                                   sprintf(m_buffer.Tx,"G%dP%d",10,toKill);
+                                   m_buffer.T_flag=1;
+                                   sendTCP(m_servers[m_server].IPaddress,m_servers[m_server].portNo,&m_buffer); 
+                            }            
                             break;
                             
-                            case _BUTT:
+                            case START_BUTT:
+                            { 
+                                   
+                                   sprintf(m_buffer.Tx,"G%d",2);
+                                   m_buffer.T_flag=1;
+                                   sendTCP(m_servers[m_server].IPaddress,m_servers[m_server].portNo,&m_buffer); 
+                                   
+                                   return ;
+                                   
+                            }            
+                            break;
+                            
+                            
+                            case OPTION_BUTT:
+                                   m_state=OPTION_MENU;
+                                   createMenu();
+                            break;
+                            case QUIT_BUTT:
+                                   window.close();
+                            break;
+                            
+                            case BACK_BUTT:
+                                   
+                                   if(m_state=CREATION_MENU)
+                                   {
+                                          sprintf(m_buffer.Tx,"G%dU%d",10,m_myNo);
+                                          m_buffer.T_flag=1;
+                                          sendTCP(m_servers[m_server].IPaddress,m_servers[m_server].portNo,&m_buffer); 
+                                   }
+                                   m_state=MAIN_MENU;
+                                   
+                                   createMenu();
+                            break;
+                            
+                            case SAVE_BUTT:
                             break;
                      }
               }
@@ -202,6 +238,16 @@ void Game::createMenu()
        {
               delete buttons[i];
               buttons.pop_back();
+       }
+       for(int i=m_arraySprites.size()-1;i>-1;i--)
+       {
+              delete m_arraySprites[i];
+              m_arraySprites.pop_back();
+       }
+        for(int i=m_arrayText.size()-1;i>-1;i--)
+       {
+              delete m_arrayText[i];
+              m_arrayText.pop_back();
        }
        
        switch(m_state)
@@ -228,9 +274,9 @@ void Game::createMenu()
               break;
               case LAN_MENU:
               {
-                     string buttonsLabel[]={"host game","back"};
-                     int buttonIndex[]={HOST_BUTT,JOIN_BUTT,BACK_BUTT};
-                     for(int i=0;i<2;i++)
+                     string buttonsLabel[]={"host game","refresh","back"};
+                     int buttonIndex[]={HOST_BUTT,REFRESH_BUTT,BACK_BUTT};
+                     for(int i=0;i<3;i++)
                      {
                             buttons.push_back(new Button(buttonsLabel[i],Vector2f(20+window.getSize().x*i/3,window.getSize().y*7/8),buttonIndex[i]));
                      }
@@ -371,6 +417,8 @@ void Game::createMenu()
                             m_arrayText[n*i+4]->setColor(Color(0,0,0));
                             
                             buttons.push_back(new Button("X",Vector2f(window.getSize().x/2+305,window.getSize().y*3/10+35+50*i),KILL_P1_BUTT+i));
+                            if(!m_host)
+                                   buttons[buttons.size()-1]->disable();
                      }
                      
               }
@@ -568,7 +616,7 @@ void Game::startServer()
                             
                             
                             case 1://Joining
-                                   
+                            {  
                                    char *name=strtok((strchr(serv_buff.Rx,'N')+1),";");    //get the name of the player
                                    int port = atoi(strchr(serv_buff.Rx,'P')+1);            //get the port of the player
                                    
@@ -603,6 +651,57 @@ void Game::startServer()
                                           write(serv_cpsfd,serv_buff.Tx,strlen(serv_buff.Tx));
                                           printf("S: replied : %s \n",serv_buff.Tx);
                                    }
+                            }
+                            break;
+                            
+                            case 10://Killing
+                            {      
+                                   
+                                   int U = atoi(strchr(serv_buff.Rx,'U')+1);            //get the player to kill
+                                   
+                                   if(U==0)
+                                   {
+                                          for(int i=1;i<m_nbPlayer;i++)
+                                          { 
+                                                 //say to client he s been kicked out
+                                                 sprintf(serv_buff.Tx,"G%d",10);
+                                                 serv_buff.T_flag=1;
+                                                 sendTCP(m_players[i].IPaddress, m_players[i].portNo, &serv_buff);
+                                          }
+                                          exit(0);
+                                   }
+                                   
+                                   //reply to killer 
+                                   sprintf(serv_buff.Tx,"G%d",10);
+                                   write(serv_cpsfd,serv_buff.Tx,strlen(serv_buff.Tx));
+                                   printf("S: replied : %s \n",serv_buff.Tx);
+                                          
+                                   //say to client he s been kicked out
+                                   sprintf(serv_buff.Tx,"G%d",10);
+                                   serv_buff.T_flag=1;
+                                   sendTCP(m_players[U].IPaddress, m_players[U].portNo, &serv_buff);
+                                   
+                                   
+                                   
+                                   for(int i=U;i<m_nbPlayer-1;i++)
+                                          setPlayer(m_players[i+1].no,m_players[i+1].name,m_players[i+1].IPaddress,m_players[i+1].portNo);
+                                    
+                                   m_nbPlayer--;
+                                         
+                                          
+                                   for(int i=0;i<m_nbPlayer;i++)
+                                   {
+                                          for(int j=0;j<m_nbPlayer;j++)
+                                          {
+                                                 printf("S: send to player %d: info player %d \n",i,j);
+                                                 sprintf(serv_buff.Tx,"G%dP%dU%dN%s;I%s;",11,m_players[j].portNo,j,m_players[j].name,m_players[j].IPaddress);
+                                                 printf("S: send to player %d: info player %d : %s\n",i,j,serv_buff.Tx);
+                                                 serv_buff.T_flag=1;
+                                                 sendTCP(m_players[i].IPaddress, m_players[i].portNo, &serv_buff);
+                                          }
+                                   }
+                                          
+                            }
                             break;
                      }
                      
@@ -705,6 +804,14 @@ int Game::processBuffer()
                      case 0:
                             printf("G: Nothing to do \n");
                      break;
+                     case 10:
+                     
+                            printf("You've been banned from the game'\n");
+                            
+                            createMenu();
+                                
+                     break;
+                     
                      case 11:
                      
                             printf("G: buff: %s \n",m_buffer.Rx);
