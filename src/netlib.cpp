@@ -160,7 +160,7 @@ int scanServers(Server servers[5])
               
               serv_addr.sin_family = AF_INET;
               serv_addr.sin_addr.s_addr=inet_addr(addr);
-              serv_addr.sin_port = htons(3002);
+              serv_addr.sin_port = htons(3000);
               if (connect(sfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0)
               { 
                      if (errno == EINPROGRESS) 
@@ -202,8 +202,8 @@ int scanServers(Server servers[5])
        {
               printf("- Somebody on: %s\n",serv_IPaddr[i]);
               B.T_flag=1;
-              sendTCP(serv_IPaddr[i],3002,&B);
-              if(strcmp(B.Rx,B.Tx)==0)
+              sendTCP(serv_IPaddr[i],3000,&B);
+              if(atoi(strchr(B.Rx,'G')+1)==0)
               {
                      printf("\tIt's a sh13 server\n");
                      strcpy(servers[s].IPaddress,serv_IPaddr[i]);

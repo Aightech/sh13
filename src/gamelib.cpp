@@ -130,12 +130,12 @@ void Game::menu()
                             break;
                             case LAN_BUTT:
                                    m_state=LAN_MENU;
-                                   Server servs[5];
-                                   s=scanServers(servs);
-                                   if(s==0)
+                                   
+                                   m_nbOfServers=scanServers(m_servers);
+                                   if(m_nbOfServers==0)
                                         printf("no server\n");  
-                                   for(int i=0;i<s;i++)
-                                          printf("IP found: %s\n",servs[i].IPaddress);
+                                   for(int i=0;i<m_nbOfServers;i++)
+                                          printf("IP found: %s\n",m_servers[i].IPaddress);
                                    createMenu();
                             break;
                             case OPTION_BUTT:
@@ -216,12 +216,74 @@ void Game::createMenu()
               break;
               case LAN_MENU:
               {
-                     string buttonsLabel[]={"host game","join game","back"};
+                     string buttonsLabel[]={"host game","back"};
                      int buttonIndex[]={HOST_BUTT,JOIN_BUTT,BACK_BUTT};
-                     for(int i=0;i<3;i++)
+                     for(int i=0;i<2;i++)
                      {
                             buttons.push_back(new Button(buttonsLabel[i],Vector2f(20+window.getSize().x*i/3,window.getSize().y*7/8),buttonIndex[i]));
                      }
+                     
+                     m_arraySprites.push_back(new Sprite);
+                     m_arraySprites[0]->setTexture(m_arrayConnectionTexture);
+                     m_arraySprites[0]->setTextureRect(sf::IntRect(0, 0, 651,37 ));
+                     m_arraySprites[0]->setPosition(Vector2f(window.getSize().x/2-350,window.getSize().y*3/10));
+                     
+                     for(int i=0;i<m_nbOfServers;i++)
+                     {      
+                            int n=5;
+                            
+                            m_arraySprites.push_back(new Sprite);
+                            m_arraySprites[i+1]->setTexture(m_arrayConnectionTexture);
+                            m_arraySprites[i+1]->setTextureRect(sf::IntRect(1, 38, 649,50 ));
+                            m_arraySprites[i+1]->setPosition(Vector2f(window.getSize().x/2-350+1,window.getSize().y*3/10+37+50*i));
+                            
+                            //Server number
+                            m_arrayText.push_back(new Text);
+                            m_arrayText[n*i]->setFont(m_font);
+                            char no[]="1";
+                            no[0]='1'+i;
+                            m_arrayText[n*i]->setString(no);
+                            m_arrayText[n*i]->setCharacterSize(15);
+                            m_arrayText[n*i]->setPosition(Vector2f(window.getSize().x/2-330,window.getSize().y*3/10+50+50*i));
+                            m_arrayText[n*i]->setColor(Color(0,0,0));
+                            
+                            //Server name
+                            m_arrayText.push_back(new Text);
+                            m_arrayText[n*i+1]->setFont(m_font);
+                            m_arrayText[n*i+1]->setString(m_servers[i].name);
+                            m_arrayText[n*i+1]->setCharacterSize(15);
+                            m_arrayText[n*i+1]->setPosition(Vector2f(window.getSize().x/2-300,window.getSize().y*3/10+50+50*i));
+                            m_arrayText[n*i+1]->setColor(Color(0,0,0));
+                            
+                            //Server IPaddress
+                            m_arrayText.push_back(new Text);
+                            m_arrayText[n*i+2]->setFont(m_font);
+                            m_arrayText[n*i+2]->setString(m_servers[i].IPaddress);
+                            m_arrayText[n*i+2]->setCharacterSize(15);
+                            m_arrayText[n*i+2]->setPosition(Vector2f(window.getSize().x/2-100,window.getSize().y*3/10+50+50*i));
+                            m_arrayText[n*i+2]->setColor(Color(0,0,0));
+                            
+                            //Player Port no
+                            m_arrayText.push_back(new Text);
+                            m_arrayText[n*i+3]->setFont(m_font);
+                            char port[]="2027";
+                            m_arrayText[n*i+3]->setString(port);
+                            m_arrayText[n*i+3]->setCharacterSize(15);
+                            m_arrayText[n*i+3]->setPosition(Vector2f(window.getSize().x/2+70,window.getSize().y*3/10+50+50*i));
+                            m_arrayText[n*i+3]->setColor(Color(0,0,0));
+                            
+                            //Player Port no
+                            m_arrayText.push_back(new Text);
+                            m_arrayText[n*i+4]->setFont(m_font);
+                            char date[]="17h25m23";
+                            m_arrayText[n*i+4]->setString(date);
+                            m_arrayText[n*i+4]->setCharacterSize(15);
+                            m_arrayText[n*i+4]->setPosition(Vector2f(window.getSize().x/2+170,window.getSize().y*3/10+50+50*i));
+                            m_arrayText[n*i+4]->setColor(Color(0,0,0));
+                            
+                            buttons.push_back(new Button("X",Vector2f(window.getSize().x/2+305,window.getSize().y*3/10+35+50*i),KILL_P1_BUTT+i));
+                     }
+                     
               }
               break;
               case CREATION_MENU:
@@ -510,7 +572,7 @@ void Game::startServer()
                      }
               }
               close(serv_cpsfd);
-              printf("S: communication with Address [%s] on port %d Ended.\n",inet_ntoa(serv_clientAddr[0].sin_addr), ntohs(serv_clientAddr[0].sin_port));
+              printf("S: ## - End of communication - ##\n");
                      
      	}
      

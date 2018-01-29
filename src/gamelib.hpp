@@ -127,6 +127,9 @@ class Game
        static void * tcpWatchdog(void * p_data);
        pthread_t m_thread_server;
        
+       Server m_servers[5];
+       int m_nbOfServers;
+       
        
        
        int m_nbPlayer;
