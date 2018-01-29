@@ -150,7 +150,7 @@ void Game::menu()
                                    sprintf(m_buffer.Tx,"G%dP%dN%s",1,m_buffer.R_port,"aight;");
                                    m_buffer.T_flag=1;
                                    sendTCP(m_servers[m_server].IPaddress,m_servers[m_server].portNo,&m_buffer); 
-                                         
+                                   m_host=0;   
                                    if(atoi(strchr(m_buffer.Rx,'G')+1)==1)
                                           m_state=CREATION_MENU;
                                           
