@@ -51,6 +51,11 @@
 #define KILL_P3_BUTT 23
 #define KILL_P4_BUTT 24
 
+#define JOIN_S1_BUTT 31
+#define JOIN_S2_BUTT 32
+#define JOIN_S3_BUTT 33
+#define JOIN_S4_BUTT 34
+
 #define _BUTT 20
 
 #define NB_OBJ 8

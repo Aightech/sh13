@@ -134,8 +134,6 @@ void Game::menu()
                                    m_nbOfServers=scanServers(m_servers);
                                    if(m_nbOfServers==0)
                                         printf("no server\n");  
-                                   for(int i=0;i<m_nbOfServers;i++)
-                                          printf("IP found: %s\n",m_servers[i].IPaddress);
                                    createMenu();
                             break;
                             case OPTION_BUTT:
@@ -263,7 +261,7 @@ void Game::createMenu()
                             m_arrayText[n*i+2]->setPosition(Vector2f(window.getSize().x/2-100,window.getSize().y*3/10+50+50*i));
                             m_arrayText[n*i+2]->setColor(Color(0,0,0));
                             
-                            //Player Port no
+                            //Server Port no
                             m_arrayText.push_back(new Text);
                             m_arrayText[n*i+3]->setFont(m_font);
                             char port[]="2027";
@@ -272,7 +270,7 @@ void Game::createMenu()
                             m_arrayText[n*i+3]->setPosition(Vector2f(window.getSize().x/2+70,window.getSize().y*3/10+50+50*i));
                             m_arrayText[n*i+3]->setColor(Color(0,0,0));
                             
-                            //Player Port no
+                            //Server date
                             m_arrayText.push_back(new Text);
                             m_arrayText[n*i+4]->setFont(m_font);
                             char date[]="17h25m23";
@@ -281,7 +279,7 @@ void Game::createMenu()
                             m_arrayText[n*i+4]->setPosition(Vector2f(window.getSize().x/2+170,window.getSize().y*3/10+50+50*i));
                             m_arrayText[n*i+4]->setColor(Color(0,0,0));
                             
-                            buttons.push_back(new Button("X",Vector2f(window.getSize().x/2+305,window.getSize().y*3/10+35+50*i),KILL_P1_BUTT+i));
+                            buttons.push_back(new Button("join",Vector2f(window.getSize().x/2+305,window.getSize().y*3/10+35+50*i),JOIN_S1_BUTT+i));
                      }
                      
               }
@@ -539,40 +537,45 @@ void Game::startServer()
               bzero(serv_buff.Rx,SIZE_BUFF);
               if(read(serv_cpsfd,serv_buff.Rx,SIZE_BUFF)>0)
               {
+                     printf("\nS: ## -Start of communication- ##\n");
                      printf("S: Address [%s] on port %d :\n",inet_ntoa(serv_clientAddr[0].sin_addr), ntohs(serv_clientAddr[0].sin_port));
                      printf("S: Request:%s\n",serv_buff.Rx);//strchr(serv_RxBuff,'G')+1);
                      switch(atoi(strchr(serv_buff.Rx,'G')+1))
                      {
                             case 0://if a client ask if we are a sh13 server
                                    printf("S: Want to know if we were a sh13 server. \n");
-                                   strcpy(serv_buff.Tx,"G0NXxpartyxX;");
-                                   serv_buff.T_flag=1;
+                                   sprintf(serv_buff.Tx,"G%dP%dN%s",0,m_nbPlayer,"XxpartyxX;");
                                    write(serv_cpsfd,serv_buff.Tx,strlen(serv_buff.Tx));
-                                   printf("S: replied our name: %s \n","name");
+                                   printf("S: replied : %s \n",serv_buff.Tx);
                             break;
                             case 1:
-                                   printf("Server: join ?\n");
+                                   printf("S: Want to join the game. \n");
+                                   
+                                   
                                    if(m_nbPlayer<4)
                                    {
-                                          strcpy(serv_buff.Tx,"G1Q0P0O0");
-                                          serv_buff.T_flag=1;
+                                          sprintf(serv_buff.Tx,"G%dP%dN%s",1,m_nbPlayer,"XxpartyxX;");
                                           write(serv_cpsfd,serv_buff.Tx,strlen(serv_buff.Tx));
-                                          printf("reply: yes\n");
+                                          printf("S: replied : %s \n",serv_buff.Tx);
                                           m_nbPlayer++;
-                                          sendTCP(serv_clientIPAddr[0],serv_clientPortNo[0],&serv_buff);
+                                          sprintf(serv_buff.Tx,"G%dP%dN%s",1,m_nbPlayer,"newP;");
+                                          serv_buff.T_flag=1;
+                                          for(int i=0;i<m_nbPlayer;i++)
+                                                 sendTCP(serv_clientIPAddr[i],serv_clientPortNo[i],&serv_buff);
                                           
                                    }
                                    else
                                    {
-                                          strcpy(serv_buff.Tx,"G-1Q0P0O0");
+                                          strcpy(serv_buff.Tx,"G-1");
                                           write(serv_cpsfd,serv_buff.Tx,strlen(serv_buff.Tx));
-                                          printf("reply: no\n");
+                                          printf("S: replied : %s \n",serv_buff.Tx);
                                    }
                             break;
                      }
+              printf("S: ## - End of communication - ##\n\n");
               }
               close(serv_cpsfd);
-              printf("S: ## - End of communication - ##\n");
+              
                      
      	}
      
@@ -616,23 +619,28 @@ void * Game::tcpWatchdog(void * p_data)
        {    
               if(!buff->R_flag)//if the last data received has been process
               { 
+                     
                      _cpsfd = accept(_sfd, (struct sockaddr *) &_clientAddr, &_clilen); //wait for a connection
                      if (_cpsfd < 0) //if the connection went wrong.
                      {
-                            printf("watch : error(ERROR on binding)\n");
+                            printf("W: error(ERROR on binding)\n");
                             exit(0);
                      }
                      
                      bzero(buff->Rx,SIZE_BUFF);
                      if(read(_cpsfd,buff->Rx,SIZE_BUFF)>0)
-                     {
+                     {      
+                            printf("W: \n## -Start of communication- ##\n");
+                            printf("W: Address [%s] on port %d :\n",inet_ntoa(_clientAddr.sin_addr), ntohs(_clientAddr.sin_port));
+                            printf("W: Request:%s\n",buff->Rx);
                             buff->R_flag=1;
-                            printf("watch : Address %s on port %d :\n",inet_ntoa(_clientAddr.sin_addr), ntohs(_clientAddr.sin_port));
-                            printf("watch : %s\n",buff->Rx);
+                            printf("S: ## - End of communication - ##\n\n");
                      }
                      else
-                            printf("watch : Nothing was received.\n\n");
-                            
+                            printf("W: Nothing was received.\n\n");
+                     
+                     
+                     
                      close(_cpsfd);
               }
        }
