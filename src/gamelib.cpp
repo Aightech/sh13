@@ -145,7 +145,7 @@ void Game::menu()
                             case JOIN_S2_BUTT:
                             case JOIN_S3_BUTT:
                             case JOIN_S4_BUTT:
-                                   m_server=JOIN_S1_BUTT-abs(select);
+                                   m_server=abs(select)-JOIN_S1_BUTT;
                                    
                                    sprintf(m_buffer.Tx,"G%dP%dN%s",1,m_buffer.R_port,"aight;");
                                    m_buffer.T_flag=1;
@@ -169,6 +169,12 @@ void Game::menu()
                                           startServer();
                                           exit(0);
                                    }
+                                   
+                                   m_server=0;
+                                   strcpy(m_servers[0].IPaddress,"127.0.0.1");
+                                   m_servers[0].portNo=SERVERPORT;
+                                   
+                                   
                                    createMenu();
                             break;
                             
@@ -177,9 +183,10 @@ void Game::menu()
                             case KILL_P3_BUTT: 
                             case KILL_P4_BUTT:
                             { 
-                                   int toKill = KILL_P1_BUTT-abs(select);
-                                   
-                                   sprintf(m_buffer.Tx,"G%dP%d",10,toKill);
+                                   int toKill = abs(select)-KILL_P1_BUTT;
+                                   printf("G: s : %d\n",m_server);
+                                   printf("G: Killing : %d , to [%s] on %d\n",toKill,m_servers[m_server].IPaddress,m_servers[m_server].portNo);
+                                   sprintf(m_buffer.Tx,"G%dU%d",10,toKill);
                                    m_buffer.T_flag=1;
                                    sendTCP(m_servers[m_server].IPaddress,m_servers[m_server].portNo,&m_buffer); 
                             }            
@@ -325,7 +332,7 @@ void Game::createMenu()
                             m_arrayText.push_back(new Text);
                             m_arrayText[n*i+3]->setFont(m_font);
                             char port[]="20270000";
-                            sprintf(port,"%d",m_players[i].portNo);
+                            sprintf(port,"%d",m_servers[i].portNo);
                             m_arrayText[n*i+3]->setString(port);
                             m_arrayText[n*i+3]->setCharacterSize(15);
                             m_arrayText[n*i+3]->setPosition(Vector2f(window.getSize().x/2+70,window.getSize().y*3/10+50+50*i));
@@ -636,7 +643,6 @@ void Game::startServer()
                                           {
                                                  for(int j=0;j<m_nbPlayer;j++)
                                                  {
-                                                        printf("S: send to player %d: info player %d \n",i,j);
                                                         sprintf(serv_buff.Tx,"G%dP%dU%dN%s;I%s;",11,m_players[j].portNo,j,m_players[j].name,m_players[j].IPaddress);
                                                         printf("S: send to player %d: info player %d : %s\n",i,j,serv_buff.Tx);
                                                         serv_buff.T_flag=1;
@@ -658,7 +664,7 @@ void Game::startServer()
                             {      
                                    
                                    int U = atoi(strchr(serv_buff.Rx,'U')+1);            //get the player to kill
-                                   
+                                   printf("S: Killing : %d \n",U);
                                    if(U==0)
                                    {
                                           for(int i=1;i<m_nbPlayer;i++)
@@ -670,11 +676,6 @@ void Game::startServer()
                                           }
                                           exit(0);
                                    }
-                                   
-                                   //reply to killer 
-                                   sprintf(serv_buff.Tx,"G%d",10);
-                                   write(serv_cpsfd,serv_buff.Tx,strlen(serv_buff.Tx));
-                                   printf("S: replied : %s \n",serv_buff.Tx);
                                           
                                    //say to client he s been kicked out
                                    sprintf(serv_buff.Tx,"G%d",10);
@@ -693,7 +694,6 @@ void Game::startServer()
                                    {
                                           for(int j=0;j<m_nbPlayer;j++)
                                           {
-                                                 printf("S: send to player %d: info player %d \n",i,j);
                                                  sprintf(serv_buff.Tx,"G%dP%dU%dN%s;I%s;",11,m_players[j].portNo,j,m_players[j].name,m_players[j].IPaddress);
                                                  printf("S: send to player %d: info player %d : %s\n",i,j,serv_buff.Tx);
                                                  serv_buff.T_flag=1;
@@ -806,8 +806,8 @@ int Game::processBuffer()
                      break;
                      case 10:
                      
-                            printf("You've been banned from the game'\n");
-                            
+                            printf("G: You've been banned from the game'\n");
+                            m_state=LAN_MENU;
                             createMenu();
                                 
                      break;
