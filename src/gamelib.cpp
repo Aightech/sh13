@@ -43,9 +43,10 @@ using namespace std;
 Game::Game()
 {
        time = clock();
+       
        m_state=0;
+       
        m_turn=1;
-       LANport=LANPORT;
        
        window.create(VideoMode(WIN_W,WIN_H), GAME_NAME);   
 }
@@ -76,7 +77,6 @@ void Game::init()
 void Game::menu()
 {
        createMenu();
-       
        
        
        while(window.isOpen())
@@ -564,32 +564,36 @@ void Game::startServer()
                      {
                             case 0://if a client ask if we are a sh13 server
                                    printf("S: Want to know if we were a sh13 server. \n");
-                                   sprintf(serv_buff.Tx,"G%dP%dU%dN%s",0,serv_portNo,m_nbPlayer,"XxpartyxX;");
+                                   sprintf(serv_buff.Tx,"G%dP%dU%dN%s;",0,serv_portNo,m_nbPlayer,"XxpartyxX");
                                    write(serv_cpsfd,serv_buff.Tx,strlen(serv_buff.Tx));
                                    printf("S: replied : %s \n",serv_buff.Tx);
                             break;
                             case 1:
-                                   char *name=strtok((strchr(serv_buff.Rx,'N')+1),";");
                                    
-                                   printf("S: %s want to join the game. \n",name);
+                                   char *name=strtok((strchr(serv_buff.Rx,'N')+1),";");    //get the name of the player
+                                   int port = atoi(strchr(serv_buff.Rx,'P')+1);            //get the port of the player
                                    
-                                   if(m_nbPlayer<4)
+                                   printf("S: %s want to join the game.\n",name);
+                                   
+                                   if(m_nbPlayer<NB_MAX_PLAYERS)
                                    {
-                                          strcpy(m_players[m_nbPlayer].name, name);
-                                          m_players[m_nbPlayer].portNo = atoi(strchr(m_buffer.Rx,'P')+1);
-                                          strcpy(m_players[m_nbPlayer].IPaddress, inet_ntoa(serv_clientAddr[0].sin_addr));
+                                          setPlayer(m_nbPlayer,name,inet_ntoa(serv_clientAddr[0].sin_addr),port);
                                           
-                                          sprintf(serv_buff.Tx,"G%dP%dN%s",1,m_nbPlayer,"XxpartyxX;");
+                                          sprintf(serv_buff.Tx,"G%d",1);
                                           write(serv_cpsfd,serv_buff.Tx,strlen(serv_buff.Tx));
                                           printf("S: replied : %s \n",serv_buff.Tx);
-                                          strcpy(serv_clientIPAddr[m_nbPlayer],inet_ntoa(serv_clientAddr[0].sin_addr));
-                                          serv_clientPortNo[m_nbPlayer]=ntohs(serv_clientAddr[0].sin_port);
-                                          sprintf(serv_buff.Tx,"G%dP%dU%dN%s;I%s;",11,m_players[m_nbPlayer].portNo,m_nbPlayer+1,m_players[m_nbPlayer].name,m_players[m_nbPlayer].IPaddress);
                                           
+                                          //strcpy(serv_clientIPAddr[m_nbPlayer],inet_ntoa(serv_clientAddr[0].sin_addr));
+                                          //serv_clientPortNo[m_nbPlayer]=ntohs(serv_clientAddr[0].sin_port);
                                           m_nbPlayer++;
-                                          serv_buff.T_flag=1;
-                                          for(int i=0;i<m_nbPlayer-1;i++)
-                                                 sendTCP(serv_clientIPAddr[i],serv_clientPortNo[i],&serv_buff);
+                                          
+                                          for(int i=0;i<m_nbPlayer;i++)
+                                                 for(int j=0;j<m_nbPlayer;j++)
+                                                 {
+                                                        sprintf(serv_buff.Tx,"G%dP%dU%dN%s;I%s;",11,m_players[j].portNo,j,m_players[j].name,m_players[j].IPaddress);
+                                                        serv_buff.T_flag=1;
+                                                        sendTCP(m_players[j].IPaddress, m_players[i].portNo, &serv_buff);
+                                                 }
                                           
                                    }
                                    else
@@ -676,6 +680,20 @@ void * Game::tcpWatchdog(void * p_data)
        return NULL;
 }
 
+int Game::setPlayer(int no, char * name, char * IPaddr, int port)
+{
+       if(no<NB_MAX_PLAYERS)
+       {
+              m_players[no].no=no;
+              strcpy(m_players[no].name,name);
+              strcpy(m_players[no].IPaddress,IPaddr);
+              m_players[no].portNo=port;
+              return 1;
+       }
+       else 
+              return -1;
+}
+
 int Game::processBuffer()
 {
        if(m_buffer.R_flag==1)//double check if new stuff is to read 
@@ -686,21 +704,11 @@ int Game::processBuffer()
                             printf("G: Nothing to do \n");
                      break;
                      case 11:
+                     
                             printf("G: buff: %s \n",m_buffer.Rx);
-                            printf("G: new Player \n");
+                            setPlayer(atoi(strchr(m_buffer.Rx,'U')+1),strtok((strchr(m_buffer.Rx,'N')+1),";"),strtok((strchr(m_buffer.Rx,'I')+1),";"),atoi(strchr(m_buffer.Rx,'P')+1));
                             
-                            strcpy(m_players[m_nbPlayer].IPaddress, strtok((strchr(m_buffer.Rx,'I')+1),";"));
-                            printf("G: IP :%s \n",m_players[m_nbPlayer].IPaddress);
-                            
-                            strcpy(m_players[m_nbPlayer].name, strtok((strchr(m_buffer.Rx,'N')+1),";"));
-                            printf("G: name :%s \n",m_players[m_nbPlayer].name);
-                            
-                            m_players[m_nbPlayer].portNo = atoi(strchr(m_buffer.Rx,'P')+1);
-                            printf("G: Port :%d \n",m_players[m_nbPlayer].portNo);
-                            m_players[m_nbPlayer].no= atoi(strchr(m_buffer.Rx,'U')+1);
-                            printf("G: nb player :%d \n",m_players[m_nbPlayer].no);
-                            
-                            m_nbPlayer++;
+                            m_nbPlayer=atoi(strchr(m_buffer.Rx,'U')+1)+1;
                             
                             createMenu();
                                 
@@ -709,78 +717,3 @@ int Game::processBuffer()
               m_buffer.R_flag=0;
        }
 }
-
-
-/*
-
-       
-       char imgName[]="media/SH13_00.png";
-       for(int i=0;i<13;i++)
-       {
-              sprintf(imgName,"media/SH13_%d.png",i);
-              printf("%s\n",imgName);
-              persoTextures.push_back(new Texture);
-              if (!persoTextures[i]->loadFromFile(imgName, sf::IntRect(0, 0, 300, 198)))
-              {
-                  // erreur...
-              }
-              persoSprites.push_back(new Sprite);
-              persoSprites[i]->setTexture(*persoTextures[i]);
-              persoSprites[i]->setScale(0.5,0.5);
-              persoSprites[i]->setPosition(Vector2f(550+160*(i%4),10+110*(int)(i/4)));
-       }
-       
-       char iconName[]="media/icons/SH13_icon00_120x120.png";
-       for(int i=0;i<8;i++)
-       {
-              sprintf(iconName,"media/icons/SH13_icon%d_120x120.png",i);
-              iconsTextures.push_back(new Texture);
-              if (!iconsTextures[i]->loadFromFile(iconName, sf::IntRect(0, 0, 300, 198)))
-              {
-                  // erreur...
-              }
-              iconsSprites.push_back(new Sprite);
-              iconsSprites[i]->setTexture(*iconsTextures[i]);
-              iconsSprites[i]->setScale(0.3,0.3);
-              iconsSprites[i]->setPosition(Vector2f(250+80*(i%4),80+50*(int)(i/4)));
-       }
-       /*
-       Texture textureIcon;
-       Sprite icon;
-       if (!textureIcon.loadFromFile("media/icons/SH13_icon0_120x120.png", sf::IntRect(0, 0, 300, 198)))
-       {
-           // erreur...
-       }
-       icon.setTexture(textureIcon);
-       icon.setScale(0.3,0.3);
-       icon.setPosition(Vector2f(250,70));
-       Texture texture;
-       if (!texture.loadFromFile("media/theme/wood.png", sf::IntRect(0, 0, 230, 100)))
-       {
-           // erreur...
-       }
-       if (!font.loadFromFile(GAME_FONT_BUTTON))
-       {
-           // erreur...
-       }
-       for(int i=0;i<4;i++)
-       {
-              playerPlateSprites.push_back(new Sprite);
-              playerPlateSprites[i]->setTexture(texture);
-              playerPlateSprites[i]->setPosition(Vector2f(10,70+110*i));
-              
-              labelPlayerName.push_back(new Text);
-              labelPlayerName[i]->setFont(font);
-              labelPlayerName[i]->setString("NAME:");
-              labelPlayerName[i]->setCharacterSize(20);
-              labelPlayerName[i]->setPosition(Vector2f(20,80+110*i));
-              labelPlayerName[i]->setColor(Color(255,255,255));
-              
-              labelPlayerIP.push_back(new Text);
-              labelPlayerIP[i]->setFont(font);
-              labelPlayerIP[i]->setString("IP ADDR.:");
-              labelPlayerIP[i]->setCharacterSize(10);
-              labelPlayerIP[i]->setPosition(Vector2f(20,110+110*i));
-              labelPlayerIP[i]->setColor(Color(255,255,255));
-       }
-       */

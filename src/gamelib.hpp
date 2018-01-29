@@ -60,6 +60,8 @@
 
 #define NB_OBJ 8
 
+#define NB_MAX_PLAYERS 4
+
 
 
 
@@ -143,6 +145,7 @@ class Game
        vector<Text*> m_arrayText;
        
        Player m_players[4];
+       int setPlayer(int no, char * name, char * IPaddr, int port);
        
        char m_arrayPlayersNames[4][20];
        char m_arrayPlayersIPaddr[4][20];
