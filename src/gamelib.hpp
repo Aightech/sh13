@@ -142,7 +142,7 @@ class Game
        vector<Sprite*> m_arraySprites;
        vector<Text*> m_arrayText;
        
-       Player m_players;
+       Player m_players[4];
        
        char m_arrayPlayersNames[4][20];
        char m_arrayPlayersIPaddr[4][20];

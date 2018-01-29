@@ -29,8 +29,11 @@
 
 #include <pthread.h>
 
-#define SERVERPORT 3000
-#define WATCHPORT 3001
+#include <stdio.h>
+#include <stdlib.h>
+
+#define SERVERPORT 4000
+#define WATCHPORT 4001
 
 
 using namespace sf;
@@ -137,7 +140,7 @@ void Game::menu()
                                    createMenu();
                             break;
                             case JOIN_S1_BUTT:
-                                   sprintf(m_buffer.Tx,"G%dP%dN%s",1,m_buffer.R_port,"aig;");
+                                   sprintf(m_buffer.Tx,"G%dP%dN%s",1,m_buffer.R_port,"aight;");
                                    m_buffer.T_flag=1;
                                    
                                    sendTCP(m_servers[0].IPaddress,m_servers[0].portNo,&m_buffer);       
@@ -168,6 +171,10 @@ void Game::menu()
                                    m_state=CREATION_MENU;
                                    m_host=1;
                                    m_nbPlayer=1;
+                                   strcpy(m_players[0].name,"mwa");
+                                   strcpy(m_players[0].IPaddress,"127.0.0.1");
+                                   m_players[0].portNo=m_buffer.R_port;
+                                   
                                    if(!fork())
                                    {
                                           startServer();
@@ -273,7 +280,8 @@ void Game::createMenu()
                             //Server Port no
                             m_arrayText.push_back(new Text);
                             m_arrayText[n*i+3]->setFont(m_font);
-                            char port[]="2027";
+                            char port[]="20270000";
+                            sprintf(port,"%d",m_players[i].portNo);
                             m_arrayText[n*i+3]->setString(port);
                             m_arrayText[n*i+3]->setCharacterSize(15);
                             m_arrayText[n*i+3]->setPosition(Vector2f(window.getSize().x/2+70,window.getSize().y*3/10+50+50*i));
@@ -323,6 +331,7 @@ void Game::createMenu()
                             char no[]="1";
                             no[0]='1'+i;
                             m_arrayText[n*i]->setString(no);
+                            m_arrayText[n*i]->setString(no);
                             m_arrayText[n*i]->setCharacterSize(15);
                             m_arrayText[n*i]->setPosition(Vector2f(window.getSize().x/2-330,window.getSize().y*3/10+50+50*i));
                             m_arrayText[n*i]->setColor(Color(0,0,0));
@@ -330,7 +339,7 @@ void Game::createMenu()
                             //Player name
                             m_arrayText.push_back(new Text);
                             m_arrayText[n*i+1]->setFont(m_font);
-                            m_arrayText[n*i+1]->setString("aightech");
+                            m_arrayText[n*i+1]->setString(m_players[i].name);
                             m_arrayText[n*i+1]->setCharacterSize(15);
                             m_arrayText[n*i+1]->setPosition(Vector2f(window.getSize().x/2-300,window.getSize().y*3/10+50+50*i));
                             m_arrayText[n*i+1]->setColor(Color(0,0,0));
@@ -339,7 +348,7 @@ void Game::createMenu()
                             m_arrayText.push_back(new Text);
                             m_arrayText[n*i+2]->setFont(m_font);
                             char IP[]="192.168.0.1";
-                            m_arrayText[n*i+2]->setString(IP);
+                            m_arrayText[n*i+2]->setString(m_players[i].IPaddress);
                             m_arrayText[n*i+2]->setCharacterSize(15);
                             m_arrayText[n*i+2]->setPosition(Vector2f(window.getSize().x/2-100,window.getSize().y*3/10+50+50*i));
                             m_arrayText[n*i+2]->setColor(Color(0,0,0));
@@ -347,7 +356,8 @@ void Game::createMenu()
                             //Player Port no
                             m_arrayText.push_back(new Text);
                             m_arrayText[n*i+3]->setFont(m_font);
-                            char port[]="2027";
+                            char port[]="20270000";
+                            sprintf(port,"%d",m_players[i].portNo);
                             m_arrayText[n*i+3]->setString(port);
                             m_arrayText[n*i+3]->setCharacterSize(15);
                             m_arrayText[n*i+3]->setPosition(Vector2f(window.getSize().x/2+70,window.getSize().y*3/10+50+50*i));
@@ -558,19 +568,20 @@ void Game::startServer()
                                    printf("S: replied : %s \n",serv_buff.Tx);
                             break;
                             case 1:
+                                   char *name=strtok((strchr(serv_buff.Rx,'N')+1),";");
                                    
-                                   printf("S: %s want to join the game. \n",strtok((strchr(serv_buff.Rx,'N')+1),";"));
+                                   printf("S: %s want to join the game. \n",name);
                                    
                                    if(m_nbPlayer<4)
                                    {
-                                          //strcpy(servers[s].name, strtok((strchr(B.Rx,'N')+1),";"));
+                                          strcpy(m_players[m_nbPlayer].name, name);
                                           sprintf(serv_buff.Tx,"G%dP%dN%s",1,m_nbPlayer,"XxpartyxX;");
                                           write(serv_cpsfd,serv_buff.Tx,strlen(serv_buff.Tx));
                                           printf("S: replied : %s \n",serv_buff.Tx);
                                           strcpy(serv_clientIPAddr[m_nbPlayer],inet_ntoa(serv_clientAddr[0].sin_addr));
                                           serv_clientPortNo[m_nbPlayer]=ntohs(serv_clientAddr[0].sin_port);
                                           m_nbPlayer++;
-                                          sprintf(serv_buff.Tx,"G%dP%dN%s",1,m_nbPlayer,"newP;");
+                                          sprintf(serv_buff.Tx,"G%dP%dU%dN%s;I%s;",11,ntohs(serv_clientAddr[0].sin_port),m_nbPlayer,"newP",inet_ntoa(serv_clientAddr[0].sin_addr));
                                           serv_buff.T_flag=1;
                                           for(int i=0;i<m_nbPlayer-1;i++)
                                                  sendTCP(serv_clientIPAddr[i],serv_clientPortNo[i],&serv_buff);
@@ -664,7 +675,20 @@ int Game::processBuffer()
 {
        if(m_buffer.R_flag==1)//double check if new stuff is to read 
        {
-              printf("main: %s",m_buffer.Rx);
+              switch(atoi(strchr(m_buffer.Rx,'G')+1))
+              {
+                     case 0:
+                            printf("G: Nothing to do \n");
+                     break;
+                     case 11:
+                            m_nbPlayer++;
+                            strcpy(m_players[m_nbPlayer].name, strtok((strchr(serv_buff.Rx,'N')+1),";"));
+                            strcpy(m_players[m_nbPlayer].IPaddress, strtok((strchr(serv_buff.Rx,'I')+1),";"));
+                            m_players[m_nbPlayer].portNo = atoi(strchr(m_buffer.Rx,'P')+1);
+                            m_players[m_nbPlayer].no= atoi(strchr(m_buffer.Rx,'U')+1);
+                                
+                     break;
+              }
               m_buffer.R_flag=0;
        }
 }
