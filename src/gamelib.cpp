@@ -144,7 +144,9 @@ void Game::menu()
                                    m_buffer.T_flag=1;
                                    
                                    sendTCP(m_servers[0].IPaddress,m_servers[0].portNo,&m_buffer);       
-                                   
+                                   //if(atoi(strchr(m_buffer.Rx,'G')+1)==1)
+                                     //     m_state=CREATION_MENU;
+                                          
                             break;
                             
                             
@@ -160,12 +162,7 @@ void Game::menu()
                                    m_state=MAIN_MENU;
                                    createMenu();
                             break;
-                            
-                            case JOIN_BUTT:
-                                   m_state=CREATION_MENU;
-                                   m_host=0;
-                                   createMenu();
-                            break;
+                     
                             
                             case HOST_BUTT:
                                    m_state=CREATION_MENU;
@@ -568,7 +565,9 @@ void Game::startServer()
                                    write(serv_cpsfd,serv_buff.Tx,strlen(serv_buff.Tx));
                                    printf("S: replied : %s \n",serv_buff.Tx);
                             break;
-                            case 1:
+                            
+                            
+                            case 1://Joining
                                    
                                    char *name=strtok((strchr(serv_buff.Rx,'N')+1),";");    //get the name of the player
                                    int port = atoi(strchr(serv_buff.Rx,'P')+1);            //get the port of the player
@@ -583,8 +582,6 @@ void Game::startServer()
                                           write(serv_cpsfd,serv_buff.Tx,strlen(serv_buff.Tx));
                                           printf("S: replied : %s \n",serv_buff.Tx);
                                           
-                                          //strcpy(serv_clientIPAddr[m_nbPlayer],inet_ntoa(serv_clientAddr[0].sin_addr));
-                                          //serv_clientPortNo[m_nbPlayer]=ntohs(serv_clientAddr[0].sin_port);
                                           m_nbPlayer++;
                                           
                                           for(int i=0;i<m_nbPlayer;i++)
@@ -593,8 +590,9 @@ void Game::startServer()
                                                  {
                                                         printf("S: send to player %d: info player %d \n",i,j);
                                                         sprintf(serv_buff.Tx,"G%dP%dU%dN%s;I%s;",11,m_players[j].portNo,j,m_players[j].name,m_players[j].IPaddress);
+                                                        printf("S: send to player %d: info player %d : %s\n",i,j,serv_buff.Tx);
                                                         serv_buff.T_flag=1;
-                                                        sendTCP(m_players[j].IPaddress, m_players[i].portNo, &serv_buff);
+                                                        sendTCP(m_players[i].IPaddress, m_players[i].portNo, &serv_buff);
                                                  }
                                           }
                                           
@@ -607,6 +605,7 @@ void Game::startServer()
                                    }
                             break;
                      }
+                     
               printf("S: ## - End of communication - ##\n\n");
               }
               close(serv_cpsfd);
