@@ -137,7 +137,7 @@ void Game::menu()
                                    createMenu();
                             break;
                             case JOIN_S1_BUTT:
-                                   sprintf(m_buffer.Tx,"G%dN%s",1,"aig;");
+                                   sprintf(m_buffer.Tx,"G%dP%dN%s",1,m_buffer.R_port,"aig;");
                                    m_buffer.T_flag=1;
                                    
                                    sendTCP(m_servers[0].IPaddress,m_servers[0].portNo,&m_buffer);       
@@ -558,11 +558,12 @@ void Game::startServer()
                                    printf("S: replied : %s \n",serv_buff.Tx);
                             break;
                             case 1:
-                                   printf("S: Want to join the game. \n");
                                    
+                                   printf("S: %s want to join the game. \n",strtok((strchr(serv_buff.Rx,'N')+1),";"));
                                    
                                    if(m_nbPlayer<4)
                                    {
+                                          //strcpy(servers[s].name, strtok((strchr(B.Rx,'N')+1),";"));
                                           sprintf(serv_buff.Tx,"G%dP%dN%s",1,m_nbPlayer,"XxpartyxX;");
                                           write(serv_cpsfd,serv_buff.Tx,strlen(serv_buff.Tx));
                                           printf("S: replied : %s \n",serv_buff.Tx);
@@ -645,7 +646,7 @@ void * Game::tcpWatchdog(void * p_data)
                             printf("W: Address [%s] on port %d :\n",inet_ntoa(_clientAddr.sin_addr), ntohs(_clientAddr.sin_port));
                             printf("W: Request:%s\n",buff->Rx);
                             buff->R_flag=1;
-                            printf("S: ## - End of communication - ##\n\n");
+                            printf("W: ## - End of communication - ##\n\n");
                      }
                      else
                             printf("W: Nothing was received.\n\n");

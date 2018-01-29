@@ -141,6 +141,9 @@ class Game
        Texture m_arrayConnectionTexture;
        vector<Sprite*> m_arraySprites;
        vector<Text*> m_arrayText;
+       
+       Player m_players;
+       
        char m_arrayPlayersNames[4][20];
        char m_arrayPlayersIPaddr[4][20];
        int m_arrayPlayersPort[4];
