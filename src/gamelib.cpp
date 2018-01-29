@@ -588,12 +588,15 @@ void Game::startServer()
                                           m_nbPlayer++;
                                           
                                           for(int i=0;i<m_nbPlayer;i++)
+                                          {
                                                  for(int j=0;j<m_nbPlayer;j++)
                                                  {
+                                                        printf("S: send to player %d: info player %d \n",i,j);
                                                         sprintf(serv_buff.Tx,"G%dP%dU%dN%s;I%s;",11,m_players[j].portNo,j,m_players[j].name,m_players[j].IPaddress);
                                                         serv_buff.T_flag=1;
                                                         sendTCP(m_players[j].IPaddress, m_players[i].portNo, &serv_buff);
                                                  }
+                                          }
                                           
                                    }
                                    else
@@ -706,9 +709,17 @@ int Game::processBuffer()
                      case 11:
                      
                             printf("G: buff: %s \n",m_buffer.Rx);
-                            setPlayer(atoi(strchr(m_buffer.Rx,'U')+1),strtok((strchr(m_buffer.Rx,'N')+1),";"),strtok((strchr(m_buffer.Rx,'I')+1),";"),atoi(strchr(m_buffer.Rx,'P')+1));
+                            int no        = atoi(strchr(m_buffer.Rx,'U')+1);
+                            printf("G: no:%d\n",no);
+                            char *IP      = strtok((strchr(m_buffer.Rx,'I')+1),";");
+                            printf("G: IP:%s\n",IP);
+                            char *name    = strtok((strchr(m_buffer.Rx,'N')+1),";");
+                            printf("G: name:%s\n",name);
+                            int port      = atoi(strchr(m_buffer.Rx,'P')+1);
+                            printf("G: port:%d\n",port);
+                            setPlayer(no, name, IP, port);
                             
-                            m_nbPlayer=atoi(strchr(m_buffer.Rx,'U')+1)+1;
+                            m_nbPlayer= no+1 ;
                             
                             createMenu();
                                 
