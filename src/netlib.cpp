@@ -136,7 +136,7 @@ int scanServers(Server servers[5])
        
        char serv_IPaddr[255][16];
        int h=0,s=0;
-       int testingPort=3000;
+       int testingPort=4000;
        
        
        printf("scanning...\n[");

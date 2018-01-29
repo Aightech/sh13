@@ -194,6 +194,7 @@ void Game::menu()
               window.draw(m_title);
               window.display();
        }
+       wait(NULL);
        
 }
 
@@ -563,7 +564,7 @@ void Game::startServer()
                      {
                             case 0://if a client ask if we are a sh13 server
                                    printf("S: Want to know if we were a sh13 server. \n");
-                                   sprintf(serv_buff.Tx,"G%dP%dN%s",0,m_nbPlayer,"XxpartyxX;");
+                                   sprintf(serv_buff.Tx,"G%dP%dU%dN%s",0,serv_portNo,m_nbPlayer,"XxpartyxX;");
                                    write(serv_cpsfd,serv_buff.Tx,strlen(serv_buff.Tx));
                                    printf("S: replied : %s \n",serv_buff.Tx);
                             break;
@@ -575,13 +576,17 @@ void Game::startServer()
                                    if(m_nbPlayer<4)
                                    {
                                           strcpy(m_players[m_nbPlayer].name, name);
+                                          m_players[m_nbPlayer].portNo = atoi(strchr(m_buffer.Rx,'P')+1);
+                                          strcpy(m_players[m_nbPlayer].IPaddress, inet_ntoa(serv_clientAddr[0].sin_addr));
+                                          
                                           sprintf(serv_buff.Tx,"G%dP%dN%s",1,m_nbPlayer,"XxpartyxX;");
                                           write(serv_cpsfd,serv_buff.Tx,strlen(serv_buff.Tx));
                                           printf("S: replied : %s \n",serv_buff.Tx);
                                           strcpy(serv_clientIPAddr[m_nbPlayer],inet_ntoa(serv_clientAddr[0].sin_addr));
                                           serv_clientPortNo[m_nbPlayer]=ntohs(serv_clientAddr[0].sin_port);
+                                          sprintf(serv_buff.Tx,"G%dP%dU%dN%s;I%s;",11,m_players[m_nbPlayer].portNo,m_nbPlayer+1,m_players[m_nbPlayer].name,m_players[m_nbPlayer].IPaddress);
+                                          
                                           m_nbPlayer++;
-                                          sprintf(serv_buff.Tx,"G%dP%dU%dN%s;I%s;",11,ntohs(serv_clientAddr[0].sin_port),m_nbPlayer,"newP",inet_ntoa(serv_clientAddr[0].sin_addr));
                                           serv_buff.T_flag=1;
                                           for(int i=0;i<m_nbPlayer-1;i++)
                                                  sendTCP(serv_clientIPAddr[i],serv_clientPortNo[i],&serv_buff);
@@ -681,11 +686,23 @@ int Game::processBuffer()
                             printf("G: Nothing to do \n");
                      break;
                      case 11:
-                            m_nbPlayer++;
-                            strcpy(m_players[m_nbPlayer].name, strtok((strchr(serv_buff.Rx,'N')+1),";"));
-                            strcpy(m_players[m_nbPlayer].IPaddress, strtok((strchr(serv_buff.Rx,'I')+1),";"));
+                            printf("G: buff: %s \n",m_buffer.Rx);
+                            printf("G: new Player \n");
+                            
+                            strcpy(m_players[m_nbPlayer].IPaddress, strtok((strchr(m_buffer.Rx,'I')+1),";"));
+                            printf("G: IP :%s \n",m_players[m_nbPlayer].IPaddress);
+                            
+                            strcpy(m_players[m_nbPlayer].name, strtok((strchr(m_buffer.Rx,'N')+1),";"));
+                            printf("G: name :%s \n",m_players[m_nbPlayer].name);
+                            
                             m_players[m_nbPlayer].portNo = atoi(strchr(m_buffer.Rx,'P')+1);
+                            printf("G: Port :%d \n",m_players[m_nbPlayer].portNo);
                             m_players[m_nbPlayer].no= atoi(strchr(m_buffer.Rx,'U')+1);
+                            printf("G: nb player :%d \n",m_players[m_nbPlayer].no);
+                            
+                            m_nbPlayer++;
+                            
+                            createMenu();
                                 
                      break;
               }
