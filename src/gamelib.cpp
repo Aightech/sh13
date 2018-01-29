@@ -136,6 +136,15 @@ void Game::menu()
                                         printf("no server\n");  
                                    createMenu();
                             break;
+                            case JOIN_S1_BUTT:
+                                   sprintf(m_buffer.Tx,"G%dN%s",1,"aig;");
+                                   m_buffer.T_flag=1;
+                                   
+                                   sendTCP(m_servers[0].IPaddress,m_servers[0].portNo,&m_buffer);       
+                                   
+                            break;
+                            
+                            
                             case OPTION_BUTT:
                                    m_state=OPTION_MENU;
                                    createMenu();
@@ -557,10 +566,12 @@ void Game::startServer()
                                           sprintf(serv_buff.Tx,"G%dP%dN%s",1,m_nbPlayer,"XxpartyxX;");
                                           write(serv_cpsfd,serv_buff.Tx,strlen(serv_buff.Tx));
                                           printf("S: replied : %s \n",serv_buff.Tx);
+                                          strcpy(serv_clientIPAddr[m_nbPlayer],inet_ntoa(serv_clientAddr[0].sin_addr));
+                                          serv_clientPortNo[m_nbPlayer]=ntohs(serv_clientAddr[0].sin_port);
                                           m_nbPlayer++;
                                           sprintf(serv_buff.Tx,"G%dP%dN%s",1,m_nbPlayer,"newP;");
                                           serv_buff.T_flag=1;
-                                          for(int i=0;i<m_nbPlayer;i++)
+                                          for(int i=0;i<m_nbPlayer-1;i++)
                                                  sendTCP(serv_clientIPAddr[i],serv_clientPortNo[i],&serv_buff);
                                           
                                    }
@@ -630,7 +641,7 @@ void * Game::tcpWatchdog(void * p_data)
                      bzero(buff->Rx,SIZE_BUFF);
                      if(read(_cpsfd,buff->Rx,SIZE_BUFF)>0)
                      {      
-                            printf("W: \n## -Start of communication- ##\n");
+                            printf("\nW: ## -Start of communication- ##\n");
                             printf("W: Address [%s] on port %d :\n",inet_ntoa(_clientAddr.sin_addr), ntohs(_clientAddr.sin_port));
                             printf("W: Request:%s\n",buff->Rx);
                             buff->R_flag=1;

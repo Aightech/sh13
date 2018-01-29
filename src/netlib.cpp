@@ -208,8 +208,8 @@ int scanServers(Server servers[5])
               {
                      printf("\tsh13 server\n");
                      strcpy(servers[s].IPaddress,serv_IPaddr[i]);
-                     strcpy(servers[s++].name, strtok((strchr(B.Rx,'N')+1),";"));
-                     servers[s].portNo=testingPort;
+                     strcpy(servers[s].name, strtok((strchr(B.Rx,'N')+1),";"));
+                     servers[s++].portNo=testingPort;
               }
               else
                      printf("not a sh13 server\n");
