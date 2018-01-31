@@ -52,7 +52,7 @@ int sendTCP(const char *IPaddress, int port, Buffer *buff)
                      {
                             if(read(sockfd,buff->Rx,255)>0)
                             {
-                                   buff->R_flag=1;//data received
+                                   //buff->R_flag=1;//data received
                                    flag =1;
                             }
                      }

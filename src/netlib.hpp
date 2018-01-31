@@ -3,7 +3,7 @@
 
 #define SIZE_BUFF 256
 
-#define SERVERPORT 4013
+#define SERVERPORT 4016
 
 /*! \file netlib.h
     \brief TCP communication functions
