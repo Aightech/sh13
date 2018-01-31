@@ -715,6 +715,7 @@ void Game::createGameContext()
                             m_persoSprites[m_players[m_myNo].card[i]]->setPosition(Vector2f(290+906/(12/m_nbPlayer)*i,10));
                             m_arraySprites.push_back(m_persoSprites[m_players[m_myNo].card[i]]);
                             cards[m_players[m_myNo].card[i]]=-1;
+                            printf("[%d]",m_players[m_myNo].card[i]);
                      }
                      int c=0;
                      
@@ -724,11 +725,12 @@ void Game::createGameContext()
                             m_persoSprites[c]->setPosition(Vector2f(1020-152*((int)i/4),130+100*(i%4)));
                             m_arraySprites.push_back(m_persoSprites[c]);
                             m_otherCharacters[i]=c;
-                            printf("C:%d\n",c);
                             c++;
                      }
                      for(int i=0;i<10;i++)
-                            printf("[%d]\n",m_otherCharacters[i]);
+                            printf("[%d]",m_otherCharacters[i]);
+                            
+                     printf("\n");
                      
                      for(int i=0; i<m_nbPlayer;i++)
                      {
@@ -1213,7 +1215,7 @@ int Game::processBuffer()
                                    printf("G: %d / i=%d / %d\n",m_myNo,i,atoi(ptr));
                                    m_players[m_myNo].card[i]=atoi(ptr);
                                    printf("G: %d\n",m_players[m_myNo].card[i]);
-                                   ptr=strchr(m_buffer.Rx,';')+1;
+                                   ptr=strchr(ptr,';')+1;
                             }
                             m_turn=-1;
                      
