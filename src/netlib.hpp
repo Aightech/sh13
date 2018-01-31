@@ -3,6 +3,8 @@
 
 #define SIZE_BUFF 256
 
+#define SERVERPORT 4012
+
 /*! \file netlib.h
     \brief TCP communication functions
     \author Alexis Devillard

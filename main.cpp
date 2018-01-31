@@ -29,12 +29,13 @@ int main(int argc,char ** argv)
 {
        srand(time(NULL));
        if(argc>1)
+       {
               WATCHPORT=atoi(argv[1]);
+              //strcpy(m_myname,argv[1]);
+       }
        else
               WATCHPORT=4001;
               
-              
-       
        Game game;
        game.init();
        

@@ -149,7 +149,7 @@ void Game::init()
               
               m_playersObjects.push_back(new Text);
               m_playersObjects[i]->setFont(m_font);
-              m_playersObjects[i]->setString("X X X X X X X X");
+              m_playersObjects[i]->setString(". . . . . . . .");
               m_playersObjects[i]->setCharacterSize(24);
               m_playersObjects[i]->setPosition(Vector2f(257,120+110+110*i));
               m_playersObjects[i]->setColor(Color(255,255,255));
@@ -241,8 +241,9 @@ void Game::menu()
                                    sprintf(m_buffer.Tx,"G%dP%dN%s",1,m_buffer.R_port,"aight;");
                                    m_buffer.T_flag=1;
                                    sendTCP(m_servers[m_server].IPaddress,m_servers[m_server].portNo,&m_buffer); 
-                                   m_host=0;   
-                                   if(atoi(strchr(m_buffer.Rx,'G')+1)==1)
+                                   m_host=0; 
+                                     m_buffer.R_flag=0;
+                                   //if(atoi(strchr(m_buffer.Rx,'G')+1)==1)
                                           m_state=CREATION_MENU;
                                           
                             break;
@@ -254,6 +255,7 @@ void Game::menu()
                                    strcpy(m_players[0].name,"mwa");
                                    strcpy(m_players[0].IPaddress,"127.0.0.1");
                                    m_players[0].portNo=m_buffer.R_port;
+                                   m_players[0].no=0;
                                    
                                    if(!fork())
                                    {
@@ -609,6 +611,8 @@ void Game::onlineGame()
                                                  m_buffer.T_flag=1;
                                                  printf("G: ask server : %s\n",m_buffer.Tx);
                                                  sendTCP(m_servers[m_server].IPaddress,m_servers[m_server].portNo,&m_buffer); 
+                                                 m_state=MAIN_GAME;
+                                                 m_turn=-1;
                                           break;
                                           case INQUIRY_GAME:
                                                  m_state=INQUIRY_GAME2;
@@ -626,6 +630,8 @@ void Game::onlineGame()
                                    m_buffer.T_flag=1;
                                    printf("G: ask server : %s\n",m_buffer.Tx);
                                    sendTCP(m_servers[m_server].IPaddress,m_servers[m_server].portNo,&m_buffer);
+                                   m_state=MAIN_GAME;
+                                   m_turn=-1;
                             
                             break;
                             
@@ -644,6 +650,8 @@ void Game::onlineGame()
                                    m_buffer.T_flag=1;
                                    printf("G: ask server : %s\n",m_buffer.Tx);
                                    sendTCP(m_servers[m_server].IPaddress,m_servers[m_server].portNo,&m_buffer);
+                                   m_state=MAIN_GAME;
+                                   m_turn=-1;
                             
                             break;
                             
@@ -676,6 +684,16 @@ void Game::createGameContext()
        {
               case INIT_GAME:
               {
+                     for(int i=m_arraySprites.size()-1;i>-1;i--)
+                     {
+                            delete m_arraySprites[i];
+                            m_arraySprites.pop_back();
+                     }
+                      for(int i=m_arrayText.size()-1;i>-1;i--)
+                     {
+                            delete m_arrayText[i];
+                            m_arrayText.pop_back();
+                     }
                      
                      string buttonsLabel[]={"gen. poll","inquiry","denounce","quit"};
                      int buttonIndex[]={GENPOLL_BUTT,INQUIRY_BUTT,DENOUNCE_BUTT,QUIT_BUTT};
@@ -684,19 +702,19 @@ void Game::createGameContext()
                      {
                             buttons.push_back(new Button(buttonsLabel[i],Vector2f(buttonPos[i][0],buttonPos[i][1]),buttonIndex[i]));
                      }
-                     if(!isMyTurn())
+                     if(m_turn!=m_myNo)
                             for(int i=0;i<3;i++)
                                    buttons[i]->disable();
                                    
-                     int array[6]={1,3,4,12,6,7};
+                     
                      
                      int cards[13]={0,0,0,0,0,0,0,0,0,0,0,0,0};
-                     m_nbPlayer=4;
+                     
                      for(int i=0;i<12/m_nbPlayer;i++)
                      {
-                            m_persoSprites[array[i]]->setPosition(Vector2f(290+906/(12/m_nbPlayer)*i,10));
-                            m_arraySprites.push_back(m_persoSprites[array[i]]);
-                            cards[array[i]]=-1;
+                            m_persoSprites[m_players[m_myNo].card[i]]->setPosition(Vector2f(290+906/(12/m_nbPlayer)*i,10));
+                            m_arraySprites.push_back(m_persoSprites[m_players[m_myNo].card[i]]);
+                            cards[m_players[m_myNo].card[i]]=-1;
                      }
                      int c=0;
                      
@@ -903,12 +921,13 @@ void Game::startServer()
                                           {
                                                  for(int j=0;j<m_nbPlayer;j++)
                                                  {
-                                                        sprintf(serv_buff.Tx,"G%dP%dU%dN%s;I%s;",11,m_players[j].portNo,j,m_players[j].name,m_players[j].IPaddress);
+                                                        sprintf(serv_buff.Tx,"G%dH%dP%dU%dN%s;I%s;",11,m_players[i].no,m_players[j].portNo,j,m_players[j].name,m_players[j].IPaddress);
                                                         printf("S: send to player %d: info player %d : %s\n",i,j,serv_buff.Tx);
                                                         serv_buff.T_flag=1;
                                                         sendTCP(m_players[i].IPaddress, m_players[i].portNo, &serv_buff);
                                                  }
                                           }
+                                          
                                           
                                    }
                                    else
@@ -966,7 +985,7 @@ void Game::startServer()
                             case 20:
                                    m_turn=0;
                                    shareObj();
-                                   sprintf(serv_buff.Tx,"G0");
+                                   sprintf(serv_buff.Tx,"G20");
                                    printf("S: send to player %d: info player : %s\n",0,serv_buff.Tx);
                                    write(serv_cpsfd,serv_buff.Tx,strlen(serv_buff.Tx));
                                    
@@ -1161,8 +1180,11 @@ int Game::processBuffer()
                      break;
                      
                      case 11:
-                     
                             printf("G: buff: %s \n",m_buffer.Rx);
+                            
+                            m_myNo=atoi(strchr(m_buffer.Rx,'H')+1);
+                            printf("G: my no:%d\n",m_myNo);
+                            
                             int no        = atoi(strchr(m_buffer.Rx,'U')+1);
                             printf("G: no:%d\n",no);
                             char *IP      = strtok((strchr(m_buffer.Rx,'I')+1),";");
@@ -1173,6 +1195,8 @@ int Game::processBuffer()
                             printf("G: port:%d\n",port);
                             setPlayer(no, name, IP, port);
                             
+                            
+                            
                             m_nbPlayer= no+1 ;
                             
                             createMenu();
@@ -1180,14 +1204,27 @@ int Game::processBuffer()
                      break;
                      
                      case 20:
+                     {
                             printf("G: get my card\n");
                             m_state=GAME_ONLINE;
-                            //my turn
+                            char *ptr=strchr(m_buffer.Rx,'C')+1;
+                            for(int i=0;i<12/m_nbPlayer;i++)
+                            {
+                                   printf("G: %d / i=%d / %d\n",m_myNo,i,atoi(ptr));
+                                   m_players[m_myNo].card[i]=atoi(ptr);
+                                   printf("G: %d\n",m_players[m_myNo].card[i]);
+                                   ptr=strchr(m_buffer.Rx,';')+1;
+                            }
+                            m_turn=-1;
+                     
+                     }  
                      break;
                      
                      case 21:
+                            m_turn=m_myNo;
                             printf("G: My turn\n");//my turn
                             
+                                   
                      break;
                      
                      case 22:

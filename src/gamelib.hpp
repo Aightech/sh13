@@ -81,7 +81,7 @@
 
 #define NB_MAX_PLAYERS 4
 
-#define SERVERPORT 4000
+
 //#define WATCHPORT 4001
 
 
@@ -178,7 +178,10 @@ class Game
        float time;
        int m_state;
        int m_turn;
+       
        int m_myNo;
+       int m_myname;
+       
        int m_host;
        int m_culprit;
        int m_charactersArray[13][3];
