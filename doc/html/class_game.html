@@ -83,45 +83,1375 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-static-methods">Static Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_game-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Game Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>This class represent the game application. It owns the different methods running the game.  
+ <a href="class_game.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="gamelib_8hpp_source.html">gamelib.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for Game:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_game__coll__graph.png" border="0" usemap="#_game_coll__map" alt="Collaboration graph"/></div>
+<map name="_game_coll__map" id="_game_coll__map">
+<area shape="rect" id="node2" href="struct___server.html" title="Structure of different data link to severs. " alt="" coords="5,5,72,32"/>
+<area shape="rect" id="node3" href="struct___buffer.html" title="Structures of transmission and reception buffers. " alt="" coords="101,5,165,32"/>
+<area shape="rect" id="node4" href="struct___player.html" title="_Player" alt="" coords="189,5,256,32"/>
+<area shape="rect" id="node5" href="class_button.html" title="Button" alt="" coords="289,5,349,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6f3a33940524b6ba9d83f627ccb14bbf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6f3a33940524b6ba9d83f627ccb14bbf"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> ()</td></tr>
+<tr class="memitem:ad59df6562a58a614fda24622d3715b65"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#ad59df6562a58a614fda24622d3715b65">Game</a> ()</td></tr>
+<tr class="memdesc:ad59df6562a58a614fda24622d3715b65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#ad59df6562a58a614fda24622d3715b65">More...</a><br /></td></tr>
+<tr class="separator:ad59df6562a58a614fda24622d3715b65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3d112ca6e0e55150d2fdbc704474530"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#ae3d112ca6e0e55150d2fdbc704474530">~Game</a> ()</td></tr>
+<tr class="memdesc:ae3d112ca6e0e55150d2fdbc704474530"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="#ae3d112ca6e0e55150d2fdbc704474530">More...</a><br /></td></tr>
+<tr class="separator:ae3d112ca6e0e55150d2fdbc704474530"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f3a33940524b6ba9d83f627ccb14bbf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a6f3a33940524b6ba9d83f627ccb14bbf">init</a> ()</td></tr>
+<tr class="memdesc:a6f3a33940524b6ba9d83f627ccb14bbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization methode. Some parametere are initialize inside.  <a href="#a6f3a33940524b6ba9d83f627ccb14bbf">More...</a><br /></td></tr>
 <tr class="separator:a6f3a33940524b6ba9d83f627ccb14bbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3bce2a9f8f79bd9ce6878a1afd51994d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3bce2a9f8f79bd9ce6878a1afd51994d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>createMenu</b> ()</td></tr>
-<tr class="separator:a3bce2a9f8f79bd9ce6878a1afd51994d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a463932fa7ca2f1ce243279bf2422fc48"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a463932fa7ca2f1ce243279bf2422fc48"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>menu</b> ()</td></tr>
+<tr class="memitem:a463932fa7ca2f1ce243279bf2422fc48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a463932fa7ca2f1ce243279bf2422fc48">menu</a> ()</td></tr>
+<tr class="memdesc:a463932fa7ca2f1ce243279bf2422fc48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process the 'menu' state of the game. It's mainly a event loop.  <a href="#a463932fa7ca2f1ce243279bf2422fc48">More...</a><br /></td></tr>
 <tr class="separator:a463932fa7ca2f1ce243279bf2422fc48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80324d4742c70ca5b52171382cfb2327"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a80324d4742c70ca5b52171382cfb2327"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getState</b> ()</td></tr>
+<tr class="memitem:a80324d4742c70ca5b52171382cfb2327"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a80324d4742c70ca5b52171382cfb2327">getState</a> ()</td></tr>
+<tr class="memdesc:a80324d4742c70ca5b52171382cfb2327"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accessor method to get the state of the game from the main loop.  <a href="#a80324d4742c70ca5b52171382cfb2327">More...</a><br /></td></tr>
 <tr class="separator:a80324d4742c70ca5b52171382cfb2327"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc94b469c429df61f845891b45805061"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adc94b469c429df61f845891b45805061"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>onlineGame</b> ()</td></tr>
+<tr class="memitem:adc94b469c429df61f845891b45805061"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#adc94b469c429df61f845891b45805061">onlineGame</a> ()</td></tr>
+<tr class="memdesc:adc94b469c429df61f845891b45805061"><td class="mdescLeft">&#160;</td><td class="mdescRight">launch an online game. The game have to be setted (through <a class="el" href="class_game.html#a463932fa7ca2f1ce243279bf2422fc48" title="Process the &#39;menu&#39; state of the game. It&#39;s mainly a event loop. ">menu()</a> )  <a href="#adc94b469c429df61f845891b45805061">More...</a><br /></td></tr>
 <tr class="separator:adc94b469c429df61f845891b45805061"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e497a8b5bf1e585a66324f4884f055b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4e497a8b5bf1e585a66324f4884f055b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>createGameContext</b> ()</td></tr>
-<tr class="separator:a4e497a8b5bf1e585a66324f4884f055b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac978133ca5e0a54ab72f8c1da13e9fbd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac978133ca5e0a54ab72f8c1da13e9fbd"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>isMyTurn</b> ()</td></tr>
+<tr class="memitem:ac978133ca5e0a54ab72f8c1da13e9fbd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#ac978133ca5e0a54ab72f8c1da13e9fbd">isMyTurn</a> ()</td></tr>
+<tr class="memdesc:ac978133ca5e0a54ab72f8c1da13e9fbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accessor method to get the turn of the game from the main loop.  <a href="#ac978133ca5e0a54ab72f8c1da13e9fbd">More...</a><br /></td></tr>
 <tr class="separator:ac978133ca5e0a54ab72f8c1da13e9fbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e10e827638cabd577ce12ab68497d31"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6e10e827638cabd577ce12ab68497d31"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>isHost</b> ()</td></tr>
+<tr class="memitem:a6e10e827638cabd577ce12ab68497d31"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a6e10e827638cabd577ce12ab68497d31">isHost</a> ()</td></tr>
+<tr class="memdesc:a6e10e827638cabd577ce12ab68497d31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accessor method to get the host of the game from the main loop.  <a href="#a6e10e827638cabd577ce12ab68497d31">More...</a><br /></td></tr>
 <tr class="separator:a6e10e827638cabd577ce12ab68497d31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed51d3d3760d9c052cdf33144ead0fba"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aed51d3d3760d9c052cdf33144ead0fba"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>startServer</b> ()</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a3bce2a9f8f79bd9ce6878a1afd51994d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a3bce2a9f8f79bd9ce6878a1afd51994d">createMenu</a> ()</td></tr>
+<tr class="memdesc:a3bce2a9f8f79bd9ce6878a1afd51994d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate the graphics of the different menu's states of the game. It's mainly SFML sprites/Text/Buttons creation.  <a href="#a3bce2a9f8f79bd9ce6878a1afd51994d">More...</a><br /></td></tr>
+<tr class="separator:a3bce2a9f8f79bd9ce6878a1afd51994d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e497a8b5bf1e585a66324f4884f055b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a4e497a8b5bf1e585a66324f4884f055b">createGameContext</a> ()</td></tr>
+<tr class="memdesc:a4e497a8b5bf1e585a66324f4884f055b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate the graphics of the different game's states of the game. It's mainly SFML sprites/Text/Buttons creation.  <a href="#a4e497a8b5bf1e585a66324f4884f055b">More...</a><br /></td></tr>
+<tr class="separator:a4e497a8b5bf1e585a66324f4884f055b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed51d3d3760d9c052cdf33144ead0fba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#aed51d3d3760d9c052cdf33144ead0fba">startServer</a> ()</td></tr>
+<tr class="memdesc:aed51d3d3760d9c052cdf33144ead0fba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Launch a sh13 server.  <a href="#aed51d3d3760d9c052cdf33144ead0fba">More...</a><br /></td></tr>
 <tr class="separator:aed51d3d3760d9c052cdf33144ead0fba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a087cbce66aa1586d8da688c67755c641"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a087cbce66aa1586d8da688c67755c641">processBuffer</a> ()</td></tr>
+<tr class="memdesc:a087cbce66aa1586d8da688c67755c641"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process a buffer filled by the tcp thread.  <a href="#a087cbce66aa1586d8da688c67755c641">More...</a><br /></td></tr>
+<tr class="separator:a087cbce66aa1586d8da688c67755c641"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cbb03c1c0cd47feb713ba9883654ab3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a4cbb03c1c0cd47feb713ba9883654ab3">setPlayer</a> (int no, char *name, char *IPaddr, int port)</td></tr>
+<tr class="memdesc:a4cbb03c1c0cd47feb713ba9883654ab3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set new data in the players array.  <a href="#a4cbb03c1c0cd47feb713ba9883654ab3">More...</a><br /></td></tr>
+<tr class="separator:a4cbb03c1c0cd47feb713ba9883654ab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-methods"></a>
+Static Private Member Functions</h2></td></tr>
+<tr class="memitem:a1de7811d3b61dcf66cc4371200b3f64a"><td class="memItemLeft" align="right" valign="top">static void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a1de7811d3b61dcf66cc4371200b3f64a">tcpWatchdog</a> (void *p_data)</td></tr>
+<tr class="memdesc:a1de7811d3b61dcf66cc4371200b3f64a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process the different connection to the client and fill up a shared buffer with incomming data.  <a href="#a1de7811d3b61dcf66cc4371200b3f64a">More...</a><br /></td></tr>
+<tr class="separator:a1de7811d3b61dcf66cc4371200b3f64a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:afeb6f705821e63812c7479d05c0c8447"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#afeb6f705821e63812c7479d05c0c8447">serv_portNo</a></td></tr>
+<tr class="separator:afeb6f705821e63812c7479d05c0c8447"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90aab94315524e741e90fb8e29cbe8dd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a90aab94315524e741e90fb8e29cbe8dd">serv_clientPortNo</a> [4]</td></tr>
+<tr class="separator:a90aab94315524e741e90fb8e29cbe8dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f7f8e29dc9f799e221a38493c7d43ca"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a4f7f8e29dc9f799e221a38493c7d43ca">serv_clientIPAddr</a> [4][16]</td></tr>
+<tr class="separator:a4f7f8e29dc9f799e221a38493c7d43ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac698cf1904287abc3021f0b6fa7411a4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#ac698cf1904287abc3021f0b6fa7411a4">serv_sfd</a></td></tr>
+<tr class="separator:ac698cf1904287abc3021f0b6fa7411a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1c8c267903168ca92facc373399531b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#aa1c8c267903168ca92facc373399531b">serv_cpsfd</a></td></tr>
+<tr class="separator:aa1c8c267903168ca92facc373399531b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbda5d55bf70435c7f4bcbe27af49dcc"><td class="memItemLeft" align="right" valign="top">struct sockaddr_in&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#adbda5d55bf70435c7f4bcbe27af49dcc">serv_addr</a></td></tr>
+<tr class="separator:adbda5d55bf70435c7f4bcbe27af49dcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad42b135b7c7c3fcb96a5faa6ecd086a"><td class="memItemLeft" align="right" valign="top">struct sockaddr_in&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#aad42b135b7c7c3fcb96a5faa6ecd086a">serv_clientAddr</a> [4]</td></tr>
+<tr class="separator:aad42b135b7c7c3fcb96a5faa6ecd086a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a261876196ef61c4808c3e34a06e0b1"><td class="memItemLeft" align="right" valign="top">socklen_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a4a261876196ef61c4808c3e34a06e0b1">serv_clilen</a></td></tr>
+<tr class="separator:a4a261876196ef61c4808c3e34a06e0b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38fa2f0f4350dfa47bd85fd13e3e558c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="netlib_8hpp.html#a2e50028ebd48ce86d5b1fc983d6ef155">Buffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a38fa2f0f4350dfa47bd85fd13e3e558c">serv_buff</a></td></tr>
+<tr class="separator:a38fa2f0f4350dfa47bd85fd13e3e558c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace6d6f7c808735dabb0e4d46e9f95495"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#ace6d6f7c808735dabb0e4d46e9f95495">time</a></td></tr>
+<tr class="separator:ace6d6f7c808735dabb0e4d46e9f95495"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6fd7fa82d311756848b0e6fe3e636ee"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#aa6fd7fa82d311756848b0e6fe3e636ee">m_state</a></td></tr>
+<tr class="separator:aa6fd7fa82d311756848b0e6fe3e636ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9442e9eb5eacee1fd1bac6ab9e0737dc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a9442e9eb5eacee1fd1bac6ab9e0737dc">m_turn</a></td></tr>
+<tr class="separator:a9442e9eb5eacee1fd1bac6ab9e0737dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1bcd562d4abde5c4c4cba9d3ce65113"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#ad1bcd562d4abde5c4c4cba9d3ce65113">m_myNo</a></td></tr>
+<tr class="separator:ad1bcd562d4abde5c4c4cba9d3ce65113"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae668e9c38c6d79fd8115ba23983ffdd6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#ae668e9c38c6d79fd8115ba23983ffdd6">m_host</a></td></tr>
+<tr class="separator:ae668e9c38c6d79fd8115ba23983ffdd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82c4007d09ac390cb7f783868f7b6279"><td class="memItemLeft" align="right" valign="top"><a class="el" href="netlib_8hpp.html#a2e50028ebd48ce86d5b1fc983d6ef155">Buffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a82c4007d09ac390cb7f783868f7b6279">m_buffer</a></td></tr>
+<tr class="separator:a82c4007d09ac390cb7f783868f7b6279"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d5f7576bfcb537e6b13faa3712e6c70"><td class="memItemLeft" align="right" valign="top">pthread_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a0d5f7576bfcb537e6b13faa3712e6c70">m_thread_server</a></td></tr>
+<tr class="separator:a0d5f7576bfcb537e6b13faa3712e6c70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5ed3302bc0b3e8b25aca8437cf4a9fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="netlib_8hpp.html#a95e7ffbda40674e59bb208b9c6c9a22a">Server</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#ae5ed3302bc0b3e8b25aca8437cf4a9fa">m_servers</a> [5]</td></tr>
+<tr class="separator:ae5ed3302bc0b3e8b25aca8437cf4a9fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d466d7035c178e0bda6213097a5494e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a7d466d7035c178e0bda6213097a5494e">m_server</a></td></tr>
+<tr class="separator:a7d466d7035c178e0bda6213097a5494e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ece0b988b3b61990806f15c85a696cd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a8ece0b988b3b61990806f15c85a696cd">m_nbOfServers</a></td></tr>
+<tr class="separator:a8ece0b988b3b61990806f15c85a696cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5ecceb630ef75f3a2098c14aa32bdf6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#aa5ecceb630ef75f3a2098c14aa32bdf6">m_nbPlayer</a></td></tr>
+<tr class="separator:aa5ecceb630ef75f3a2098c14aa32bdf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38d250490b02207c472dabff033b2698"><td class="memItemLeft" align="right" valign="top"><a class="el" href="gamelib_8hpp.html#af30e2030635a69690f85e48bc6ef202f">Player</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a38d250490b02207c472dabff033b2698">m_players</a> [4]</td></tr>
+<tr class="separator:a38d250490b02207c472dabff033b2698"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1598f69be155189c3bb11085f1c09941"><td class="memItemLeft" align="right" valign="top">Texture&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a1598f69be155189c3bb11085f1c09941">m_arrayConnectionTexture</a></td></tr>
+<tr class="separator:a1598f69be155189c3bb11085f1c09941"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf146b48291f9181101f3e9f64fc79fd"><td class="memItemLeft" align="right" valign="top">vector&lt; Sprite * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#abf146b48291f9181101f3e9f64fc79fd">m_arraySprites</a></td></tr>
+<tr class="separator:abf146b48291f9181101f3e9f64fc79fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0962fd29c65da3b252af011b97112c7"><td class="memItemLeft" align="right" valign="top">vector&lt; Text * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#af0962fd29c65da3b252af011b97112c7">m_arrayText</a></td></tr>
+<tr class="separator:af0962fd29c65da3b252af011b97112c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaad584aa5af55ff622aed20b100e84b6"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#aaad584aa5af55ff622aed20b100e84b6">m_arrayPlayersNames</a> [4][20]</td></tr>
+<tr class="separator:aaad584aa5af55ff622aed20b100e84b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07b6b5690df46f10f6162af2d0448a82"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a07b6b5690df46f10f6162af2d0448a82">m_arrayPlayersIPaddr</a> [4][20]</td></tr>
+<tr class="separator:a07b6b5690df46f10f6162af2d0448a82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5725f31c673785a45c5a6c37433ba253"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a5725f31c673785a45c5a6c37433ba253">m_arrayPlayersPort</a> [4]</td></tr>
+<tr class="separator:a5725f31c673785a45c5a6c37433ba253"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8773f0f2562575ce000b0a6abb6c87ed"><td class="memItemLeft" align="right" valign="top">RenderWindow&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a8773f0f2562575ce000b0a6abb6c87ed">window</a></td></tr>
+<tr class="separator:a8773f0f2562575ce000b0a6abb6c87ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6f5762c0f546512838893970fd9436e"><td class="memItemLeft" align="right" valign="top">Text&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#ac6f5762c0f546512838893970fd9436e">m_title</a></td></tr>
+<tr class="separator:ac6f5762c0f546512838893970fd9436e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2141a4a7b82e11a9c4f4dd1ec62bb0eb"><td class="memItemLeft" align="right" valign="top">Font&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a2141a4a7b82e11a9c4f4dd1ec62bb0eb">m_font</a></td></tr>
+<tr class="separator:a2141a4a7b82e11a9c4f4dd1ec62bb0eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd7b0bcfc0ef3d114455432d2fe8e137"><td class="memItemLeft" align="right" valign="top">Texture&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#acd7b0bcfc0ef3d114455432d2fe8e137">m_buttonTexture</a></td></tr>
+<tr class="separator:acd7b0bcfc0ef3d114455432d2fe8e137"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16e92942e7362adb169b98e56e59aa0e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_button.html">Button</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a16e92942e7362adb169b98e56e59aa0e">button</a></td></tr>
+<tr class="separator:a16e92942e7362adb169b98e56e59aa0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae699e93a493eb14c7009054c5ddab8d7"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="class_button.html">Button</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#ae699e93a493eb14c7009054c5ddab8d7">buttons</a></td></tr>
+<tr class="separator:ae699e93a493eb14c7009054c5ddab8d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5caae82a187e433175a08de88a17b4db"><td class="memItemLeft" align="right" valign="top">Vector2i&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a5caae82a187e433175a08de88a17b4db">msPos</a></td></tr>
+<tr class="separator:a5caae82a187e433175a08de88a17b4db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ce381e463f20cfa4b02e7883a911562"><td class="memItemLeft" align="right" valign="top">vector&lt; Texture * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a9ce381e463f20cfa4b02e7883a911562">persoTextures</a></td></tr>
+<tr class="separator:a9ce381e463f20cfa4b02e7883a911562"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e6e306ff053106fef09e037c8d1e6ba"><td class="memItemLeft" align="right" valign="top">vector&lt; Sprite * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a2e6e306ff053106fef09e037c8d1e6ba">persoSprites</a></td></tr>
+<tr class="separator:a2e6e306ff053106fef09e037c8d1e6ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae97b872af441bf853ee3af3129cba962"><td class="memItemLeft" align="right" valign="top">vector&lt; Sprite * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#ae97b872af441bf853ee3af3129cba962">playerPlateSprites</a></td></tr>
+<tr class="separator:ae97b872af441bf853ee3af3129cba962"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cecd29f9b4f439703dd67331a9a7d1d"><td class="memItemLeft" align="right" valign="top">vector&lt; Text * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a5cecd29f9b4f439703dd67331a9a7d1d">labelPlayerName</a></td></tr>
+<tr class="separator:a5cecd29f9b4f439703dd67331a9a7d1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d9bb8f6fa70f8377a1c1c9e8de04d05"><td class="memItemLeft" align="right" valign="top">vector&lt; Text * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a8d9bb8f6fa70f8377a1c1c9e8de04d05">labelPlayerIP</a></td></tr>
+<tr class="separator:a8d9bb8f6fa70f8377a1c1c9e8de04d05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40e4eab46df384695bc73ff0f36b171f"><td class="memItemLeft" align="right" valign="top">vector&lt; Texture * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a40e4eab46df384695bc73ff0f36b171f">iconsTextures</a></td></tr>
+<tr class="separator:a40e4eab46df384695bc73ff0f36b171f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f4ef83dc173252517c1e91667bd6239"><td class="memItemLeft" align="right" valign="top">vector&lt; Sprite * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a4f4ef83dc173252517c1e91667bd6239">iconsSprites</a></td></tr>
+<tr class="separator:a4f4ef83dc173252517c1e91667bd6239"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9c5aff719d0bde89121da263e9c1b1c"><td class="memItemLeft" align="right" valign="top">Font&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#aa9c5aff719d0bde89121da263e9c1b1c">font</a></td></tr>
+<tr class="separator:aa9c5aff719d0bde89121da263e9c1b1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class represent the game application. It owns the different methods running the game. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="ad59df6562a58a614fda24622d3715b65"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Game::Game </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+
+</div>
+</div>
+<a class="anchor" id="ae3d112ca6e0e55150d2fdbc704474530"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Game::~Game </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a4e497a8b5bf1e585a66324f4884f055b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Game::createGameContext </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Generate the graphics of the different game's states of the game. It's mainly SFML sprites/Text/Buttons creation. </p>
+
+</div>
+</div>
+<a class="anchor" id="a3bce2a9f8f79bd9ce6878a1afd51994d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Game::createMenu </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Generate the graphics of the different menu's states of the game. It's mainly SFML sprites/Text/Buttons creation. </p>
+
+</div>
+</div>
+<a class="anchor" id="a80324d4742c70ca5b52171382cfb2327"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Game::getState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Accessor method to get the state of the game from the main loop. </p>
+
+</div>
+</div>
+<a class="anchor" id="a6f3a33940524b6ba9d83f627ccb14bbf"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Game::init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialization methode. Some parametere are initialize inside. </p>
+
+</div>
+</div>
+<a class="anchor" id="a6e10e827638cabd577ce12ab68497d31"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Game::isHost </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Accessor method to get the host of the game from the main loop. </p>
+
+</div>
+</div>
+<a class="anchor" id="ac978133ca5e0a54ab72f8c1da13e9fbd"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Game::isMyTurn </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Accessor method to get the turn of the game from the main loop. </p>
+
+</div>
+</div>
+<a class="anchor" id="a463932fa7ca2f1ce243279bf2422fc48"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Game::menu </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Process the 'menu' state of the game. It's mainly a event loop. </p>
+
+</div>
+</div>
+<a class="anchor" id="adc94b469c429df61f845891b45805061"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Game::onlineGame </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>launch an online game. The game have to be setted (through <a class="el" href="class_game.html#a463932fa7ca2f1ce243279bf2422fc48" title="Process the &#39;menu&#39; state of the game. It&#39;s mainly a event loop. ">menu()</a> ) </p>
+
+</div>
+</div>
+<a class="anchor" id="a087cbce66aa1586d8da688c67755c641"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Game::processBuffer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Process a buffer filled by the tcp thread. </p>
+
+</div>
+</div>
+<a class="anchor" id="a4cbb03c1c0cd47feb713ba9883654ab3"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Game::setPlayer </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>no</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>IPaddr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set new data in the players array. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">no</td><td>: the numero of the player. </td></tr>
+    <tr><td class="paramname">name</td><td>: the name of the player. </td></tr>
+    <tr><td class="paramname">IPaddr</td><td>: the IP address of the player. </td></tr>
+    <tr><td class="paramname">port</td><td>: the port of the player. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aed51d3d3760d9c052cdf33144ead0fba"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Game::startServer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Launch a sh13 server. </p>
+
+</div>
+</div>
+<a class="anchor" id="a1de7811d3b61dcf66cc4371200b3f64a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * Game::tcpWatchdog </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>p_data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Process the different connection to the client and fill up a shared buffer with incomming data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_data</td><td>: the shared buffer. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a16e92942e7362adb169b98e56e59aa0e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_button.html">Button</a> Game::button</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae699e93a493eb14c7009054c5ddab8d7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;<a class="el" href="class_button.html">Button</a> *&gt; Game::buttons</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa9c5aff719d0bde89121da263e9c1b1c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Font Game::font</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4f4ef83dc173252517c1e91667bd6239"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;Sprite*&gt; Game::iconsSprites</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a40e4eab46df384695bc73ff0f36b171f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;Texture*&gt; Game::iconsTextures</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8d9bb8f6fa70f8377a1c1c9e8de04d05"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;Text*&gt; Game::labelPlayerIP</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5cecd29f9b4f439703dd67331a9a7d1d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;Text*&gt; Game::labelPlayerName</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1598f69be155189c3bb11085f1c09941"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Texture Game::m_arrayConnectionTexture</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a07b6b5690df46f10f6162af2d0448a82"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Game::m_arrayPlayersIPaddr[4][20]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aaad584aa5af55ff622aed20b100e84b6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Game::m_arrayPlayersNames[4][20]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5725f31c673785a45c5a6c37433ba253"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Game::m_arrayPlayersPort[4]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abf146b48291f9181101f3e9f64fc79fd"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;Sprite*&gt; Game::m_arraySprites</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af0962fd29c65da3b252af011b97112c7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;Text*&gt; Game::m_arrayText</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a82c4007d09ac390cb7f783868f7b6279"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="netlib_8hpp.html#a2e50028ebd48ce86d5b1fc983d6ef155">Buffer</a> Game::m_buffer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acd7b0bcfc0ef3d114455432d2fe8e137"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Texture Game::m_buttonTexture</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2141a4a7b82e11a9c4f4dd1ec62bb0eb"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Font Game::m_font</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae668e9c38c6d79fd8115ba23983ffdd6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Game::m_host</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad1bcd562d4abde5c4c4cba9d3ce65113"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Game::m_myNo</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8ece0b988b3b61990806f15c85a696cd"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Game::m_nbOfServers</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa5ecceb630ef75f3a2098c14aa32bdf6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Game::m_nbPlayer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a38d250490b02207c472dabff033b2698"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="gamelib_8hpp.html#af30e2030635a69690f85e48bc6ef202f">Player</a> Game::m_players[4]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7d466d7035c178e0bda6213097a5494e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Game::m_server</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae5ed3302bc0b3e8b25aca8437cf4a9fa"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="netlib_8hpp.html#a95e7ffbda40674e59bb208b9c6c9a22a">Server</a> Game::m_servers[5]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa6fd7fa82d311756848b0e6fe3e636ee"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Game::m_state</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0d5f7576bfcb537e6b13faa3712e6c70"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">pthread_t Game::m_thread_server</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac6f5762c0f546512838893970fd9436e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Text Game::m_title</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9442e9eb5eacee1fd1bac6ab9e0737dc"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Game::m_turn</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5caae82a187e433175a08de88a17b4db"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector2i Game::msPos</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2e6e306ff053106fef09e037c8d1e6ba"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;Sprite*&gt; Game::persoSprites</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9ce381e463f20cfa4b02e7883a911562"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;Texture*&gt; Game::persoTextures</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae97b872af441bf853ee3af3129cba962"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;Sprite*&gt; Game::playerPlateSprites</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="adbda5d55bf70435c7f4bcbe27af49dcc"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct sockaddr_in Game::serv_addr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a38fa2f0f4350dfa47bd85fd13e3e558c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="netlib_8hpp.html#a2e50028ebd48ce86d5b1fc983d6ef155">Buffer</a> Game::serv_buff</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aad42b135b7c7c3fcb96a5faa6ecd086a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct sockaddr_in Game::serv_clientAddr[4]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4f7f8e29dc9f799e221a38493c7d43ca"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Game::serv_clientIPAddr[4][16]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a90aab94315524e741e90fb8e29cbe8dd"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Game::serv_clientPortNo[4]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4a261876196ef61c4808c3e34a06e0b1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">socklen_t Game::serv_clilen</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa1c8c267903168ca92facc373399531b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Game::serv_cpsfd</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="afeb6f705821e63812c7479d05c0c8447"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Game::serv_portNo</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Liste des morceaux </p>
+
+</div>
+</div>
+<a class="anchor" id="ac698cf1904287abc3021f0b6fa7411a4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Game::serv_sfd</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ace6d6f7c808735dabb0e4d46e9f95495"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Game::time</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8773f0f2562575ce000b0a6abb6c87ed"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RenderWindow Game::window</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/<a class="el" href="gamelib_8hpp_source.html">gamelib.hpp</a></li>
-<li>src/gamelib.cpp</li>
+<li>src/<a class="el" href="gamelib_8cpp.html">gamelib.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

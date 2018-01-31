@@ -11,6 +11,8 @@
 
 #include "vector"
 
+#include <time.h> 
+
 
 
 int Button::s_nb=0;
@@ -20,12 +22,22 @@ Font Button::s_font;
 int Textbox::s_nb=0;
 Font Textbox::s_font;
 
+extern int WATCHPORT;
 
-int main()
+
+int main(int argc,char ** argv)
 {
+       srand(time(NULL));
+       if(argc>1)
+              WATCHPORT=atoi(argv[1]);
+       else
+              WATCHPORT=4001;
+              
+              
        
        Game game;
        game.init();
+       
        game.menu();
        
        switch(game.getState())

@@ -48,11 +48,16 @@ int sendTCP(const char *IPaddress, int port, Buffer *buff)
               if(write(sockfd,buff->Tx,strlen(buff->Tx))==strlen(buff->Tx))
               {
                      buff->T_flag=0;//the data has been sent
-                     if(read(sockfd,buff->Rx,255)>0)
+                     if(!buff->R_flag)//no data un read
                      {
-                            buff->R_flag=1;//data received
-                            flag =1;
+                            if(read(sockfd,buff->Rx,255)>0)
+                            {
+                                   buff->R_flag=1;//data received
+                                   flag =1;
+                            }
                      }
+                     else
+                         printf("Couldn't read because of unprocess data in the buffer.\n\n");   
               }
               else
               {

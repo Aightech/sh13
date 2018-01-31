@@ -11,6 +11,8 @@
 #define INQUIRY_GAME 6
 #define DENOUNCE_GAME 7
 #define GENPOLL_GAME 8
+#define INIT_GAME 9
+#define INQUIRY_GAME2 10
 
 #define GAME_NAME "SHERLOCK 13"
 #define WIN_W 1200
@@ -57,11 +59,32 @@
 #define JOIN_S3_BUTT 33
 #define JOIN_S4_BUTT 34
 
+#define ASK1_BUTT 31
+#define ASK2_BUTT 32
+#define ASK3_BUTT 33
+#define ASK4_BUTT 34
+
+#define DENOUNCE1_BUTT 21
+#define DENOUNCE2_BUTT 22
+#define DENOUNCE3_BUTT 23
+#define DENOUNCE4_BUTT 24
+#define DENOUNCE5_BUTT 25
+#define DENOUNCE6_BUTT 26
+#define DENOUNCE7_BUTT 27
+#define DENOUNCE8_BUTT 28
+#define DENOUNCE9_BUTT 29
+#define DENOUNCE10_BUTT 30
+
 
 
 #define NB_OBJ 8
 
 #define NB_MAX_PLAYERS 4
+
+#define SERVERPORT 4000
+//#define WATCHPORT 4001
+
+
 
 
 
@@ -87,32 +110,61 @@ typedef struct _Player {
 	int  portNo;
 	
 	int obj[NB_OBJ];
-	int card[3];
+	int card[6];
 	
 }Player;
 
 
 
+
+
 class Game
 {
+       /*! \class Game
+       * \brief This class represent the game application.
+       *      It owns the different methods running the game.
+       */
        public:
+       
+       /*! \brief Constructor */
        Game();
+       
+       /*! \brief Destructor */
        ~Game(){};
+       
+       /*! \brief Initialization methode. Some parametere are initialize inside */
        void init();
-       void createMenu();
+       
+       /*! \brief Process the 'menu' state of the game. It's mainly a event loop */
        void menu();
+       
+       /*! \brief Accessor method to get the state of the game from the main loop.   */
        int getState(){return m_state;};
+       
+       /*! \brief launch an online game. The game have to be setted (through menu() )*/
        void onlineGame();
-       void createGameContext();
+       
+       /*! \brief Accessor method to get the turn of the game from the main loop.   */
        int isMyTurn(){return m_turn;};
+       
+       /*! \brief Accessor method to get the host of the game from the main loop.   */
        int isHost(){return m_host;};
        
-       void startServer();
+       void shareObj();
+       
        
        private:
+       /*! \brief Generate the graphics of the different menu's states of the game. It's mainly SFML sprites/Text/Buttons creation   */
+       void createMenu();
+       
+       /*! \brief Generate the graphics of the different game's states of the game. It's mainly SFML sprites/Text/Buttons creation   */
+       void createGameContext();
+       
+       /*! \brief Launch a sh13 server.   */
+       void startServer();
        
        //server related attributes
-       int serv_portNo;
+       int serv_portNo;            /*!< Liste des morceaux*/
        int serv_clientPortNo[4];
        char serv_clientIPAddr[4][16];
        int serv_sfd;
@@ -128,11 +180,20 @@ class Game
        int m_turn;
        int m_myNo;
        int m_host;
+       int m_culprit;
+       int m_charactersArray[13][3];
+       int m_obj;
+       int m_otherCharacters[10];
        
        //TCP related attributes
        Buffer m_buffer;
+       
+       /*! \brief Process a buffer filled by the tcp thread.   */
        int processBuffer();
        pthread_t m_thread_server;
+       
+       /*! \brief Process the different connection to the client and fill up a shared buffer with incomming data.   
+        *  \param p_data : the shared buffer.*/
        static void * tcpWatchdog(void * p_data);
        
        //servers related attributes
@@ -143,6 +204,15 @@ class Game
        //Players related attributes
        int m_nbPlayer;
        Player m_players[4];
+       
+       
+       
+       /*! \brief Set new data in the players array.   
+        *  \param no : the numero of the player.
+        *  \param name : the name of the player.
+        *  \param IPaddr : the IP address of the player.
+        *  \param port : the port of the player.
+        */
        int setPlayer(int no, char * name, char * IPaddr, int port);
        
        
@@ -165,14 +235,17 @@ class Game
        
        Vector2i msPos; 
        
-       vector<Texture*> persoTextures;
-       vector<Sprite*> persoSprites; 
-       vector<Sprite*> playerPlateSprites; 
-       vector<Text*> labelPlayerName;
-       vector<Text*> labelPlayerIP;
+       vector<Texture*> m_persoTextures;
+       vector<Sprite*> m_persoSprites; 
        
-       vector<Texture*> iconsTextures;
-       vector<Sprite*> iconsSprites; 
+       Texture m_woodTexture;
+       vector<Sprite*> m_playerPlateSprites; 
+       vector<Text*> m_labelPlayerName;
+       vector<Text*> m_labelPlayerIP;
+       vector<Text*> m_playersObjects;
+       
+       vector<Texture*> m_iconsTextures;
+       vector<Sprite*> m_iconsSprites; 
        
        Font font;
         

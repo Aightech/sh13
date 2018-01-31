@@ -11,6 +11,10 @@ using namespace sf;
 
 class Button
 {
+       /*! \class Game
+       * \brief This class represent the game application.
+       *      It owns the different methods running the game.
+       */
        public:
        Button(){s_nb++;};
        Button(std::string s, sf::Vector2f position,int nb = 0);

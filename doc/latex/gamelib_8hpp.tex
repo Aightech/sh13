@@ -1,0 +1,288 @@
+\hypertarget{gamelib_8hpp}{}\section{src/gamelib.hpp File Reference}
+\label{gamelib_8hpp}\index{src/gamelib.\+hpp@{src/gamelib.\+hpp}}
+{\ttfamily \#include $<$sys/types.\+h$>$}\\*
+{\ttfamily \#include $<$sys/socket.\+h$>$}\\*
+{\ttfamily \#include $<$sys/ioctl.\+h$>$}\\*
+{\ttfamily \#include $<$netinet/in.\+h$>$}\\*
+{\ttfamily \#include $<$net/if.\+h$>$}\\*
+{\ttfamily \#include $<$sys/wait.\+h$>$}\\*
+{\ttfamily \#include $<$netdb.\+h$>$}\\*
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\\*
+Include dependency graph for gamelib.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gamelib_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{gamelib_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct___player}{\+\_\+\+Player}
+\item 
+class \hyperlink{class_game}{Game}
+\begin{DoxyCompactList}\small\item\em This class represent the game application. It owns the different methods running the game. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{gamelib_8hpp_a44dd1b46a3f55007e78fc1ac506153b9}{M\+A\+I\+N\+\_\+\+M\+E\+NU}~0
+\item 
+\#define \hyperlink{gamelib_8hpp_ac11b1add7fbae1e2fd3eb4db280e726e}{O\+P\+T\+I\+O\+N\+\_\+\+M\+E\+NU}~1
+\item 
+\#define \hyperlink{gamelib_8hpp_ad0f28d6602fd831f4b23b07600cb5663}{L\+A\+N\+\_\+\+M\+E\+NU}~2
+\item 
+\#define \hyperlink{gamelib_8hpp_ae4dc9aa573dd719b4e8d32de866a0676}{C\+R\+E\+A\+T\+I\+O\+N\+\_\+\+M\+E\+NU}~3
+\item 
+\#define \hyperlink{gamelib_8hpp_aac183cf41be6b5a75586c846e66fe880}{G\+A\+M\+E\+\_\+\+O\+N\+L\+I\+NE}~4
+\item 
+\#define \hyperlink{gamelib_8hpp_ae1fadc8bfc98bcc5f8283e1d266adbff}{M\+A\+I\+N\+\_\+\+G\+A\+ME}~5
+\item 
+\#define \hyperlink{gamelib_8hpp_a83e0919ddf2c586d3ed818dcff337a72}{I\+N\+Q\+U\+I\+R\+Y\+\_\+\+G\+A\+ME}~6
+\item 
+\#define \hyperlink{gamelib_8hpp_a08dd6ca7b9249fce702b62e83a83e257}{D\+E\+N\+O\+U\+N\+C\+E\+\_\+\+G\+A\+ME}~7
+\item 
+\#define \hyperlink{gamelib_8hpp_acffd6b8fc9934d27093805fb799425d6}{G\+E\+N\+P\+O\+L\+L\+\_\+\+G\+A\+ME}~8
+\item 
+\#define \hyperlink{gamelib_8hpp_aed7818555b2da57314243d796315e4e9}{G\+A\+M\+E\+\_\+\+N\+A\+ME}~\char`\"{}S\+H\+E\+R\+L\+O\+CK 13\char`\"{}
+\item 
+\#define \hyperlink{gamelib_8hpp_a23f7b870356588ddfcc49a1c364cba5e}{W\+I\+N\+\_\+W}~1200
+\item 
+\#define \hyperlink{gamelib_8hpp_ae893136b52eb3d95f3a310c3900ae42b}{W\+I\+N\+\_\+H}~700
+\item 
+\#define \hyperlink{gamelib_8hpp_add1d02207dbd9f34dd565662fb111e13}{G\+A\+M\+E\+\_\+\+F\+O\+N\+T\+\_\+\+T\+I\+T\+LE}~\char`\"{}media/fonts/S\+H\+E\+R\+L\+O\+C\+K\+E\+D.\+ttf\char`\"{}
+\item 
+\#define \hyperlink{gamelib_8hpp_aded335b4483d125c8bc278d8a01d71b3}{G\+A\+M\+E\+\_\+\+F\+O\+N\+T\+\_\+\+B\+U\+T\+T\+ON}~\char`\"{}media/fonts/S\+H\+E\+R\+L\+O\+C\+K\+E\+D.\+ttf\char`\"{}
+\item 
+\#define \hyperlink{gamelib_8hpp_ac4683d0496148f549de5e1c8565cfde4}{G\+A\+M\+E\+\_\+\+T\+H\+E\+M\+E\+\_\+\+B\+U\+T\+T\+ON}~\char`\"{}media/theme/button.\+png\char`\"{}
+\item 
+\#define \hyperlink{gamelib_8hpp_a2ffe207d8c7eafc9fc1dcf5847195288}{G\+A\+M\+E\+\_\+\+T\+H\+E\+M\+E\+\_\+\+A\+R\+R\+AY}~\char`\"{}media/theme/array\+Connection.\+png\char`\"{}
+\item 
+\#define \hyperlink{gamelib_8hpp_a430008b68b5b6c24d322a3aa655642e9}{L\+A\+N\+P\+O\+RT}~2027
+\item 
+\#define \hyperlink{gamelib_8hpp_a64bd201cde3669cc93407f6d8a50f8a0}{P\+L\+A\+Y\+\_\+\+B\+U\+TT}~1
+\item 
+\#define \hyperlink{gamelib_8hpp_a7cc616abbe656c9f94db9b129b1dbda3}{L\+A\+N\+\_\+\+B\+U\+TT}~2
+\item 
+\#define \hyperlink{gamelib_8hpp_a1d996f78877419ea4eaaccdd2f451f15}{O\+P\+T\+I\+O\+N\+\_\+\+B\+U\+TT}~3
+\item 
+\#define \hyperlink{gamelib_8hpp_a95bf13245b70fce1174ee9218f22d5d9}{Q\+U\+I\+T\+\_\+\+B\+U\+TT}~4
+\item 
+\#define \hyperlink{gamelib_8hpp_aab03d9ae79cbecdeb46c69fed8a60b82}{S\+A\+V\+E\+\_\+\+B\+U\+TT}~5
+\item 
+\#define \hyperlink{gamelib_8hpp_a2cc20321e1647892ae7c16c19e117c3d}{B\+A\+C\+K\+\_\+\+B\+U\+TT}~6
+\item 
+\#define \hyperlink{gamelib_8hpp_ab8b49e0cd147d6d52b467115e0bdb933}{H\+O\+S\+T\+\_\+\+B\+U\+TT}~7
+\item 
+\#define \hyperlink{gamelib_8hpp_a496dce15452e2878070951e95d3b8776}{J\+O\+I\+N\+\_\+\+B\+U\+TT}~8
+\item 
+\#define \hyperlink{gamelib_8hpp_a9815ff7e5dc007c4691dbbee06bafe72}{G\+E\+N\+P\+O\+L\+L\+\_\+\+B\+U\+TT}~9
+\item 
+\#define \hyperlink{gamelib_8hpp_af742ce1e9fe0a34a9924ddaf891984ec}{I\+N\+Q\+U\+I\+R\+Y\+\_\+\+B\+U\+TT}~10
+\item 
+\#define \hyperlink{gamelib_8hpp_aa0d8c9786802ff96d2fcc6d08000338f}{D\+E\+N\+O\+U\+N\+C\+E\+\_\+\+B\+U\+TT}~11
+\item 
+\#define \hyperlink{gamelib_8hpp_aa4bdd3d404ff4909adb7d4e503eb5f7a}{J\+E\+W\+E\+L\+R\+Y\+\_\+\+B\+U\+TT}~12
+\item 
+\#define \hyperlink{gamelib_8hpp_ade59382a2fdac955b24f5bbdccb31ab7}{B\+U\+L\+B\+\_\+\+B\+U\+TT}~13
+\item 
+\#define \hyperlink{gamelib_8hpp_ab2f73a6aedf9c55f56b710ebcf376658}{B\+O\+O\+K\+\_\+\+B\+U\+TT}~14
+\item 
+\#define \hyperlink{gamelib_8hpp_ac7b31119636771ed0c04654f311e1fe6}{M\+E\+D\+A\+L\+\_\+\+B\+U\+TT}~15
+\item 
+\#define \hyperlink{gamelib_8hpp_a104281d2d6d51838fd0cc6c0c430994a}{S\+K\+U\+L\+L\+\_\+\+B\+U\+TT}~16
+\item 
+\#define \hyperlink{gamelib_8hpp_a9dd909bcc2021f46c0b75fe756e935d0}{E\+Y\+E\+\_\+\+B\+U\+TT}~17
+\item 
+\#define \hyperlink{gamelib_8hpp_a9cb6cf5a477c18ac7164e30c6e13ddbc}{P\+I\+P\+E\+\_\+\+B\+U\+TT}~18
+\item 
+\#define \hyperlink{gamelib_8hpp_a47c75756ece46f6be55c7e257465dcea}{F\+I\+S\+T\+\_\+\+B\+U\+TT}~19
+\item 
+\#define \hyperlink{gamelib_8hpp_a1e77d39a04ce491a2e3d48f122d4cb6d}{S\+T\+A\+R\+T\+\_\+\+B\+U\+TT}~20
+\item 
+\#define \hyperlink{gamelib_8hpp_a9ea596e2bccc42c0b5d75191af5f7d97}{R\+E\+F\+R\+E\+S\+H\+\_\+\+B\+U\+TT}~25
+\item 
+\#define \hyperlink{gamelib_8hpp_a57531d535074e8e056c252093721c0c3}{K\+I\+L\+L\+\_\+\+P1\+\_\+\+B\+U\+TT}~21
+\item 
+\#define \hyperlink{gamelib_8hpp_af9535f703ec9e9bcc9422ad48c8c0290}{K\+I\+L\+L\+\_\+\+P2\+\_\+\+B\+U\+TT}~22
+\item 
+\#define \hyperlink{gamelib_8hpp_ac14297352497f9a5872d5f9b1aa40d03}{K\+I\+L\+L\+\_\+\+P3\+\_\+\+B\+U\+TT}~23
+\item 
+\#define \hyperlink{gamelib_8hpp_a4c731403ae9f4cff5835eb323491eb03}{K\+I\+L\+L\+\_\+\+P4\+\_\+\+B\+U\+TT}~24
+\item 
+\#define \hyperlink{gamelib_8hpp_a3131502d495aa5b9b94f46522fd4a783}{J\+O\+I\+N\+\_\+\+S1\+\_\+\+B\+U\+TT}~31
+\item 
+\#define \hyperlink{gamelib_8hpp_ac12679eb63170b2a934f198b7506bfe1}{J\+O\+I\+N\+\_\+\+S2\+\_\+\+B\+U\+TT}~32
+\item 
+\#define \hyperlink{gamelib_8hpp_a934ef4fd3d746e009562c07e645391d9}{J\+O\+I\+N\+\_\+\+S3\+\_\+\+B\+U\+TT}~33
+\item 
+\#define \hyperlink{gamelib_8hpp_a427b8fdb6813d998aaeaac911472439c}{J\+O\+I\+N\+\_\+\+S4\+\_\+\+B\+U\+TT}~34
+\item 
+\#define \hyperlink{gamelib_8hpp_a4e075bf3de224196253c911045648e71}{N\+B\+\_\+\+O\+BJ}~8
+\item 
+\#define \hyperlink{gamelib_8hpp_af247743e348b5c28e17999f4502b527c}{N\+B\+\_\+\+M\+A\+X\+\_\+\+P\+L\+A\+Y\+E\+RS}~4
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{struct___player}{\+\_\+\+Player} \hyperlink{gamelib_8hpp_af30e2030635a69690f85e48bc6ef202f}{Player}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!B\+A\+C\+K\+\_\+\+B\+U\+TT@{B\+A\+C\+K\+\_\+\+B\+U\+TT}}
+\index{B\+A\+C\+K\+\_\+\+B\+U\+TT@{B\+A\+C\+K\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{B\+A\+C\+K\+\_\+\+B\+U\+TT}{BACK_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\+A\+C\+K\+\_\+\+B\+U\+TT~6}\hypertarget{gamelib_8hpp_a2cc20321e1647892ae7c16c19e117c3d}{}\label{gamelib_8hpp_a2cc20321e1647892ae7c16c19e117c3d}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!B\+O\+O\+K\+\_\+\+B\+U\+TT@{B\+O\+O\+K\+\_\+\+B\+U\+TT}}
+\index{B\+O\+O\+K\+\_\+\+B\+U\+TT@{B\+O\+O\+K\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{B\+O\+O\+K\+\_\+\+B\+U\+TT}{BOOK_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\+O\+O\+K\+\_\+\+B\+U\+TT~14}\hypertarget{gamelib_8hpp_ab2f73a6aedf9c55f56b710ebcf376658}{}\label{gamelib_8hpp_ab2f73a6aedf9c55f56b710ebcf376658}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!B\+U\+L\+B\+\_\+\+B\+U\+TT@{B\+U\+L\+B\+\_\+\+B\+U\+TT}}
+\index{B\+U\+L\+B\+\_\+\+B\+U\+TT@{B\+U\+L\+B\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{B\+U\+L\+B\+\_\+\+B\+U\+TT}{BULB_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\+U\+L\+B\+\_\+\+B\+U\+TT~13}\hypertarget{gamelib_8hpp_ade59382a2fdac955b24f5bbdccb31ab7}{}\label{gamelib_8hpp_ade59382a2fdac955b24f5bbdccb31ab7}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!C\+R\+E\+A\+T\+I\+O\+N\+\_\+\+M\+E\+NU@{C\+R\+E\+A\+T\+I\+O\+N\+\_\+\+M\+E\+NU}}
+\index{C\+R\+E\+A\+T\+I\+O\+N\+\_\+\+M\+E\+NU@{C\+R\+E\+A\+T\+I\+O\+N\+\_\+\+M\+E\+NU}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{C\+R\+E\+A\+T\+I\+O\+N\+\_\+\+M\+E\+NU}{CREATION_MENU}}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\+R\+E\+A\+T\+I\+O\+N\+\_\+\+M\+E\+NU~3}\hypertarget{gamelib_8hpp_ae4dc9aa573dd719b4e8d32de866a0676}{}\label{gamelib_8hpp_ae4dc9aa573dd719b4e8d32de866a0676}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!D\+E\+N\+O\+U\+N\+C\+E\+\_\+\+B\+U\+TT@{D\+E\+N\+O\+U\+N\+C\+E\+\_\+\+B\+U\+TT}}
+\index{D\+E\+N\+O\+U\+N\+C\+E\+\_\+\+B\+U\+TT@{D\+E\+N\+O\+U\+N\+C\+E\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{D\+E\+N\+O\+U\+N\+C\+E\+\_\+\+B\+U\+TT}{DENOUNCE_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+N\+O\+U\+N\+C\+E\+\_\+\+B\+U\+TT~11}\hypertarget{gamelib_8hpp_aa0d8c9786802ff96d2fcc6d08000338f}{}\label{gamelib_8hpp_aa0d8c9786802ff96d2fcc6d08000338f}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!D\+E\+N\+O\+U\+N\+C\+E\+\_\+\+G\+A\+ME@{D\+E\+N\+O\+U\+N\+C\+E\+\_\+\+G\+A\+ME}}
+\index{D\+E\+N\+O\+U\+N\+C\+E\+\_\+\+G\+A\+ME@{D\+E\+N\+O\+U\+N\+C\+E\+\_\+\+G\+A\+ME}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{D\+E\+N\+O\+U\+N\+C\+E\+\_\+\+G\+A\+ME}{DENOUNCE_GAME}}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+N\+O\+U\+N\+C\+E\+\_\+\+G\+A\+ME~7}\hypertarget{gamelib_8hpp_a08dd6ca7b9249fce702b62e83a83e257}{}\label{gamelib_8hpp_a08dd6ca7b9249fce702b62e83a83e257}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!E\+Y\+E\+\_\+\+B\+U\+TT@{E\+Y\+E\+\_\+\+B\+U\+TT}}
+\index{E\+Y\+E\+\_\+\+B\+U\+TT@{E\+Y\+E\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{E\+Y\+E\+\_\+\+B\+U\+TT}{EYE_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\+Y\+E\+\_\+\+B\+U\+TT~17}\hypertarget{gamelib_8hpp_a9dd909bcc2021f46c0b75fe756e935d0}{}\label{gamelib_8hpp_a9dd909bcc2021f46c0b75fe756e935d0}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!F\+I\+S\+T\+\_\+\+B\+U\+TT@{F\+I\+S\+T\+\_\+\+B\+U\+TT}}
+\index{F\+I\+S\+T\+\_\+\+B\+U\+TT@{F\+I\+S\+T\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{F\+I\+S\+T\+\_\+\+B\+U\+TT}{FIST_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+I\+S\+T\+\_\+\+B\+U\+TT~19}\hypertarget{gamelib_8hpp_a47c75756ece46f6be55c7e257465dcea}{}\label{gamelib_8hpp_a47c75756ece46f6be55c7e257465dcea}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!G\+A\+M\+E\+\_\+\+F\+O\+N\+T\+\_\+\+B\+U\+T\+T\+ON@{G\+A\+M\+E\+\_\+\+F\+O\+N\+T\+\_\+\+B\+U\+T\+T\+ON}}
+\index{G\+A\+M\+E\+\_\+\+F\+O\+N\+T\+\_\+\+B\+U\+T\+T\+ON@{G\+A\+M\+E\+\_\+\+F\+O\+N\+T\+\_\+\+B\+U\+T\+T\+ON}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{G\+A\+M\+E\+\_\+\+F\+O\+N\+T\+\_\+\+B\+U\+T\+T\+ON}{GAME_FONT_BUTTON}}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\+A\+M\+E\+\_\+\+F\+O\+N\+T\+\_\+\+B\+U\+T\+T\+ON~\char`\"{}media/fonts/S\+H\+E\+R\+L\+O\+C\+K\+E\+D.\+ttf\char`\"{}}\hypertarget{gamelib_8hpp_aded335b4483d125c8bc278d8a01d71b3}{}\label{gamelib_8hpp_aded335b4483d125c8bc278d8a01d71b3}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!G\+A\+M\+E\+\_\+\+F\+O\+N\+T\+\_\+\+T\+I\+T\+LE@{G\+A\+M\+E\+\_\+\+F\+O\+N\+T\+\_\+\+T\+I\+T\+LE}}
+\index{G\+A\+M\+E\+\_\+\+F\+O\+N\+T\+\_\+\+T\+I\+T\+LE@{G\+A\+M\+E\+\_\+\+F\+O\+N\+T\+\_\+\+T\+I\+T\+LE}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{G\+A\+M\+E\+\_\+\+F\+O\+N\+T\+\_\+\+T\+I\+T\+LE}{GAME_FONT_TITLE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\+A\+M\+E\+\_\+\+F\+O\+N\+T\+\_\+\+T\+I\+T\+LE~\char`\"{}media/fonts/S\+H\+E\+R\+L\+O\+C\+K\+E\+D.\+ttf\char`\"{}}\hypertarget{gamelib_8hpp_add1d02207dbd9f34dd565662fb111e13}{}\label{gamelib_8hpp_add1d02207dbd9f34dd565662fb111e13}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!G\+A\+M\+E\+\_\+\+N\+A\+ME@{G\+A\+M\+E\+\_\+\+N\+A\+ME}}
+\index{G\+A\+M\+E\+\_\+\+N\+A\+ME@{G\+A\+M\+E\+\_\+\+N\+A\+ME}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{G\+A\+M\+E\+\_\+\+N\+A\+ME}{GAME_NAME}}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\+A\+M\+E\+\_\+\+N\+A\+ME~\char`\"{}S\+H\+E\+R\+L\+O\+CK 13\char`\"{}}\hypertarget{gamelib_8hpp_aed7818555b2da57314243d796315e4e9}{}\label{gamelib_8hpp_aed7818555b2da57314243d796315e4e9}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!G\+A\+M\+E\+\_\+\+O\+N\+L\+I\+NE@{G\+A\+M\+E\+\_\+\+O\+N\+L\+I\+NE}}
+\index{G\+A\+M\+E\+\_\+\+O\+N\+L\+I\+NE@{G\+A\+M\+E\+\_\+\+O\+N\+L\+I\+NE}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{G\+A\+M\+E\+\_\+\+O\+N\+L\+I\+NE}{GAME_ONLINE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\+A\+M\+E\+\_\+\+O\+N\+L\+I\+NE~4}\hypertarget{gamelib_8hpp_aac183cf41be6b5a75586c846e66fe880}{}\label{gamelib_8hpp_aac183cf41be6b5a75586c846e66fe880}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!G\+A\+M\+E\+\_\+\+T\+H\+E\+M\+E\+\_\+\+A\+R\+R\+AY@{G\+A\+M\+E\+\_\+\+T\+H\+E\+M\+E\+\_\+\+A\+R\+R\+AY}}
+\index{G\+A\+M\+E\+\_\+\+T\+H\+E\+M\+E\+\_\+\+A\+R\+R\+AY@{G\+A\+M\+E\+\_\+\+T\+H\+E\+M\+E\+\_\+\+A\+R\+R\+AY}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{G\+A\+M\+E\+\_\+\+T\+H\+E\+M\+E\+\_\+\+A\+R\+R\+AY}{GAME_THEME_ARRAY}}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\+A\+M\+E\+\_\+\+T\+H\+E\+M\+E\+\_\+\+A\+R\+R\+AY~\char`\"{}media/theme/array\+Connection.\+png\char`\"{}}\hypertarget{gamelib_8hpp_a2ffe207d8c7eafc9fc1dcf5847195288}{}\label{gamelib_8hpp_a2ffe207d8c7eafc9fc1dcf5847195288}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!G\+A\+M\+E\+\_\+\+T\+H\+E\+M\+E\+\_\+\+B\+U\+T\+T\+ON@{G\+A\+M\+E\+\_\+\+T\+H\+E\+M\+E\+\_\+\+B\+U\+T\+T\+ON}}
+\index{G\+A\+M\+E\+\_\+\+T\+H\+E\+M\+E\+\_\+\+B\+U\+T\+T\+ON@{G\+A\+M\+E\+\_\+\+T\+H\+E\+M\+E\+\_\+\+B\+U\+T\+T\+ON}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{G\+A\+M\+E\+\_\+\+T\+H\+E\+M\+E\+\_\+\+B\+U\+T\+T\+ON}{GAME_THEME_BUTTON}}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\+A\+M\+E\+\_\+\+T\+H\+E\+M\+E\+\_\+\+B\+U\+T\+T\+ON~\char`\"{}media/theme/button.\+png\char`\"{}}\hypertarget{gamelib_8hpp_ac4683d0496148f549de5e1c8565cfde4}{}\label{gamelib_8hpp_ac4683d0496148f549de5e1c8565cfde4}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!G\+E\+N\+P\+O\+L\+L\+\_\+\+B\+U\+TT@{G\+E\+N\+P\+O\+L\+L\+\_\+\+B\+U\+TT}}
+\index{G\+E\+N\+P\+O\+L\+L\+\_\+\+B\+U\+TT@{G\+E\+N\+P\+O\+L\+L\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{G\+E\+N\+P\+O\+L\+L\+\_\+\+B\+U\+TT}{GENPOLL_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\+E\+N\+P\+O\+L\+L\+\_\+\+B\+U\+TT~9}\hypertarget{gamelib_8hpp_a9815ff7e5dc007c4691dbbee06bafe72}{}\label{gamelib_8hpp_a9815ff7e5dc007c4691dbbee06bafe72}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!G\+E\+N\+P\+O\+L\+L\+\_\+\+G\+A\+ME@{G\+E\+N\+P\+O\+L\+L\+\_\+\+G\+A\+ME}}
+\index{G\+E\+N\+P\+O\+L\+L\+\_\+\+G\+A\+ME@{G\+E\+N\+P\+O\+L\+L\+\_\+\+G\+A\+ME}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{G\+E\+N\+P\+O\+L\+L\+\_\+\+G\+A\+ME}{GENPOLL_GAME}}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\+E\+N\+P\+O\+L\+L\+\_\+\+G\+A\+ME~8}\hypertarget{gamelib_8hpp_acffd6b8fc9934d27093805fb799425d6}{}\label{gamelib_8hpp_acffd6b8fc9934d27093805fb799425d6}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!H\+O\+S\+T\+\_\+\+B\+U\+TT@{H\+O\+S\+T\+\_\+\+B\+U\+TT}}
+\index{H\+O\+S\+T\+\_\+\+B\+U\+TT@{H\+O\+S\+T\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{H\+O\+S\+T\+\_\+\+B\+U\+TT}{HOST_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define H\+O\+S\+T\+\_\+\+B\+U\+TT~7}\hypertarget{gamelib_8hpp_ab8b49e0cd147d6d52b467115e0bdb933}{}\label{gamelib_8hpp_ab8b49e0cd147d6d52b467115e0bdb933}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!I\+N\+Q\+U\+I\+R\+Y\+\_\+\+B\+U\+TT@{I\+N\+Q\+U\+I\+R\+Y\+\_\+\+B\+U\+TT}}
+\index{I\+N\+Q\+U\+I\+R\+Y\+\_\+\+B\+U\+TT@{I\+N\+Q\+U\+I\+R\+Y\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{I\+N\+Q\+U\+I\+R\+Y\+\_\+\+B\+U\+TT}{INQUIRY_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+N\+Q\+U\+I\+R\+Y\+\_\+\+B\+U\+TT~10}\hypertarget{gamelib_8hpp_af742ce1e9fe0a34a9924ddaf891984ec}{}\label{gamelib_8hpp_af742ce1e9fe0a34a9924ddaf891984ec}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!I\+N\+Q\+U\+I\+R\+Y\+\_\+\+G\+A\+ME@{I\+N\+Q\+U\+I\+R\+Y\+\_\+\+G\+A\+ME}}
+\index{I\+N\+Q\+U\+I\+R\+Y\+\_\+\+G\+A\+ME@{I\+N\+Q\+U\+I\+R\+Y\+\_\+\+G\+A\+ME}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{I\+N\+Q\+U\+I\+R\+Y\+\_\+\+G\+A\+ME}{INQUIRY_GAME}}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\+N\+Q\+U\+I\+R\+Y\+\_\+\+G\+A\+ME~6}\hypertarget{gamelib_8hpp_a83e0919ddf2c586d3ed818dcff337a72}{}\label{gamelib_8hpp_a83e0919ddf2c586d3ed818dcff337a72}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!J\+E\+W\+E\+L\+R\+Y\+\_\+\+B\+U\+TT@{J\+E\+W\+E\+L\+R\+Y\+\_\+\+B\+U\+TT}}
+\index{J\+E\+W\+E\+L\+R\+Y\+\_\+\+B\+U\+TT@{J\+E\+W\+E\+L\+R\+Y\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{J\+E\+W\+E\+L\+R\+Y\+\_\+\+B\+U\+TT}{JEWELRY_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define J\+E\+W\+E\+L\+R\+Y\+\_\+\+B\+U\+TT~12}\hypertarget{gamelib_8hpp_aa4bdd3d404ff4909adb7d4e503eb5f7a}{}\label{gamelib_8hpp_aa4bdd3d404ff4909adb7d4e503eb5f7a}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!J\+O\+I\+N\+\_\+\+B\+U\+TT@{J\+O\+I\+N\+\_\+\+B\+U\+TT}}
+\index{J\+O\+I\+N\+\_\+\+B\+U\+TT@{J\+O\+I\+N\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{J\+O\+I\+N\+\_\+\+B\+U\+TT}{JOIN_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define J\+O\+I\+N\+\_\+\+B\+U\+TT~8}\hypertarget{gamelib_8hpp_a496dce15452e2878070951e95d3b8776}{}\label{gamelib_8hpp_a496dce15452e2878070951e95d3b8776}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!J\+O\+I\+N\+\_\+\+S1\+\_\+\+B\+U\+TT@{J\+O\+I\+N\+\_\+\+S1\+\_\+\+B\+U\+TT}}
+\index{J\+O\+I\+N\+\_\+\+S1\+\_\+\+B\+U\+TT@{J\+O\+I\+N\+\_\+\+S1\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{J\+O\+I\+N\+\_\+\+S1\+\_\+\+B\+U\+TT}{JOIN_S1_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define J\+O\+I\+N\+\_\+\+S1\+\_\+\+B\+U\+TT~31}\hypertarget{gamelib_8hpp_a3131502d495aa5b9b94f46522fd4a783}{}\label{gamelib_8hpp_a3131502d495aa5b9b94f46522fd4a783}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!J\+O\+I\+N\+\_\+\+S2\+\_\+\+B\+U\+TT@{J\+O\+I\+N\+\_\+\+S2\+\_\+\+B\+U\+TT}}
+\index{J\+O\+I\+N\+\_\+\+S2\+\_\+\+B\+U\+TT@{J\+O\+I\+N\+\_\+\+S2\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{J\+O\+I\+N\+\_\+\+S2\+\_\+\+B\+U\+TT}{JOIN_S2_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define J\+O\+I\+N\+\_\+\+S2\+\_\+\+B\+U\+TT~32}\hypertarget{gamelib_8hpp_ac12679eb63170b2a934f198b7506bfe1}{}\label{gamelib_8hpp_ac12679eb63170b2a934f198b7506bfe1}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!J\+O\+I\+N\+\_\+\+S3\+\_\+\+B\+U\+TT@{J\+O\+I\+N\+\_\+\+S3\+\_\+\+B\+U\+TT}}
+\index{J\+O\+I\+N\+\_\+\+S3\+\_\+\+B\+U\+TT@{J\+O\+I\+N\+\_\+\+S3\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{J\+O\+I\+N\+\_\+\+S3\+\_\+\+B\+U\+TT}{JOIN_S3_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define J\+O\+I\+N\+\_\+\+S3\+\_\+\+B\+U\+TT~33}\hypertarget{gamelib_8hpp_a934ef4fd3d746e009562c07e645391d9}{}\label{gamelib_8hpp_a934ef4fd3d746e009562c07e645391d9}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!J\+O\+I\+N\+\_\+\+S4\+\_\+\+B\+U\+TT@{J\+O\+I\+N\+\_\+\+S4\+\_\+\+B\+U\+TT}}
+\index{J\+O\+I\+N\+\_\+\+S4\+\_\+\+B\+U\+TT@{J\+O\+I\+N\+\_\+\+S4\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{J\+O\+I\+N\+\_\+\+S4\+\_\+\+B\+U\+TT}{JOIN_S4_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define J\+O\+I\+N\+\_\+\+S4\+\_\+\+B\+U\+TT~34}\hypertarget{gamelib_8hpp_a427b8fdb6813d998aaeaac911472439c}{}\label{gamelib_8hpp_a427b8fdb6813d998aaeaac911472439c}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!K\+I\+L\+L\+\_\+\+P1\+\_\+\+B\+U\+TT@{K\+I\+L\+L\+\_\+\+P1\+\_\+\+B\+U\+TT}}
+\index{K\+I\+L\+L\+\_\+\+P1\+\_\+\+B\+U\+TT@{K\+I\+L\+L\+\_\+\+P1\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{K\+I\+L\+L\+\_\+\+P1\+\_\+\+B\+U\+TT}{KILL_P1_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define K\+I\+L\+L\+\_\+\+P1\+\_\+\+B\+U\+TT~21}\hypertarget{gamelib_8hpp_a57531d535074e8e056c252093721c0c3}{}\label{gamelib_8hpp_a57531d535074e8e056c252093721c0c3}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!K\+I\+L\+L\+\_\+\+P2\+\_\+\+B\+U\+TT@{K\+I\+L\+L\+\_\+\+P2\+\_\+\+B\+U\+TT}}
+\index{K\+I\+L\+L\+\_\+\+P2\+\_\+\+B\+U\+TT@{K\+I\+L\+L\+\_\+\+P2\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{K\+I\+L\+L\+\_\+\+P2\+\_\+\+B\+U\+TT}{KILL_P2_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define K\+I\+L\+L\+\_\+\+P2\+\_\+\+B\+U\+TT~22}\hypertarget{gamelib_8hpp_af9535f703ec9e9bcc9422ad48c8c0290}{}\label{gamelib_8hpp_af9535f703ec9e9bcc9422ad48c8c0290}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!K\+I\+L\+L\+\_\+\+P3\+\_\+\+B\+U\+TT@{K\+I\+L\+L\+\_\+\+P3\+\_\+\+B\+U\+TT}}
+\index{K\+I\+L\+L\+\_\+\+P3\+\_\+\+B\+U\+TT@{K\+I\+L\+L\+\_\+\+P3\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{K\+I\+L\+L\+\_\+\+P3\+\_\+\+B\+U\+TT}{KILL_P3_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define K\+I\+L\+L\+\_\+\+P3\+\_\+\+B\+U\+TT~23}\hypertarget{gamelib_8hpp_ac14297352497f9a5872d5f9b1aa40d03}{}\label{gamelib_8hpp_ac14297352497f9a5872d5f9b1aa40d03}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!K\+I\+L\+L\+\_\+\+P4\+\_\+\+B\+U\+TT@{K\+I\+L\+L\+\_\+\+P4\+\_\+\+B\+U\+TT}}
+\index{K\+I\+L\+L\+\_\+\+P4\+\_\+\+B\+U\+TT@{K\+I\+L\+L\+\_\+\+P4\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{K\+I\+L\+L\+\_\+\+P4\+\_\+\+B\+U\+TT}{KILL_P4_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define K\+I\+L\+L\+\_\+\+P4\+\_\+\+B\+U\+TT~24}\hypertarget{gamelib_8hpp_a4c731403ae9f4cff5835eb323491eb03}{}\label{gamelib_8hpp_a4c731403ae9f4cff5835eb323491eb03}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!L\+A\+N\+\_\+\+B\+U\+TT@{L\+A\+N\+\_\+\+B\+U\+TT}}
+\index{L\+A\+N\+\_\+\+B\+U\+TT@{L\+A\+N\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{L\+A\+N\+\_\+\+B\+U\+TT}{LAN_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\+A\+N\+\_\+\+B\+U\+TT~2}\hypertarget{gamelib_8hpp_a7cc616abbe656c9f94db9b129b1dbda3}{}\label{gamelib_8hpp_a7cc616abbe656c9f94db9b129b1dbda3}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!L\+A\+N\+\_\+\+M\+E\+NU@{L\+A\+N\+\_\+\+M\+E\+NU}}
+\index{L\+A\+N\+\_\+\+M\+E\+NU@{L\+A\+N\+\_\+\+M\+E\+NU}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{L\+A\+N\+\_\+\+M\+E\+NU}{LAN_MENU}}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\+A\+N\+\_\+\+M\+E\+NU~2}\hypertarget{gamelib_8hpp_ad0f28d6602fd831f4b23b07600cb5663}{}\label{gamelib_8hpp_ad0f28d6602fd831f4b23b07600cb5663}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!L\+A\+N\+P\+O\+RT@{L\+A\+N\+P\+O\+RT}}
+\index{L\+A\+N\+P\+O\+RT@{L\+A\+N\+P\+O\+RT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{L\+A\+N\+P\+O\+RT}{LANPORT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\+A\+N\+P\+O\+RT~2027}\hypertarget{gamelib_8hpp_a430008b68b5b6c24d322a3aa655642e9}{}\label{gamelib_8hpp_a430008b68b5b6c24d322a3aa655642e9}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!M\+A\+I\+N\+\_\+\+G\+A\+ME@{M\+A\+I\+N\+\_\+\+G\+A\+ME}}
+\index{M\+A\+I\+N\+\_\+\+G\+A\+ME@{M\+A\+I\+N\+\_\+\+G\+A\+ME}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{M\+A\+I\+N\+\_\+\+G\+A\+ME}{MAIN_GAME}}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+I\+N\+\_\+\+G\+A\+ME~5}\hypertarget{gamelib_8hpp_ae1fadc8bfc98bcc5f8283e1d266adbff}{}\label{gamelib_8hpp_ae1fadc8bfc98bcc5f8283e1d266adbff}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!M\+A\+I\+N\+\_\+\+M\+E\+NU@{M\+A\+I\+N\+\_\+\+M\+E\+NU}}
+\index{M\+A\+I\+N\+\_\+\+M\+E\+NU@{M\+A\+I\+N\+\_\+\+M\+E\+NU}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{M\+A\+I\+N\+\_\+\+M\+E\+NU}{MAIN_MENU}}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+I\+N\+\_\+\+M\+E\+NU~0}\hypertarget{gamelib_8hpp_a44dd1b46a3f55007e78fc1ac506153b9}{}\label{gamelib_8hpp_a44dd1b46a3f55007e78fc1ac506153b9}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!M\+E\+D\+A\+L\+\_\+\+B\+U\+TT@{M\+E\+D\+A\+L\+\_\+\+B\+U\+TT}}
+\index{M\+E\+D\+A\+L\+\_\+\+B\+U\+TT@{M\+E\+D\+A\+L\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{M\+E\+D\+A\+L\+\_\+\+B\+U\+TT}{MEDAL_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+E\+D\+A\+L\+\_\+\+B\+U\+TT~15}\hypertarget{gamelib_8hpp_ac7b31119636771ed0c04654f311e1fe6}{}\label{gamelib_8hpp_ac7b31119636771ed0c04654f311e1fe6}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!N\+B\+\_\+\+M\+A\+X\+\_\+\+P\+L\+A\+Y\+E\+RS@{N\+B\+\_\+\+M\+A\+X\+\_\+\+P\+L\+A\+Y\+E\+RS}}
+\index{N\+B\+\_\+\+M\+A\+X\+\_\+\+P\+L\+A\+Y\+E\+RS@{N\+B\+\_\+\+M\+A\+X\+\_\+\+P\+L\+A\+Y\+E\+RS}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{N\+B\+\_\+\+M\+A\+X\+\_\+\+P\+L\+A\+Y\+E\+RS}{NB_MAX_PLAYERS}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+B\+\_\+\+M\+A\+X\+\_\+\+P\+L\+A\+Y\+E\+RS~4}\hypertarget{gamelib_8hpp_af247743e348b5c28e17999f4502b527c}{}\label{gamelib_8hpp_af247743e348b5c28e17999f4502b527c}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!N\+B\+\_\+\+O\+BJ@{N\+B\+\_\+\+O\+BJ}}
+\index{N\+B\+\_\+\+O\+BJ@{N\+B\+\_\+\+O\+BJ}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{N\+B\+\_\+\+O\+BJ}{NB_OBJ}}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+B\+\_\+\+O\+BJ~8}\hypertarget{gamelib_8hpp_a4e075bf3de224196253c911045648e71}{}\label{gamelib_8hpp_a4e075bf3de224196253c911045648e71}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!O\+P\+T\+I\+O\+N\+\_\+\+B\+U\+TT@{O\+P\+T\+I\+O\+N\+\_\+\+B\+U\+TT}}
+\index{O\+P\+T\+I\+O\+N\+\_\+\+B\+U\+TT@{O\+P\+T\+I\+O\+N\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{O\+P\+T\+I\+O\+N\+\_\+\+B\+U\+TT}{OPTION_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+P\+T\+I\+O\+N\+\_\+\+B\+U\+TT~3}\hypertarget{gamelib_8hpp_a1d996f78877419ea4eaaccdd2f451f15}{}\label{gamelib_8hpp_a1d996f78877419ea4eaaccdd2f451f15}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!O\+P\+T\+I\+O\+N\+\_\+\+M\+E\+NU@{O\+P\+T\+I\+O\+N\+\_\+\+M\+E\+NU}}
+\index{O\+P\+T\+I\+O\+N\+\_\+\+M\+E\+NU@{O\+P\+T\+I\+O\+N\+\_\+\+M\+E\+NU}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{O\+P\+T\+I\+O\+N\+\_\+\+M\+E\+NU}{OPTION_MENU}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+P\+T\+I\+O\+N\+\_\+\+M\+E\+NU~1}\hypertarget{gamelib_8hpp_ac11b1add7fbae1e2fd3eb4db280e726e}{}\label{gamelib_8hpp_ac11b1add7fbae1e2fd3eb4db280e726e}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!P\+I\+P\+E\+\_\+\+B\+U\+TT@{P\+I\+P\+E\+\_\+\+B\+U\+TT}}
+\index{P\+I\+P\+E\+\_\+\+B\+U\+TT@{P\+I\+P\+E\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{P\+I\+P\+E\+\_\+\+B\+U\+TT}{PIPE_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+I\+P\+E\+\_\+\+B\+U\+TT~18}\hypertarget{gamelib_8hpp_a9cb6cf5a477c18ac7164e30c6e13ddbc}{}\label{gamelib_8hpp_a9cb6cf5a477c18ac7164e30c6e13ddbc}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!P\+L\+A\+Y\+\_\+\+B\+U\+TT@{P\+L\+A\+Y\+\_\+\+B\+U\+TT}}
+\index{P\+L\+A\+Y\+\_\+\+B\+U\+TT@{P\+L\+A\+Y\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{P\+L\+A\+Y\+\_\+\+B\+U\+TT}{PLAY_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+L\+A\+Y\+\_\+\+B\+U\+TT~1}\hypertarget{gamelib_8hpp_a64bd201cde3669cc93407f6d8a50f8a0}{}\label{gamelib_8hpp_a64bd201cde3669cc93407f6d8a50f8a0}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!Q\+U\+I\+T\+\_\+\+B\+U\+TT@{Q\+U\+I\+T\+\_\+\+B\+U\+TT}}
+\index{Q\+U\+I\+T\+\_\+\+B\+U\+TT@{Q\+U\+I\+T\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{Q\+U\+I\+T\+\_\+\+B\+U\+TT}{QUIT_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define Q\+U\+I\+T\+\_\+\+B\+U\+TT~4}\hypertarget{gamelib_8hpp_a95bf13245b70fce1174ee9218f22d5d9}{}\label{gamelib_8hpp_a95bf13245b70fce1174ee9218f22d5d9}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!R\+E\+F\+R\+E\+S\+H\+\_\+\+B\+U\+TT@{R\+E\+F\+R\+E\+S\+H\+\_\+\+B\+U\+TT}}
+\index{R\+E\+F\+R\+E\+S\+H\+\_\+\+B\+U\+TT@{R\+E\+F\+R\+E\+S\+H\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{R\+E\+F\+R\+E\+S\+H\+\_\+\+B\+U\+TT}{REFRESH_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+E\+F\+R\+E\+S\+H\+\_\+\+B\+U\+TT~25}\hypertarget{gamelib_8hpp_a9ea596e2bccc42c0b5d75191af5f7d97}{}\label{gamelib_8hpp_a9ea596e2bccc42c0b5d75191af5f7d97}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!S\+A\+V\+E\+\_\+\+B\+U\+TT@{S\+A\+V\+E\+\_\+\+B\+U\+TT}}
+\index{S\+A\+V\+E\+\_\+\+B\+U\+TT@{S\+A\+V\+E\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{S\+A\+V\+E\+\_\+\+B\+U\+TT}{SAVE_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+A\+V\+E\+\_\+\+B\+U\+TT~5}\hypertarget{gamelib_8hpp_aab03d9ae79cbecdeb46c69fed8a60b82}{}\label{gamelib_8hpp_aab03d9ae79cbecdeb46c69fed8a60b82}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!S\+K\+U\+L\+L\+\_\+\+B\+U\+TT@{S\+K\+U\+L\+L\+\_\+\+B\+U\+TT}}
+\index{S\+K\+U\+L\+L\+\_\+\+B\+U\+TT@{S\+K\+U\+L\+L\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{S\+K\+U\+L\+L\+\_\+\+B\+U\+TT}{SKULL_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+K\+U\+L\+L\+\_\+\+B\+U\+TT~16}\hypertarget{gamelib_8hpp_a104281d2d6d51838fd0cc6c0c430994a}{}\label{gamelib_8hpp_a104281d2d6d51838fd0cc6c0c430994a}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!S\+T\+A\+R\+T\+\_\+\+B\+U\+TT@{S\+T\+A\+R\+T\+\_\+\+B\+U\+TT}}
+\index{S\+T\+A\+R\+T\+\_\+\+B\+U\+TT@{S\+T\+A\+R\+T\+\_\+\+B\+U\+TT}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{S\+T\+A\+R\+T\+\_\+\+B\+U\+TT}{START_BUTT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+T\+A\+R\+T\+\_\+\+B\+U\+TT~20}\hypertarget{gamelib_8hpp_a1e77d39a04ce491a2e3d48f122d4cb6d}{}\label{gamelib_8hpp_a1e77d39a04ce491a2e3d48f122d4cb6d}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!W\+I\+N\+\_\+H@{W\+I\+N\+\_\+H}}
+\index{W\+I\+N\+\_\+H@{W\+I\+N\+\_\+H}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{W\+I\+N\+\_\+H}{WIN_H}}]{\setlength{\rightskip}{0pt plus 5cm}\#define W\+I\+N\+\_\+H~700}\hypertarget{gamelib_8hpp_ae893136b52eb3d95f3a310c3900ae42b}{}\label{gamelib_8hpp_ae893136b52eb3d95f3a310c3900ae42b}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!W\+I\+N\+\_\+W@{W\+I\+N\+\_\+W}}
+\index{W\+I\+N\+\_\+W@{W\+I\+N\+\_\+W}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{W\+I\+N\+\_\+W}{WIN_W}}]{\setlength{\rightskip}{0pt plus 5cm}\#define W\+I\+N\+\_\+W~1200}\hypertarget{gamelib_8hpp_a23f7b870356588ddfcc49a1c364cba5e}{}\label{gamelib_8hpp_a23f7b870356588ddfcc49a1c364cba5e}
+
+
+\subsection{Typedef Documentation}
+\index{gamelib.\+hpp@{gamelib.\+hpp}!Player@{Player}}
+\index{Player@{Player}!gamelib.\+hpp@{gamelib.\+hpp}}
+\subsubsection[{\texorpdfstring{Player}{Player}}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \+\_\+\+Player} {\bf Player}}\hypertarget{gamelib_8hpp_af30e2030635a69690f85e48bc6ef202f}{}\label{gamelib_8hpp_af30e2030635a69690f85e48bc6ef202f}

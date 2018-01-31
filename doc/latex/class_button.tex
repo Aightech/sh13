@@ -1,39 +1,194 @@
 \hypertarget{class_button}{}\section{Button Class Reference}
 \label{class_button}\index{Button@{Button}}
+
+
+{\ttfamily \#include $<$guilib.\+hpp$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Button} (std\+::string s, sf\+::\+Vector2f position, int nb=0)\hypertarget{class_button_a941cf3f1f95654c5b19b47e56e6cc635}{}\label{class_button_a941cf3f1f95654c5b19b47e56e6cc635}
-
+\hyperlink{class_button_a3b36df1ae23c58aedb9e15a713159459}{Button} ()
 \item 
-void {\bfseries create} (std\+::string s, sf\+::\+Vector2f position, int nb=0)\hypertarget{class_button_afa0ead4b7c469f56757562fcff6e7a3c}{}\label{class_button_afa0ead4b7c469f56757562fcff6e7a3c}
-
+\hyperlink{class_button_a941cf3f1f95654c5b19b47e56e6cc635}{Button} (std\+::string s, sf\+::\+Vector2f position, int nb=0)
 \item 
-void {\bfseries set\+Texture} (const std\+::string \&filename)\hypertarget{class_button_a10e78ae5d324ba437180714155928a11}{}\label{class_button_a10e78ae5d324ba437180714155928a11}
-
+void \hyperlink{class_button_afa0ead4b7c469f56757562fcff6e7a3c}{create} (std\+::string s, sf\+::\+Vector2f position, int nb=0)
 \item 
-void {\bfseries set\+Font} (const std\+::string \&filename)\hypertarget{class_button_aa74e79c2f66153d3635cfeb05a4882fe}{}\label{class_button_aa74e79c2f66153d3635cfeb05a4882fe}
-
+\hyperlink{class_button_a2a001eb9c3cc8ae54768a850dd345002}{$\sim$\+Button} ()
 \item 
-int {\bfseries update} (Render\+Window \&w)\hypertarget{class_button_a15b5d672bee69cab7c02d7dbb3efc5db}{}\label{class_button_a15b5d672bee69cab7c02d7dbb3efc5db}
-
+void \hyperlink{class_button_a10e78ae5d324ba437180714155928a11}{set\+Texture} (const std\+::string \&filename)
 \item 
-int {\bfseries clicked} ()\hypertarget{class_button_a39ef46d1d6ba89e67b47767cf774714c}{}\label{class_button_a39ef46d1d6ba89e67b47767cf774714c}
-
+void \hyperlink{class_button_aa74e79c2f66153d3635cfeb05a4882fe}{set\+Font} (const std\+::string \&filename)
 \item 
-int {\bfseries get\+Nb\+Of\+Bt} ()\hypertarget{class_button_ae80715b5f7c59eeb3677008053937732}{}\label{class_button_ae80715b5f7c59eeb3677008053937732}
-
+int \hyperlink{class_button_a15b5d672bee69cab7c02d7dbb3efc5db}{update} (Render\+Window \&w)
 \item 
-void {\bfseries disable} ()\hypertarget{class_button_abde3c72299314347169ef607ec7b7192}{}\label{class_button_abde3c72299314347169ef607ec7b7192}
-
+int \hyperlink{class_button_a39ef46d1d6ba89e67b47767cf774714c}{clicked} ()
 \item 
-void {\bfseries enable} ()\hypertarget{class_button_a2829d6ad3d25929c6755a6f17cee7cb3}{}\label{class_button_a2829d6ad3d25929c6755a6f17cee7cb3}
-
+int \hyperlink{class_button_ae80715b5f7c59eeb3677008053937732}{get\+Nb\+Of\+Bt} ()
+\item 
+void \hyperlink{class_button_abde3c72299314347169ef607ec7b7192}{disable} ()
+\item 
+void \hyperlink{class_button_a2829d6ad3d25929c6755a6f17cee7cb3}{enable} ()
 \end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Vector2i \hyperlink{class_button_a31ebaceb3638c12b502dc744edb7d68d}{ms\+Pos}
+\item 
+Vector2f \hyperlink{class_button_a13db93cc8006345a321612cc53095fd3}{bt\+Pos}
+\item 
+Float\+Rect \hyperlink{class_button_a45858e93e2875745ce6b044ab83a5f0e}{bt\+Size}
+\item 
+int \hyperlink{class_button_aee03ef2e04b98c1a782b20d67636806b}{m\+\_\+nb}
+\item 
+Text \hyperlink{class_button_a0747cdcc3552bbf90d3c17d7ad71e4ea}{label}
+\item 
+Sprite \hyperlink{class_button_a4d77032b31205be0b6dd5230eece53c7}{button}
+\item 
+int \hyperlink{class_button_a0efa9e01151e32ad0d974b7d50a0aded}{m\+\_\+state}
+\item 
+int \hyperlink{class_button_a464821978156737022e6fe5781b66ea5}{ms\+In\+Button}
+\item 
+int \hyperlink{class_button_a6bb3b2a3313633b617d155fe12402171}{click}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{class_button_a15879fddc562e8dcf81fe8dcb01f600c}{s\+\_\+nb} =0
+\item 
+static Texture \hyperlink{class_button_aa9a490bc7d0d3f7d39c3116e4148f789}{s\+\_\+texture}
+\item 
+static Font \hyperlink{class_button_afe0091a0ada46c9da104f4cc60731676}{s\+\_\+font}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Button@{Button}!Button@{Button}}
+\index{Button@{Button}!Button@{Button}}
+\subsubsection[{\texorpdfstring{Button()}{Button()}}]{\setlength{\rightskip}{0pt plus 5cm}Button\+::\+Button (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_button_a3b36df1ae23c58aedb9e15a713159459}{}\label{class_button_a3b36df1ae23c58aedb9e15a713159459}
+\index{Button@{Button}!Button@{Button}}
+\index{Button@{Button}!Button@{Button}}
+\subsubsection[{\texorpdfstring{Button(std\+::string s, sf\+::\+Vector2f position, int nb=0)}{Button(std::string s, sf::Vector2f position, int nb=0)}}]{\setlength{\rightskip}{0pt plus 5cm}Button\+::\+Button (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{s, }
+\item[{sf\+::\+Vector2f}]{position, }
+\item[{int}]{nb = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_button_a941cf3f1f95654c5b19b47e56e6cc635}{}\label{class_button_a941cf3f1f95654c5b19b47e56e6cc635}
+\index{Button@{Button}!````~Button@{$\sim$\+Button}}
+\index{````~Button@{$\sim$\+Button}!Button@{Button}}
+\subsubsection[{\texorpdfstring{$\sim$\+Button()}{~Button()}}]{\setlength{\rightskip}{0pt plus 5cm}Button\+::$\sim$\+Button (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_button_a2a001eb9c3cc8ae54768a850dd345002}{}\label{class_button_a2a001eb9c3cc8ae54768a850dd345002}
+
+
+\subsection{Member Function Documentation}
+\index{Button@{Button}!clicked@{clicked}}
+\index{clicked@{clicked}!Button@{Button}}
+\subsubsection[{\texorpdfstring{clicked()}{clicked()}}]{\setlength{\rightskip}{0pt plus 5cm}int Button\+::clicked (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_button_a39ef46d1d6ba89e67b47767cf774714c}{}\label{class_button_a39ef46d1d6ba89e67b47767cf774714c}
+\index{Button@{Button}!create@{create}}
+\index{create@{create}!Button@{Button}}
+\subsubsection[{\texorpdfstring{create(std\+::string s, sf\+::\+Vector2f position, int nb=0)}{create(std::string s, sf::Vector2f position, int nb=0)}}]{\setlength{\rightskip}{0pt plus 5cm}void Button\+::create (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{s, }
+\item[{sf\+::\+Vector2f}]{position, }
+\item[{int}]{nb = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_button_afa0ead4b7c469f56757562fcff6e7a3c}{}\label{class_button_afa0ead4b7c469f56757562fcff6e7a3c}
+\index{Button@{Button}!disable@{disable}}
+\index{disable@{disable}!Button@{Button}}
+\subsubsection[{\texorpdfstring{disable()}{disable()}}]{\setlength{\rightskip}{0pt plus 5cm}void Button\+::disable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_button_abde3c72299314347169ef607ec7b7192}{}\label{class_button_abde3c72299314347169ef607ec7b7192}
+\index{Button@{Button}!enable@{enable}}
+\index{enable@{enable}!Button@{Button}}
+\subsubsection[{\texorpdfstring{enable()}{enable()}}]{\setlength{\rightskip}{0pt plus 5cm}void Button\+::enable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_button_a2829d6ad3d25929c6755a6f17cee7cb3}{}\label{class_button_a2829d6ad3d25929c6755a6f17cee7cb3}
+\index{Button@{Button}!get\+Nb\+Of\+Bt@{get\+Nb\+Of\+Bt}}
+\index{get\+Nb\+Of\+Bt@{get\+Nb\+Of\+Bt}!Button@{Button}}
+\subsubsection[{\texorpdfstring{get\+Nb\+Of\+Bt()}{getNbOfBt()}}]{\setlength{\rightskip}{0pt plus 5cm}int Button\+::get\+Nb\+Of\+Bt (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_button_ae80715b5f7c59eeb3677008053937732}{}\label{class_button_ae80715b5f7c59eeb3677008053937732}
+\index{Button@{Button}!set\+Font@{set\+Font}}
+\index{set\+Font@{set\+Font}!Button@{Button}}
+\subsubsection[{\texorpdfstring{set\+Font(const std\+::string \&filename)}{setFont(const std::string &filename)}}]{\setlength{\rightskip}{0pt plus 5cm}void Button\+::set\+Font (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{filename}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_button_aa74e79c2f66153d3635cfeb05a4882fe}{}\label{class_button_aa74e79c2f66153d3635cfeb05a4882fe}
+\index{Button@{Button}!set\+Texture@{set\+Texture}}
+\index{set\+Texture@{set\+Texture}!Button@{Button}}
+\subsubsection[{\texorpdfstring{set\+Texture(const std\+::string \&filename)}{setTexture(const std::string &filename)}}]{\setlength{\rightskip}{0pt plus 5cm}void Button\+::set\+Texture (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{filename}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_button_a10e78ae5d324ba437180714155928a11}{}\label{class_button_a10e78ae5d324ba437180714155928a11}
+\index{Button@{Button}!update@{update}}
+\index{update@{update}!Button@{Button}}
+\subsubsection[{\texorpdfstring{update(\+Render\+Window \&w)}{update(RenderWindow &w)}}]{\setlength{\rightskip}{0pt plus 5cm}int Button\+::update (
+\begin{DoxyParamCaption}
+\item[{Render\+Window \&}]{w}
+\end{DoxyParamCaption}
+)}\hypertarget{class_button_a15b5d672bee69cab7c02d7dbb3efc5db}{}\label{class_button_a15b5d672bee69cab7c02d7dbb3efc5db}
+
+
+\subsection{Member Data Documentation}
+\index{Button@{Button}!bt\+Pos@{bt\+Pos}}
+\index{bt\+Pos@{bt\+Pos}!Button@{Button}}
+\subsubsection[{\texorpdfstring{bt\+Pos}{btPos}}]{\setlength{\rightskip}{0pt plus 5cm}Vector2f Button\+::bt\+Pos\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_button_a13db93cc8006345a321612cc53095fd3}{}\label{class_button_a13db93cc8006345a321612cc53095fd3}
+\index{Button@{Button}!bt\+Size@{bt\+Size}}
+\index{bt\+Size@{bt\+Size}!Button@{Button}}
+\subsubsection[{\texorpdfstring{bt\+Size}{btSize}}]{\setlength{\rightskip}{0pt plus 5cm}Float\+Rect Button\+::bt\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_button_a45858e93e2875745ce6b044ab83a5f0e}{}\label{class_button_a45858e93e2875745ce6b044ab83a5f0e}
+\index{Button@{Button}!button@{button}}
+\index{button@{button}!Button@{Button}}
+\subsubsection[{\texorpdfstring{button}{button}}]{\setlength{\rightskip}{0pt plus 5cm}Sprite Button\+::button\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_button_a4d77032b31205be0b6dd5230eece53c7}{}\label{class_button_a4d77032b31205be0b6dd5230eece53c7}
+\index{Button@{Button}!click@{click}}
+\index{click@{click}!Button@{Button}}
+\subsubsection[{\texorpdfstring{click}{click}}]{\setlength{\rightskip}{0pt plus 5cm}int Button\+::click\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_button_a6bb3b2a3313633b617d155fe12402171}{}\label{class_button_a6bb3b2a3313633b617d155fe12402171}
+\index{Button@{Button}!label@{label}}
+\index{label@{label}!Button@{Button}}
+\subsubsection[{\texorpdfstring{label}{label}}]{\setlength{\rightskip}{0pt plus 5cm}Text Button\+::label\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_button_a0747cdcc3552bbf90d3c17d7ad71e4ea}{}\label{class_button_a0747cdcc3552bbf90d3c17d7ad71e4ea}
+\index{Button@{Button}!m\+\_\+nb@{m\+\_\+nb}}
+\index{m\+\_\+nb@{m\+\_\+nb}!Button@{Button}}
+\subsubsection[{\texorpdfstring{m\+\_\+nb}{m_nb}}]{\setlength{\rightskip}{0pt plus 5cm}int Button\+::m\+\_\+nb\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_button_aee03ef2e04b98c1a782b20d67636806b}{}\label{class_button_aee03ef2e04b98c1a782b20d67636806b}
+\index{Button@{Button}!m\+\_\+state@{m\+\_\+state}}
+\index{m\+\_\+state@{m\+\_\+state}!Button@{Button}}
+\subsubsection[{\texorpdfstring{m\+\_\+state}{m_state}}]{\setlength{\rightskip}{0pt plus 5cm}int Button\+::m\+\_\+state\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_button_a0efa9e01151e32ad0d974b7d50a0aded}{}\label{class_button_a0efa9e01151e32ad0d974b7d50a0aded}
+\index{Button@{Button}!ms\+In\+Button@{ms\+In\+Button}}
+\index{ms\+In\+Button@{ms\+In\+Button}!Button@{Button}}
+\subsubsection[{\texorpdfstring{ms\+In\+Button}{msInButton}}]{\setlength{\rightskip}{0pt plus 5cm}int Button\+::ms\+In\+Button\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_button_a464821978156737022e6fe5781b66ea5}{}\label{class_button_a464821978156737022e6fe5781b66ea5}
+\index{Button@{Button}!ms\+Pos@{ms\+Pos}}
+\index{ms\+Pos@{ms\+Pos}!Button@{Button}}
+\subsubsection[{\texorpdfstring{ms\+Pos}{msPos}}]{\setlength{\rightskip}{0pt plus 5cm}Vector2i Button\+::ms\+Pos\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_button_a31ebaceb3638c12b502dc744edb7d68d}{}\label{class_button_a31ebaceb3638c12b502dc744edb7d68d}
+\index{Button@{Button}!s\+\_\+font@{s\+\_\+font}}
+\index{s\+\_\+font@{s\+\_\+font}!Button@{Button}}
+\subsubsection[{\texorpdfstring{s\+\_\+font}{s_font}}]{\setlength{\rightskip}{0pt plus 5cm}Font Button\+::s\+\_\+font\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{class_button_afe0091a0ada46c9da104f4cc60731676}{}\label{class_button_afe0091a0ada46c9da104f4cc60731676}
+\index{Button@{Button}!s\+\_\+nb@{s\+\_\+nb}}
+\index{s\+\_\+nb@{s\+\_\+nb}!Button@{Button}}
+\subsubsection[{\texorpdfstring{s\+\_\+nb}{s_nb}}]{\setlength{\rightskip}{0pt plus 5cm}int Button\+::s\+\_\+nb =0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{class_button_a15879fddc562e8dcf81fe8dcb01f600c}{}\label{class_button_a15879fddc562e8dcf81fe8dcb01f600c}
+\index{Button@{Button}!s\+\_\+texture@{s\+\_\+texture}}
+\index{s\+\_\+texture@{s\+\_\+texture}!Button@{Button}}
+\subsubsection[{\texorpdfstring{s\+\_\+texture}{s_texture}}]{\setlength{\rightskip}{0pt plus 5cm}Texture Button\+::s\+\_\+texture\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{class_button_aa9a490bc7d0d3f7d39c3116e4148f789}{}\label{class_button_aa9a490bc7d0d3f7d39c3116e4148f789}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-src/guilib.\+hpp\item 
-main.\+cpp\item 
-src/guilib.\+cpp\end{DoxyCompactItemize}
+src/\hyperlink{guilib_8hpp}{guilib.\+hpp}\item 
+\hyperlink{main_8cpp}{main.\+cpp}\item 
+src/\hyperlink{guilib_8cpp}{guilib.\+cpp}\end{DoxyCompactItemize}

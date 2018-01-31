@@ -1,0 +1,6 @@
+<map id="Game" name="Game">
+<area shape="rect" id="node2" href="$struct___server.html" title="Structure of different data link to severs. " alt="" coords="5,5,72,32"/>
+<area shape="rect" id="node3" href="$struct___buffer.html" title="Structures of transmission and reception buffers. " alt="" coords="101,5,165,32"/>
+<area shape="rect" id="node4" href="$struct___player.html" title="_Player" alt="" coords="189,5,256,32"/>
+<area shape="rect" id="node5" href="$class_button.html" title="Button" alt="" coords="289,5,349,32"/>
+</map>

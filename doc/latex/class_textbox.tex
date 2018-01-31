@@ -1,30 +1,167 @@
 \hypertarget{class_textbox}{}\section{Textbox Class Reference}
 \label{class_textbox}\index{Textbox@{Textbox}}
+
+
+{\ttfamily \#include $<$guilib.\+hpp$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Textbox} (std\+::string $\ast$s, sf\+::\+Vector2f position, int nb=0)\hypertarget{class_textbox_a3012a48f019d162a425c789861bb1990}{}\label{class_textbox_a3012a48f019d162a425c789861bb1990}
-
+\hyperlink{class_textbox_a72ae249fb4c23d134f7bc91296de0942}{Textbox} ()
 \item 
-void {\bfseries create} (std\+::string $\ast$s, sf\+::\+Vector2f position, int nb=0)\hypertarget{class_textbox_a0041248c755db7199af083f72eff1450}{}\label{class_textbox_a0041248c755db7199af083f72eff1450}
-
+\hyperlink{class_textbox_a3012a48f019d162a425c789861bb1990}{Textbox} (std\+::string $\ast$s, sf\+::\+Vector2f position, int nb=0)
 \item 
-void {\bfseries set\+Font} (const std\+::string \&filename)\hypertarget{class_textbox_ab9621713182598984ad3fb859d0e1d9f}{}\label{class_textbox_ab9621713182598984ad3fb859d0e1d9f}
-
+void \hyperlink{class_textbox_a0041248c755db7199af083f72eff1450}{create} (std\+::string $\ast$s, sf\+::\+Vector2f position, int nb=0)
 \item 
-int {\bfseries update} (Render\+Window \&w)\hypertarget{class_textbox_acde79fe8b1e486111d64ee8867c7acc7}{}\label{class_textbox_acde79fe8b1e486111d64ee8867c7acc7}
-
+\hyperlink{class_textbox_a3691c8a226ec90cada4c36466a940ba2}{$\sim$\+Textbox} ()
 \item 
-int {\bfseries clicked} ()\hypertarget{class_textbox_a1e22453d60cefece0d06a92aa257c438}{}\label{class_textbox_a1e22453d60cefece0d06a92aa257c438}
-
+void \hyperlink{class_textbox_ab9621713182598984ad3fb859d0e1d9f}{set\+Font} (const std\+::string \&filename)
 \item 
-int {\bfseries get\+Nb\+Of\+Bx} ()\hypertarget{class_textbox_abe733f2845e2d532a0a364517ff00ba2}{}\label{class_textbox_abe733f2845e2d532a0a364517ff00ba2}
-
+int \hyperlink{class_textbox_acde79fe8b1e486111d64ee8867c7acc7}{update} (Render\+Window \&w)
+\item 
+int \hyperlink{class_textbox_a1e22453d60cefece0d06a92aa257c438}{clicked} ()
+\item 
+int \hyperlink{class_textbox_abe733f2845e2d532a0a364517ff00ba2}{get\+Nb\+Of\+Bx} ()
 \end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Vector2i \hyperlink{class_textbox_a72338fd40e9c49896d56cc4cc151451e}{mx\+Pos}
+\item 
+Vector2f \hyperlink{class_textbox_add24b3a209a1d5a0251b1057cdc6084f}{bx\+Pos}
+\item 
+Float\+Rect \hyperlink{class_textbox_a4a3edf52ef4009bd4cd7745cf5d5907b}{bx\+Size}
+\item 
+int \hyperlink{class_textbox_a7ec107dfd26702bc66059202c32d90ca}{m\+\_\+nb}
+\item 
+std\+::string $\ast$ \hyperlink{class_textbox_a8d7b684614a1fa936ed71761faadafcb}{text}
+\item 
+Text \hyperlink{class_textbox_a4e073ba8f958d44afb49293247d514ad}{label}
+\item 
+Rectangle\+Shape \hyperlink{class_textbox_a6df176e39969833d37fbfd23ca58562e}{box}
+\item 
+int \hyperlink{class_textbox_acbefbcf6c9bb562c24b477ee5b5bb7c6}{m\+\_\+state}
+\item 
+int \hyperlink{class_textbox_a308c2f78e0113ce92915ac389a27beb2}{ms\+In\+Box}
+\item 
+int \hyperlink{class_textbox_af2a81ca56d4beaf3fe662b2ea9d3ccb0}{click}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{class_textbox_a2597b1b404605ad4e1c7a10cc0f2cbbb}{s\+\_\+nb} =0
+\item 
+static Font \hyperlink{class_textbox_a41d552b2dbe4236ad70c18bc750e29c7}{s\+\_\+font}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Textbox@{Textbox}!Textbox@{Textbox}}
+\index{Textbox@{Textbox}!Textbox@{Textbox}}
+\subsubsection[{\texorpdfstring{Textbox()}{Textbox()}}]{\setlength{\rightskip}{0pt plus 5cm}Textbox\+::\+Textbox (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_textbox_a72ae249fb4c23d134f7bc91296de0942}{}\label{class_textbox_a72ae249fb4c23d134f7bc91296de0942}
+\index{Textbox@{Textbox}!Textbox@{Textbox}}
+\index{Textbox@{Textbox}!Textbox@{Textbox}}
+\subsubsection[{\texorpdfstring{Textbox(std\+::string $\ast$s, sf\+::\+Vector2f position, int nb=0)}{Textbox(std::string *s, sf::Vector2f position, int nb=0)}}]{\setlength{\rightskip}{0pt plus 5cm}Textbox\+::\+Textbox (
+\begin{DoxyParamCaption}
+\item[{std\+::string $\ast$}]{s, }
+\item[{sf\+::\+Vector2f}]{position, }
+\item[{int}]{nb = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_textbox_a3012a48f019d162a425c789861bb1990}{}\label{class_textbox_a3012a48f019d162a425c789861bb1990}
+\index{Textbox@{Textbox}!````~Textbox@{$\sim$\+Textbox}}
+\index{````~Textbox@{$\sim$\+Textbox}!Textbox@{Textbox}}
+\subsubsection[{\texorpdfstring{$\sim$\+Textbox()}{~Textbox()}}]{\setlength{\rightskip}{0pt plus 5cm}Textbox\+::$\sim$\+Textbox (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_textbox_a3691c8a226ec90cada4c36466a940ba2}{}\label{class_textbox_a3691c8a226ec90cada4c36466a940ba2}
+
+
+\subsection{Member Function Documentation}
+\index{Textbox@{Textbox}!clicked@{clicked}}
+\index{clicked@{clicked}!Textbox@{Textbox}}
+\subsubsection[{\texorpdfstring{clicked()}{clicked()}}]{\setlength{\rightskip}{0pt plus 5cm}int Textbox\+::clicked (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_textbox_a1e22453d60cefece0d06a92aa257c438}{}\label{class_textbox_a1e22453d60cefece0d06a92aa257c438}
+\index{Textbox@{Textbox}!create@{create}}
+\index{create@{create}!Textbox@{Textbox}}
+\subsubsection[{\texorpdfstring{create(std\+::string $\ast$s, sf\+::\+Vector2f position, int nb=0)}{create(std::string *s, sf::Vector2f position, int nb=0)}}]{\setlength{\rightskip}{0pt plus 5cm}void Textbox\+::create (
+\begin{DoxyParamCaption}
+\item[{std\+::string $\ast$}]{s, }
+\item[{sf\+::\+Vector2f}]{position, }
+\item[{int}]{nb = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_textbox_a0041248c755db7199af083f72eff1450}{}\label{class_textbox_a0041248c755db7199af083f72eff1450}
+\index{Textbox@{Textbox}!get\+Nb\+Of\+Bx@{get\+Nb\+Of\+Bx}}
+\index{get\+Nb\+Of\+Bx@{get\+Nb\+Of\+Bx}!Textbox@{Textbox}}
+\subsubsection[{\texorpdfstring{get\+Nb\+Of\+Bx()}{getNbOfBx()}}]{\setlength{\rightskip}{0pt plus 5cm}int Textbox\+::get\+Nb\+Of\+Bx (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_textbox_abe733f2845e2d532a0a364517ff00ba2}{}\label{class_textbox_abe733f2845e2d532a0a364517ff00ba2}
+\index{Textbox@{Textbox}!set\+Font@{set\+Font}}
+\index{set\+Font@{set\+Font}!Textbox@{Textbox}}
+\subsubsection[{\texorpdfstring{set\+Font(const std\+::string \&filename)}{setFont(const std::string &filename)}}]{\setlength{\rightskip}{0pt plus 5cm}void Textbox\+::set\+Font (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{filename}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_textbox_ab9621713182598984ad3fb859d0e1d9f}{}\label{class_textbox_ab9621713182598984ad3fb859d0e1d9f}
+\index{Textbox@{Textbox}!update@{update}}
+\index{update@{update}!Textbox@{Textbox}}
+\subsubsection[{\texorpdfstring{update(\+Render\+Window \&w)}{update(RenderWindow &w)}}]{\setlength{\rightskip}{0pt plus 5cm}int Textbox\+::update (
+\begin{DoxyParamCaption}
+\item[{Render\+Window \&}]{w}
+\end{DoxyParamCaption}
+)}\hypertarget{class_textbox_acde79fe8b1e486111d64ee8867c7acc7}{}\label{class_textbox_acde79fe8b1e486111d64ee8867c7acc7}
+
+
+\subsection{Member Data Documentation}
+\index{Textbox@{Textbox}!box@{box}}
+\index{box@{box}!Textbox@{Textbox}}
+\subsubsection[{\texorpdfstring{box}{box}}]{\setlength{\rightskip}{0pt plus 5cm}Rectangle\+Shape Textbox\+::box\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_textbox_a6df176e39969833d37fbfd23ca58562e}{}\label{class_textbox_a6df176e39969833d37fbfd23ca58562e}
+\index{Textbox@{Textbox}!bx\+Pos@{bx\+Pos}}
+\index{bx\+Pos@{bx\+Pos}!Textbox@{Textbox}}
+\subsubsection[{\texorpdfstring{bx\+Pos}{bxPos}}]{\setlength{\rightskip}{0pt plus 5cm}Vector2f Textbox\+::bx\+Pos\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_textbox_add24b3a209a1d5a0251b1057cdc6084f}{}\label{class_textbox_add24b3a209a1d5a0251b1057cdc6084f}
+\index{Textbox@{Textbox}!bx\+Size@{bx\+Size}}
+\index{bx\+Size@{bx\+Size}!Textbox@{Textbox}}
+\subsubsection[{\texorpdfstring{bx\+Size}{bxSize}}]{\setlength{\rightskip}{0pt plus 5cm}Float\+Rect Textbox\+::bx\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_textbox_a4a3edf52ef4009bd4cd7745cf5d5907b}{}\label{class_textbox_a4a3edf52ef4009bd4cd7745cf5d5907b}
+\index{Textbox@{Textbox}!click@{click}}
+\index{click@{click}!Textbox@{Textbox}}
+\subsubsection[{\texorpdfstring{click}{click}}]{\setlength{\rightskip}{0pt plus 5cm}int Textbox\+::click\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_textbox_af2a81ca56d4beaf3fe662b2ea9d3ccb0}{}\label{class_textbox_af2a81ca56d4beaf3fe662b2ea9d3ccb0}
+\index{Textbox@{Textbox}!label@{label}}
+\index{label@{label}!Textbox@{Textbox}}
+\subsubsection[{\texorpdfstring{label}{label}}]{\setlength{\rightskip}{0pt plus 5cm}Text Textbox\+::label\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_textbox_a4e073ba8f958d44afb49293247d514ad}{}\label{class_textbox_a4e073ba8f958d44afb49293247d514ad}
+\index{Textbox@{Textbox}!m\+\_\+nb@{m\+\_\+nb}}
+\index{m\+\_\+nb@{m\+\_\+nb}!Textbox@{Textbox}}
+\subsubsection[{\texorpdfstring{m\+\_\+nb}{m_nb}}]{\setlength{\rightskip}{0pt plus 5cm}int Textbox\+::m\+\_\+nb\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_textbox_a7ec107dfd26702bc66059202c32d90ca}{}\label{class_textbox_a7ec107dfd26702bc66059202c32d90ca}
+\index{Textbox@{Textbox}!m\+\_\+state@{m\+\_\+state}}
+\index{m\+\_\+state@{m\+\_\+state}!Textbox@{Textbox}}
+\subsubsection[{\texorpdfstring{m\+\_\+state}{m_state}}]{\setlength{\rightskip}{0pt plus 5cm}int Textbox\+::m\+\_\+state\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_textbox_acbefbcf6c9bb562c24b477ee5b5bb7c6}{}\label{class_textbox_acbefbcf6c9bb562c24b477ee5b5bb7c6}
+\index{Textbox@{Textbox}!ms\+In\+Box@{ms\+In\+Box}}
+\index{ms\+In\+Box@{ms\+In\+Box}!Textbox@{Textbox}}
+\subsubsection[{\texorpdfstring{ms\+In\+Box}{msInBox}}]{\setlength{\rightskip}{0pt plus 5cm}int Textbox\+::ms\+In\+Box\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_textbox_a308c2f78e0113ce92915ac389a27beb2}{}\label{class_textbox_a308c2f78e0113ce92915ac389a27beb2}
+\index{Textbox@{Textbox}!mx\+Pos@{mx\+Pos}}
+\index{mx\+Pos@{mx\+Pos}!Textbox@{Textbox}}
+\subsubsection[{\texorpdfstring{mx\+Pos}{mxPos}}]{\setlength{\rightskip}{0pt plus 5cm}Vector2i Textbox\+::mx\+Pos\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_textbox_a72338fd40e9c49896d56cc4cc151451e}{}\label{class_textbox_a72338fd40e9c49896d56cc4cc151451e}
+\index{Textbox@{Textbox}!s\+\_\+font@{s\+\_\+font}}
+\index{s\+\_\+font@{s\+\_\+font}!Textbox@{Textbox}}
+\subsubsection[{\texorpdfstring{s\+\_\+font}{s_font}}]{\setlength{\rightskip}{0pt plus 5cm}Font Textbox\+::s\+\_\+font\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{class_textbox_a41d552b2dbe4236ad70c18bc750e29c7}{}\label{class_textbox_a41d552b2dbe4236ad70c18bc750e29c7}
+\index{Textbox@{Textbox}!s\+\_\+nb@{s\+\_\+nb}}
+\index{s\+\_\+nb@{s\+\_\+nb}!Textbox@{Textbox}}
+\subsubsection[{\texorpdfstring{s\+\_\+nb}{s_nb}}]{\setlength{\rightskip}{0pt plus 5cm}int Textbox\+::s\+\_\+nb =0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{class_textbox_a2597b1b404605ad4e1c7a10cc0f2cbbb}{}\label{class_textbox_a2597b1b404605ad4e1c7a10cc0f2cbbb}
+\index{Textbox@{Textbox}!text@{text}}
+\index{text@{text}!Textbox@{Textbox}}
+\subsubsection[{\texorpdfstring{text}{text}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string$\ast$ Textbox\+::text\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_textbox_a8d7b684614a1fa936ed71761faadafcb}{}\label{class_textbox_a8d7b684614a1fa936ed71761faadafcb}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-src/guilib.\+hpp\item 
-main.\+cpp\item 
-src/guilib.\+cpp\end{DoxyCompactItemize}
+src/\hyperlink{guilib_8hpp}{guilib.\+hpp}\item 
+\hyperlink{main_8cpp}{main.\+cpp}\item 
+src/\hyperlink{guilib_8cpp}{guilib.\+cpp}\end{DoxyCompactItemize}

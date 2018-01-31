@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['t_5fflag',['T_flag',['../struct___buffer.html#a458c1db99177167836af8505dea8bae3',1,'_Buffer']]],
-  ['tx',['Tx',['../struct___buffer.html#a803fdcb8a3d9d6358bf64aa8b311cb80',1,'_Buffer']]]
+  ['card',['card',['../struct___player.html#a0709887e5a2bf3e6ebb0b3f23e51dcf0',1,'_Player']]],
+  ['click',['click',['../class_button.html#a6bb3b2a3313633b617d155fe12402171',1,'Button::click()'],['../class_textbox.html#af2a81ca56d4beaf3fe662b2ea9d3ccb0',1,'Textbox::click()']]]
 ];

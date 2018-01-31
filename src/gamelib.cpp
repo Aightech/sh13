@@ -13,6 +13,7 @@
 #include "gamelib.hpp"
 
 #include "vector"
+#include <time.h> 
 
 
 #include <sys/types.h> 
@@ -32,12 +33,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define SERVERPORT 4000
-#define WATCHPORT 4001
+
 
 
 using namespace sf;
 using namespace std;
+
+int WATCHPORT;
 
 
 Game::Game()
@@ -51,9 +53,11 @@ Game::Game()
        window.create(VideoMode(WIN_W,WIN_H), GAME_NAME);   
 }
 
+
 void Game::init()
 {   
-       m_buffer.R_port=WATCHPORT;
+       
+       m_buffer.R_port = WATCHPORT;
        
        pthread_create(&m_thread_server, NULL,tcpWatchdog,(void *) &m_buffer);       
        
@@ -70,6 +74,87 @@ void Game::init()
        
        m_arrayConnectionTexture.loadFromFile(GAME_THEME_ARRAY);
        
+       int array[13][3]={   {4,7,-1},
+                            {4,1,0},
+                            {3,5,2},
+                            {3,7,2},
+                            {3,1,-1},
+                            {3,7,-1},
+                            {3,6,5},
+                            {6,1,7},
+                            {6,5,7},
+                            {6,1,2},
+                            {6,0,-1},
+                            {2,0,-1},
+                            {4,1,-1}      };
+       for(int i=0;i<13;i++)
+              for(int j=0;j<3;j++)
+                     m_charactersArray[i][j]=array[i][j];
+                     
+       char imgName[]="media/SH13_00.png";
+       for(int i=0;i<13;i++)
+       {
+              sprintf(imgName,"media/SH13_%d.png",i);
+              printf("%s\n",imgName);
+              m_persoTextures.push_back(new Texture);
+              if (!m_persoTextures[i]->loadFromFile(imgName, sf::IntRect(0, 0, 300, 198)))
+              {
+                  // erreur...
+              }
+              m_persoSprites.push_back(new Sprite);
+              m_persoSprites[i]->setTexture(*m_persoTextures[i]);
+              m_persoSprites[i]->setScale(0.5,0.5);
+              m_persoSprites[i]->setPosition(Vector2f(550+160*(i%4),10+110*(int)(i/4)));
+       }
+       
+       char iconName[]="media/icons/SH13_icon00_120x120.png";
+       for(int i=0;i<8;i++)
+       {
+              sprintf(iconName,"media/icons/SH13_icon%d_120x120.png",i);
+              m_iconsTextures.push_back(new Texture);
+              if (!m_iconsTextures[i]->loadFromFile(iconName, sf::IntRect(0, 0, 300, 198)))
+              {
+                  // erreur...
+              }
+              m_iconsSprites.push_back(new Sprite);
+              m_iconsSprites[i]->setTexture(*m_iconsTextures[i]);
+              m_iconsSprites[i]->setScale(0.3,0.3);
+              m_iconsSprites[i]->setPosition(Vector2f(250+39*i,140));
+              
+       }
+       
+       if (!m_woodTexture.loadFromFile("media/theme/wood.png", sf::IntRect(0, 0, 230, 100)))
+       {
+           // erreur...
+       }
+       for(int i=0;i<4;i++)
+       {
+              m_playerPlateSprites.push_back(new Sprite);
+              m_playerPlateSprites[i]->setTexture(m_woodTexture);
+              m_playerPlateSprites[i]->setPosition(Vector2f(10,120+70+110*i));
+              
+              m_labelPlayerName.push_back(new Text);
+              m_labelPlayerName[i]->setFont(m_font);
+              m_labelPlayerName[i]->setString("NAME:");
+              m_labelPlayerName[i]->setCharacterSize(20);
+              m_labelPlayerName[i]->setPosition(Vector2f(20,120+80+110*i));
+              m_labelPlayerName[i]->setColor(Color(255,255,255));
+              
+              m_labelPlayerIP.push_back(new Text);
+              m_labelPlayerIP[i]->setFont(m_font);
+              m_labelPlayerIP[i]->setString("IP ADDR.:");
+              m_labelPlayerIP[i]->setCharacterSize(10);
+              m_labelPlayerIP[i]->setPosition(Vector2f(20,120+110+110*i));
+              m_labelPlayerIP[i]->setColor(Color(255,255,255));
+              
+              m_playersObjects.push_back(new Text);
+              m_playersObjects[i]->setFont(m_font);
+              m_playersObjects[i]->setString("X X X X X X X X");
+              m_playersObjects[i]->setCharacterSize(24);
+              m_playersObjects[i]->setPosition(Vector2f(257,120+110+110*i));
+              m_playersObjects[i]->setColor(Color(255,255,255));
+       }
+       
        
        m_state=0;
 }
@@ -79,8 +164,10 @@ void Game::menu()
        createMenu();
        
        
-       while(window.isOpen())
+       while(window.isOpen() && m_state!=GAME_ONLINE)
        {
+              
+              
               Event event;
               while(window.pollEvent(event))
               {
@@ -110,6 +197,8 @@ void Game::menu()
               msPos=Mouse::getPosition(window);
               
               processBuffer();
+              if(!(window.isOpen() && m_state!=GAME_ONLINE))
+                     printf("01\n"); 
               
               window.clear(Color(48,48,48));
               
@@ -145,7 +234,9 @@ void Game::menu()
                             case JOIN_S2_BUTT:
                             case JOIN_S3_BUTT:
                             case JOIN_S4_BUTT:
+                            
                                    m_server=abs(select)-JOIN_S1_BUTT;
+                                   printf("G: server :%d\n",m_server);
                                    
                                    sprintf(m_buffer.Tx,"G%dP%dN%s",1,m_buffer.R_port,"aight;");
                                    m_buffer.T_flag=1;
@@ -194,12 +285,16 @@ void Game::menu()
                             
                             case START_BUTT:
                             { 
+                                   if(m_nbPlayer>1)
+                                   {
+                                          sprintf(m_buffer.Tx,"G%d",20);
+                                          m_buffer.T_flag=1;
+                                          sendTCP(m_servers[m_server].IPaddress,m_servers[m_server].portNo,&m_buffer);
+                                          
+                                          
+                                   }
                                    
-                                   sprintf(m_buffer.Tx,"G%d",2);
-                                   m_buffer.T_flag=1;
-                                   sendTCP(m_servers[m_server].IPaddress,m_servers[m_server].portNo,&m_buffer); 
                                    
-                                   return ;
                                    
                             }            
                             break;
@@ -234,7 +329,8 @@ void Game::menu()
               window.draw(m_title);
               window.display();
        }
-       wait(NULL);
+       if(!(window.isOpen()))
+              wait(NULL);
        
 }
 
@@ -435,7 +531,9 @@ void Game::createMenu()
 
 void Game::onlineGame()
 {
-       m_state=MAIN_GAME;
+       m_state=INIT_GAME;
+       printf("G: game started\n");
+       processBuffer();
        createGameContext();
        
        while(window.isOpen())
@@ -461,11 +559,15 @@ void Game::onlineGame()
              int nbButt=button.getNbOfBt();
              int select=0;
              
+             for(int i=0;i<m_arraySprites.size();i++)
+                     window.draw(*m_arraySprites[i]);
+              for(int i=0;i<m_arrayText.size();i++)
+                     window.draw(*m_arrayText[i]);
+             
               for(int i=0;i<nbButt;i++)
                      select+=buttons[i]->update(window);
               if(select)
               {
-                     printf("%d\n",select);
                      switch(abs(select))
                      {
                             case QUIT_BUTT:
@@ -477,7 +579,6 @@ void Game::onlineGame()
                                    createGameContext();
                             break;
                             
-                            
                             case INQUIRY_BUTT:
                                    m_state=INQUIRY_GAME;
                                    createGameContext();
@@ -487,6 +588,65 @@ void Game::onlineGame()
                                    m_state=DENOUNCE_GAME;
                                    createGameContext();
                             break;
+                            
+                            
+                            case JEWELRY_BUTT:
+                            case BULB_BUTT :
+                            case BOOK_BUTT :
+                            case MEDAL_BUTT :
+                            case SKULL_BUTT :
+                            case EYE_BUTT :
+                            case PIPE_BUTT :
+                            case FIST_BUTT :
+                            {
+                                   m_obj=abs(select)-JEWELRY_BUTT;
+                                   switch(m_state)
+                                   {
+                                          case GENPOLL_GAME:
+                                                 
+                                                 printf("01\n");
+                                                 sprintf(m_buffer.Tx,"G%dQ%d",21,m_obj);
+                                                 m_buffer.T_flag=1;
+                                                 printf("G: ask server : %s\n",m_buffer.Tx);
+                                                 sendTCP(m_servers[m_server].IPaddress,m_servers[m_server].portNo,&m_buffer); 
+                                          break;
+                                          case INQUIRY_GAME:
+                                                 m_state=INQUIRY_GAME2;
+                                                 createGameContext();
+                                          break;
+                                   }
+                            }
+                            break;
+                            
+                            case ASK1_BUTT:
+                            case ASK2_BUTT:
+                            case ASK3_BUTT:
+                            case ASK4_BUTT:
+                                   sprintf(m_buffer.Tx,"G%dP%dQ%d",22,abs(select)-ASK1_BUTT,m_obj);
+                                   m_buffer.T_flag=1;
+                                   printf("G: ask server : %s\n",m_buffer.Tx);
+                                   sendTCP(m_servers[m_server].IPaddress,m_servers[m_server].portNo,&m_buffer);
+                            
+                            break;
+                            
+                            case DENOUNCE1_BUTT:
+                            case DENOUNCE2_BUTT:
+                            case DENOUNCE3_BUTT:
+                            case DENOUNCE4_BUTT:
+                            case DENOUNCE5_BUTT:
+                            case DENOUNCE6_BUTT:
+                            case DENOUNCE7_BUTT:
+                            case DENOUNCE8_BUTT:
+                            case DENOUNCE9_BUTT:
+                            case DENOUNCE10_BUTT:
+                            
+                                   sprintf(m_buffer.Tx,"G%dC%d",23,m_otherCharacters[abs(select)-DENOUNCE1_BUTT]);
+                                   m_buffer.T_flag=1;
+                                   printf("G: ask server : %s\n",m_buffer.Tx);
+                                   sendTCP(m_servers[m_server].IPaddress,m_servers[m_server].portNo,&m_buffer);
+                            
+                            break;
+                            
                             
                             case BACK_BUTT:
                                    m_state=MAIN_GAME;
@@ -505,6 +665,7 @@ void Game::createGameContext()
 {
        
        m_title.setPosition(Vector2f(10, 10));
+       m_title.setCharacterSize(30);
        for(int i=buttons.size()-1;i>-1;i--)
        {
               delete buttons[i];
@@ -513,7 +674,7 @@ void Game::createGameContext()
        
        switch(m_state)
        {
-              case MAIN_GAME:
+              case INIT_GAME:
               {
                      
                      string buttonsLabel[]={"gen. poll","inquiry","denounce","quit"};
@@ -526,8 +687,64 @@ void Game::createGameContext()
                      if(!isMyTurn())
                             for(int i=0;i<3;i++)
                                    buttons[i]->disable();
+                                   
+                     int array[6]={1,3,4,12,6,7};
                      
+                     int cards[13]={0,0,0,0,0,0,0,0,0,0,0,0,0};
+                     m_nbPlayer=4;
+                     for(int i=0;i<12/m_nbPlayer;i++)
+                     {
+                            m_persoSprites[array[i]]->setPosition(Vector2f(290+906/(12/m_nbPlayer)*i,10));
+                            m_arraySprites.push_back(m_persoSprites[array[i]]);
+                            cards[array[i]]=-1;
+                     }
+                     int c=0;
+                     
+                     for(int i=0;i<13-12/m_nbPlayer;i++)
+                     {
+                            while(cards[c]==-1) c++;
+                            m_persoSprites[c]->setPosition(Vector2f(1020-152*((int)i/4),130+100*(i%4)));
+                            m_arraySprites.push_back(m_persoSprites[c]);
+                            m_otherCharacters[i]=c;
+                            printf("C:%d\n",c);
+                            c++;
+                     }
+                     for(int i=0;i<10;i++)
+                            printf("[%d]\n",m_otherCharacters[i]);
+                     
+                     for(int i=0; i<m_nbPlayer;i++)
+                     {
+                            m_arrayText.push_back(m_labelPlayerIP[i]);
+                            m_arrayText.push_back(m_labelPlayerName[i]);
+                            m_arrayText.push_back(m_playersObjects[i]);
+                            m_arraySprites.push_back(m_playerPlateSprites[i]);
+                     }
+                     
+                     for(int i=0; i<8;i++)
+                     {
+                            m_arraySprites.push_back(m_iconsSprites[i]);
+                     }
+                     
+              
+                     
+                     
+                   m_state=INIT_GAME;  
               }
+              break;
+              case MAIN_GAME:
+              {
+                     string buttonsLabel[]={"gen. poll","inquiry","denounce","quit"};
+                     int buttonIndex[]={GENPOLL_BUTT,INQUIRY_BUTT,DENOUNCE_BUTT,QUIT_BUTT};
+                     int buttonPos[][2]={{window.getSize().x*4/8,window.getSize().y*7/9},{window.getSize().x*5/8,window.getSize().y*7/9},{window.getSize().x*6/8,window.getSize().y*7/9},{window.getSize().x*7/8,window.getSize().y*7/8}};
+                     for(int i=0;i<4;i++)
+                     {
+                            buttons.push_back(new Button(buttonsLabel[i],Vector2f(buttonPos[i][0],buttonPos[i][1]),buttonIndex[i]));
+                     }
+                     if(!isMyTurn())
+                            for(int i=0;i<3;i++)
+                                   buttons[i]->disable();
+              }
+              
               break;
               case GENPOLL_GAME:
               {
@@ -545,12 +762,13 @@ void Game::createGameContext()
                      int buttonIconIndex[]={JEWELRY_BUTT,BULB_BUTT,BOOK_BUTT,MEDAL_BUTT,SKULL_BUTT,EYE_BUTT,PIPE_BUTT,FIST_BUTT};
                      for(int i=0;i<8;i++)
                      {
-                            buttons.push_back(new Button(buttonsIconLabel[i],Vector2f(window.getSize().x/2-90, window.getSize().y*1/7+50*i),buttonIconIndex[i]));
+                            buttons.push_back(new Button(buttonsIconLabel[i],Vector2f(window.getSize().x/2-30, window.getSize().y*2/10+50*i),buttonIconIndex[i]));
                      }
               }
               break;
               case INQUIRY_GAME:
               {
+                     
                      string buttonsLabel[]={"gen. poll","inquiry","denounce","quit","back"};
                      int buttonIndex[]={GENPOLL_BUTT,INQUIRY_BUTT,DENOUNCE_BUTT,QUIT_BUTT,BACK_BUTT};
                      int buttonPos[][2]={{window.getSize().x*4/8,window.getSize().y*7/9},{window.getSize().x*5/8,window.getSize().y*7/9},{window.getSize().x*6/8,window.getSize().y*7/9},{window.getSize().x*7/8,window.getSize().y*7/8},{window.getSize().x*6/8,window.getSize().y*7/8}};
@@ -565,7 +783,49 @@ void Game::createGameContext()
                      int buttonIconIndex[]={JEWELRY_BUTT,BULB_BUTT,BOOK_BUTT,MEDAL_BUTT,SKULL_BUTT,EYE_BUTT,PIPE_BUTT,FIST_BUTT};
                      for(int i=0;i<8;i++)
                      {
-                            buttons.push_back(new Button(buttonsIconLabel[i],Vector2f(window.getSize().x/2-90, window.getSize().y*1/7+50*i),buttonIconIndex[i]));
+                            buttons.push_back(new Button(buttonsIconLabel[i],Vector2f(window.getSize().x/2-30, window.getSize().y*2/10+50*i),buttonIconIndex[i]));
+                     }
+                     
+              }
+              break;
+              case INQUIRY_GAME2:
+              {
+                     string buttonsLabel[]={"gen. poll","inquiry","denounce","quit","back"};
+                     int buttonIndex[]={GENPOLL_BUTT,INQUIRY_BUTT,DENOUNCE_BUTT,QUIT_BUTT,BACK_BUTT};
+                     int buttonPos[][2]={{window.getSize().x*4/8,window.getSize().y*7/9},{window.getSize().x*5/8,window.getSize().y*7/9},{window.getSize().x*6/8,window.getSize().y*7/9},{window.getSize().x*7/8,window.getSize().y*7/8},{window.getSize().x*6/8,window.getSize().y*7/8}};
+                     for(int i=0;i<5;i++)
+                     {
+                            buttons.push_back(new Button(buttonsLabel[i],Vector2f(buttonPos[i][0],buttonPos[i][1]),buttonIndex[i]));
+                     }
+                     for(int i=0;i<3;i++)
+                            buttons[i]->disable();
+                            
+                     string buttonsIconLabel[]={"ask","ask","ask","ask"};
+                     int buttonIconIndex[]={ASK1_BUTT,ASK2_BUTT,ASK3_BUTT,ASK4_BUTT};
+                     for(int i=0;i<m_nbPlayer;i++)
+                     {
+                            buttons.push_back(new Button(buttonsIconLabel[i],Vector2f(110,240+110*i),buttonIconIndex[i]));
+                     }
+                     
+              }
+              break;
+              case DENOUNCE_GAME:
+              {
+                     string buttonsLabel[]={"gen. poll","inquiry","denounce","quit","back"};
+                     int buttonIndex[]={GENPOLL_BUTT,INQUIRY_BUTT,DENOUNCE_BUTT,QUIT_BUTT,BACK_BUTT};
+                     int buttonPos[][2]={{window.getSize().x*4/8,window.getSize().y*7/9},{window.getSize().x*5/8,window.getSize().y*7/9},{window.getSize().x*6/8,window.getSize().y*7/9},{window.getSize().x*7/8,window.getSize().y*7/8},{window.getSize().x*6/8,window.getSize().y*7/8}};
+                     for(int i=0;i<5;i++)
+                     {
+                            buttons.push_back(new Button(buttonsLabel[i],Vector2f(buttonPos[i][0],buttonPos[i][1]),buttonIndex[i]));
+                     }
+                     for(int i=0;i<3;i++)
+                            buttons[i]->disable();
+                            
+                     string buttonsIconLabel[]={"denounce"};
+                     int buttonIconIndex[]={DENOUNCE1_BUTT};
+                     for(int i=0;i<13-12/m_nbPlayer;i++)
+                     {
+                            buttons.push_back(new Button(buttonsIconLabel[0],Vector2f(Vector2f(1025-152*((int)i/4),135+100*(i%4))),DENOUNCE1_BUTT+i));
                      }
                      
               }
@@ -660,7 +920,7 @@ void Game::startServer()
                             }
                             break;
                             
-                            case 10://Killing
+                            case 99://Killing
                             {      
                                    
                                    int U = atoi(strchr(serv_buff.Rx,'U')+1);            //get the player to kill
@@ -670,7 +930,7 @@ void Game::startServer()
                                           for(int i=1;i<m_nbPlayer;i++)
                                           { 
                                                  //say to client he s been kicked out
-                                                 sprintf(serv_buff.Tx,"G%d",10);
+                                                 sprintf(serv_buff.Tx,"G%d",99);
                                                  serv_buff.T_flag=1;
                                                  sendTCP(m_players[i].IPaddress, m_players[i].portNo, &serv_buff);
                                           }
@@ -678,7 +938,7 @@ void Game::startServer()
                                    }
                                           
                                    //say to client he s been kicked out
-                                   sprintf(serv_buff.Tx,"G%d",10);
+                                   sprintf(serv_buff.Tx,"G%d",99);
                                    serv_buff.T_flag=1;
                                    sendTCP(m_players[U].IPaddress, m_players[U].portNo, &serv_buff);
                                    
@@ -702,6 +962,93 @@ void Game::startServer()
                                    }
                                           
                             }
+                            break;
+                            case 20:
+                                   m_turn=0;
+                                   shareObj();
+                                   sprintf(serv_buff.Tx,"G0");
+                                   printf("S: send to player %d: info player : %s\n",0,serv_buff.Tx);
+                                   write(serv_cpsfd,serv_buff.Tx,strlen(serv_buff.Tx));
+                                   
+                                   for(int i=0;i<m_nbPlayer;i++)
+                                   {
+                                          sprintf(serv_buff.Tx,"G%dC",20);
+                                          for(int j=0;j<12/m_nbPlayer;j++)
+                                                sprintf(serv_buff.Tx,"%s%d;",serv_buff.Tx,m_players[i].card[j]);
+
+                                          printf("S: send to player %d: info player : %s\n",i,serv_buff.Tx);
+                                          serv_buff.T_flag=1;
+                                          sendTCP(m_players[i].IPaddress, m_players[i].portNo, &serv_buff);
+                                   }
+                                   sprintf(serv_buff.Tx,"G%d",21);
+                                   serv_buff.T_flag=1;
+                                   sendTCP(m_players[0].IPaddress, m_players[0].portNo, &serv_buff);
+                                   
+                            break;
+                            case 21://GENPOLL
+                                   if(strcmp(m_players[m_turn].IPaddress,inet_ntoa(serv_clientAddr[0].sin_addr))==0)
+                                   {
+                                          int obj=atoi(strchr(serv_buff.Rx,'Q')+1);
+                                          sprintf(serv_buff.Tx,"G%dQ%dO",21,obj);
+                                          for(int i=0;i<m_nbPlayer;i++)
+                                          {
+                                                 int o=0;
+                                                 for(int j=0;j<12/m_nbPlayer;j++)
+                                                 {
+                                                        for(int k=0;k<3;k++) 
+                                                        {
+                                                               if(m_charactersArray[m_players[i].card[j]][k]==obj)  
+                                                                      o=1;  
+                                                        }      
+                                                 }
+                                                 sprintf(serv_buff.Tx,"%s%d;",serv_buff.Tx,o);
+                                          }
+
+                                          printf("S: send to player %d: info player : %s\n",m_turn,serv_buff.Tx);
+                                          serv_buff.T_flag=1;
+                                          sendTCP(m_players[m_turn].IPaddress, m_players[m_turn].portNo, &serv_buff);
+                                          m_turn=(m_turn+1)%m_nbPlayer;
+                                   }
+                                   
+                            case 22://INQUIRY
+                                   if(strcmp(m_players[m_turn].IPaddress,inet_ntoa(serv_clientAddr[0].sin_addr))==0)
+                                   {
+                                          int obj=atoi(strchr(serv_buff.Rx,'Q')+1);
+                                          int p=atoi(strchr(serv_buff.Rx,'P')+1);
+                                          
+                                          int o=0;
+                                          for(int j=0;j<12/m_nbPlayer;j++)
+                                          {
+                                                 for(int k=0;k<3;k++) 
+                                                 {
+                                                        if(m_charactersArray[m_players[p].card[j]][k]==obj)  
+                                                               o++;  
+                                                 }      
+                                          }
+                                          sprintf(serv_buff.Tx,"G%dP%dO%d",21,p,o);
+                                          
+
+                                          printf("S: send to player %d: info player : %s\n",m_turn,serv_buff.Tx);
+                                          serv_buff.T_flag=1;
+                                          sendTCP(m_players[m_turn].IPaddress, m_players[m_turn].portNo, &serv_buff);
+                                          m_turn=(m_turn+1)%m_nbPlayer;
+                                   }
+                                   
+                                   
+                            break;
+                            case 23://DENOUNCE
+                                   if(strcmp(m_players[m_turn].IPaddress,inet_ntoa(serv_clientAddr[0].sin_addr))==0)
+                                   {
+                                          int c=atoi(strchr(serv_buff.Rx,'C')+1);
+                                          if(c==m_culprit)
+                                          {
+                                                 //win
+                                          }
+                                          else
+                                          {
+                                                 //lose
+                                          }
+                                   }
                             break;
                      }
                      
@@ -799,15 +1146,16 @@ int Game::processBuffer()
 {
        if(m_buffer.R_flag==1)//double check if new stuff is to read 
        {
+              printf("G: Buffer: %s \n",m_buffer.Rx);
               switch(atoi(strchr(m_buffer.Rx,'G')+1))
               {
                      case 0:
                             printf("G: Nothing to do \n");
                      break;
-                     case 10:
-                     
+                     case 99:
+                     {
                             printf("G: You've been banned from the game'\n");
-                            m_state=LAN_MENU;
+                            m_state=MAIN_MENU;
                             createMenu();
                                 
                      break;
@@ -828,9 +1176,111 @@ int Game::processBuffer()
                             m_nbPlayer= no+1 ;
                             
                             createMenu();
-                                
+                     }
+                     break;
+                     
+                     case 20:
+                            printf("G: get my card\n");
+                            m_state=GAME_ONLINE;
+                            //my turn
+                     break;
+                     
+                     case 21:
+                            printf("G: My turn\n");//my turn
+                            
+                     break;
+                     
+                     case 22:
+                            //my turn
+                     break;
+                     
+                     case 23:
+                            //my turn
                      break;
               }
               m_buffer.R_flag=0;
        }
 }
+
+
+void Game::shareObj()
+{
+       int obj,objArray[13],nbo=1;
+       
+       obj=rand()%13;
+       objArray[0]=obj;
+       
+       while(nbo<13)
+       {
+              obj=rand()%13;
+              int i=0;
+              while(i<nbo)
+              {
+                     if(objArray[i]==obj)
+                            break;
+                     i++;
+                     if(i==nbo)
+                     {
+                            objArray[nbo++]=obj;
+                            break;
+                     }
+              }
+       }
+       
+       m_culprit=objArray[12];
+       
+       for(int i=0;i<m_nbPlayer;i++)
+              for(int j=0;j<12/m_nbPlayer;j++)
+                     m_players[i].card[j]=objArray[i*12/m_nbPlayer+j];
+                     
+       for(int i=0;i<m_nbPlayer;i++)
+              for(int j=0;j<12/m_nbPlayer;j++)
+                     printf("P%d:%d\n",i,m_players[i].card[j]);
+}
+
+ 
+       /*
+       Texture textureIcon;
+       Sprite icon;
+       if (!textureIcon.loadFromFile("media/icons/SH13_icon0_120x120.png", sf::IntRect(0, 0, 300, 198)))
+       {
+           // erreur...
+       }
+       icon.setTexture(textureIcon);
+       icon.setScale(0.3,0.3);
+       icon.setPosition(Vector2f(250,70));
+       Texture texture;
+       if (!texture.loadFromFile("media/theme/wood.png", sf::IntRect(0, 0, 230, 100)))
+       {
+           // erreur...
+       }
+       if (!font.loadFromFile(GAME_FONT_BUTTON))
+       {
+           // erreur...
+       }
+       for(int i=0;i<4;i++)
+       {
+              playerPlateSprites.push_back(new Sprite);
+              playerPlateSprites[i]->setTexture(texture);
+              playerPlateSprites[i]->setPosition(Vector2f(10,70+110*i));
+              
+              labelPlayerName.push_back(new Text);
+              labelPlayerName[i]->setFont(font);
+              labelPlayerName[i]->setString("NAME:");
+              labelPlayerName[i]->setCharacterSize(20);
+              labelPlayerName[i]->setPosition(Vector2f(20,80+110*i));
+              labelPlayerName[i]->setColor(Color(255,255,255));
+              
+              labelPlayerIP.push_back(new Text);
+              labelPlayerIP[i]->setFont(font);
+              labelPlayerIP[i]->setString("IP ADDR.:");
+              labelPlayerIP[i]->setCharacterSize(10);
+              labelPlayerIP[i]->setPosition(Vector2f(20,110+110*i));
+              labelPlayerIP[i]->setColor(Color(255,255,255));
+       }*/
+
+
+
+
+
+

@@ -3,14 +3,19 @@
 
 #define SIZE_BUFF 256
 
-/*! \file offline.h
-    \brief offline related functions descriptions.
-    \author Maeva Arlandis et Alexis Devillard
+/*! \file netlib.h
+    \brief TCP communication functions
+    \author Alexis Devillard
     \version 6.2
-    \date 10 janvier 2017
+    \date 30 janvier 2018
 */
 
-
+/**
+ * \struct _Buffer
+ * \brief Structures of transmission and reception buffers.
+ *
+ * _Buffer make easier the process of transmission and emmission with a systeme of flag.
+ */
 typedef struct _Buffer{//the buffer
        
 	char Rx[SIZE_BUFF]; /**< buffer of data received */
@@ -18,21 +23,22 @@ typedef struct _Buffer{//the buffer
        int R_port; /**< The port were it received data. */
        
        char Tx[SIZE_BUFF]; /**< buffer of data sent */
-       char T_flag;  /**< sent flag */
+       char T_flag;  /**< transmission flag */
        	
 	
 }Buffer;
 
+/**
+ * \struct _Server
+ * \brief Structure of different data link to severs.
+ */
 typedef struct _Server {
 
-	char name[16];
-	char IPaddress[16];
-	int  portNo;
+	char name[16];/**< name of the server */
+	char IPaddress[16];/**< IP address of the server */
+	int  portNo;/**< Port of the server */
 	
-	int nbPlayers;
-	
-	
-	
+	int nbPlayers;/**< Number of player in the server */
 }Server;
 
 
@@ -42,6 +48,11 @@ typedef struct _Server {
     \param port the port of the destinaion.
 */
 int sendTCP(const char *IPaddress,int port, Buffer *buff);
+
+/*! \fn scanServers(Server servers[5]);
+    \brief Scan the different IP address and store the servers sh13 found inside the servers array passed in argument. 
+    \param server[5] Arrays of servers found.
+*/
 int scanServers(Server servers[5]);
 
 #endif 	  

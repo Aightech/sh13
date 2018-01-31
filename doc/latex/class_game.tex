@@ -1,38 +1,461 @@
 \hypertarget{class_game}{}\section{Game Class Reference}
 \label{class_game}\index{Game@{Game}}
+
+
+This class represent the game application. It owns the different methods running the game.  
+
+
+
+
+{\ttfamily \#include $<$gamelib.\+hpp$>$}
+
+
+
+Collaboration diagram for Game\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=338pt]{class_game__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void {\bfseries init} ()\hypertarget{class_game_a6f3a33940524b6ba9d83f627ccb14bbf}{}\label{class_game_a6f3a33940524b6ba9d83f627ccb14bbf}
-
+\hyperlink{class_game_ad59df6562a58a614fda24622d3715b65}{Game} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_game_ae3d112ca6e0e55150d2fdbc704474530}{$\sim$\+Game} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_game_a6f3a33940524b6ba9d83f627ccb14bbf}{init} ()
+\begin{DoxyCompactList}\small\item\em Initialization methode. Some parametere are initialize inside. \end{DoxyCompactList}\item 
+void \hyperlink{class_game_a463932fa7ca2f1ce243279bf2422fc48}{menu} ()
+\begin{DoxyCompactList}\small\item\em Process the \textquotesingle{}menu\textquotesingle{} state of the game. It\textquotesingle{}s mainly a event loop. \end{DoxyCompactList}\item 
+int \hyperlink{class_game_a80324d4742c70ca5b52171382cfb2327}{get\+State} ()
+\begin{DoxyCompactList}\small\item\em Accessor method to get the state of the game from the main loop. \end{DoxyCompactList}\item 
+void \hyperlink{class_game_adc94b469c429df61f845891b45805061}{online\+Game} ()
+\begin{DoxyCompactList}\small\item\em launch an online game. The game have to be setted (through \hyperlink{class_game_a463932fa7ca2f1ce243279bf2422fc48}{menu()} ) \end{DoxyCompactList}\item 
+int \hyperlink{class_game_ac978133ca5e0a54ab72f8c1da13e9fbd}{is\+My\+Turn} ()
+\begin{DoxyCompactList}\small\item\em Accessor method to get the turn of the game from the main loop. \end{DoxyCompactList}\item 
+int \hyperlink{class_game_a6e10e827638cabd577ce12ab68497d31}{is\+Host} ()
+\begin{DoxyCompactList}\small\item\em Accessor method to get the host of the game from the main loop. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
 \item 
-void {\bfseries create\+Menu} ()\hypertarget{class_game_a3bce2a9f8f79bd9ce6878a1afd51994d}{}\label{class_game_a3bce2a9f8f79bd9ce6878a1afd51994d}
-
+void \hyperlink{class_game_a3bce2a9f8f79bd9ce6878a1afd51994d}{create\+Menu} ()
+\begin{DoxyCompactList}\small\item\em Generate the graphics of the different menu\textquotesingle{}s states of the game. It\textquotesingle{}s mainly S\+F\+ML sprites/\+Text/\+Buttons creation. \end{DoxyCompactList}\item 
+void \hyperlink{class_game_a4e497a8b5bf1e585a66324f4884f055b}{create\+Game\+Context} ()
+\begin{DoxyCompactList}\small\item\em Generate the graphics of the different game\textquotesingle{}s states of the game. It\textquotesingle{}s mainly S\+F\+ML sprites/\+Text/\+Buttons creation. \end{DoxyCompactList}\item 
+void \hyperlink{class_game_aed51d3d3760d9c052cdf33144ead0fba}{start\+Server} ()
+\begin{DoxyCompactList}\small\item\em Launch a sh13 server. \end{DoxyCompactList}\item 
+int \hyperlink{class_game_a087cbce66aa1586d8da688c67755c641}{process\+Buffer} ()
+\begin{DoxyCompactList}\small\item\em Process a buffer filled by the tcp thread. \end{DoxyCompactList}\item 
+int \hyperlink{class_game_a4cbb03c1c0cd47feb713ba9883654ab3}{set\+Player} (int no, char $\ast$name, char $\ast$I\+Paddr, int port)
+\begin{DoxyCompactList}\small\item\em Set new data in the players array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
 \item 
-void {\bfseries menu} ()\hypertarget{class_game_a463932fa7ca2f1ce243279bf2422fc48}{}\label{class_game_a463932fa7ca2f1ce243279bf2422fc48}
-
+static void $\ast$ \hyperlink{class_game_a1de7811d3b61dcf66cc4371200b3f64a}{tcp\+Watchdog} (void $\ast$p\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Process the different connection to the client and fill up a shared buffer with incomming data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
 \item 
-int {\bfseries get\+State} ()\hypertarget{class_game_a80324d4742c70ca5b52171382cfb2327}{}\label{class_game_a80324d4742c70ca5b52171382cfb2327}
-
+int \hyperlink{class_game_afeb6f705821e63812c7479d05c0c8447}{serv\+\_\+port\+No}
 \item 
-void {\bfseries online\+Game} ()\hypertarget{class_game_adc94b469c429df61f845891b45805061}{}\label{class_game_adc94b469c429df61f845891b45805061}
-
+int \hyperlink{class_game_a90aab94315524e741e90fb8e29cbe8dd}{serv\+\_\+client\+Port\+No} \mbox{[}4\mbox{]}
 \item 
-void {\bfseries create\+Game\+Context} ()\hypertarget{class_game_a4e497a8b5bf1e585a66324f4884f055b}{}\label{class_game_a4e497a8b5bf1e585a66324f4884f055b}
-
+char \hyperlink{class_game_a4f7f8e29dc9f799e221a38493c7d43ca}{serv\+\_\+client\+I\+P\+Addr} \mbox{[}4\mbox{]}\mbox{[}16\mbox{]}
 \item 
-int {\bfseries is\+My\+Turn} ()\hypertarget{class_game_ac978133ca5e0a54ab72f8c1da13e9fbd}{}\label{class_game_ac978133ca5e0a54ab72f8c1da13e9fbd}
-
+int \hyperlink{class_game_ac698cf1904287abc3021f0b6fa7411a4}{serv\+\_\+sfd}
 \item 
-int {\bfseries is\+Host} ()\hypertarget{class_game_a6e10e827638cabd577ce12ab68497d31}{}\label{class_game_a6e10e827638cabd577ce12ab68497d31}
-
+int \hyperlink{class_game_aa1c8c267903168ca92facc373399531b}{serv\+\_\+cpsfd}
 \item 
-void {\bfseries start\+Server} ()\hypertarget{class_game_aed51d3d3760d9c052cdf33144ead0fba}{}\label{class_game_aed51d3d3760d9c052cdf33144ead0fba}
-
+struct sockaddr\+\_\+in \hyperlink{class_game_adbda5d55bf70435c7f4bcbe27af49dcc}{serv\+\_\+addr}
+\item 
+struct sockaddr\+\_\+in \hyperlink{class_game_aad42b135b7c7c3fcb96a5faa6ecd086a}{serv\+\_\+client\+Addr} \mbox{[}4\mbox{]}
+\item 
+socklen\+\_\+t \hyperlink{class_game_a4a261876196ef61c4808c3e34a06e0b1}{serv\+\_\+clilen}
+\item 
+\hyperlink{netlib_8hpp_a2e50028ebd48ce86d5b1fc983d6ef155}{Buffer} \hyperlink{class_game_a38fa2f0f4350dfa47bd85fd13e3e558c}{serv\+\_\+buff}
+\item 
+float \hyperlink{class_game_ace6d6f7c808735dabb0e4d46e9f95495}{time}
+\item 
+int \hyperlink{class_game_aa6fd7fa82d311756848b0e6fe3e636ee}{m\+\_\+state}
+\item 
+int \hyperlink{class_game_a9442e9eb5eacee1fd1bac6ab9e0737dc}{m\+\_\+turn}
+\item 
+int \hyperlink{class_game_ad1bcd562d4abde5c4c4cba9d3ce65113}{m\+\_\+my\+No}
+\item 
+int \hyperlink{class_game_ae668e9c38c6d79fd8115ba23983ffdd6}{m\+\_\+host}
+\item 
+\hyperlink{netlib_8hpp_a2e50028ebd48ce86d5b1fc983d6ef155}{Buffer} \hyperlink{class_game_a82c4007d09ac390cb7f783868f7b6279}{m\+\_\+buffer}
+\item 
+pthread\+\_\+t \hyperlink{class_game_a0d5f7576bfcb537e6b13faa3712e6c70}{m\+\_\+thread\+\_\+server}
+\item 
+\hyperlink{netlib_8hpp_a95e7ffbda40674e59bb208b9c6c9a22a}{Server} \hyperlink{class_game_ae5ed3302bc0b3e8b25aca8437cf4a9fa}{m\+\_\+servers} \mbox{[}5\mbox{]}
+\item 
+int \hyperlink{class_game_a7d466d7035c178e0bda6213097a5494e}{m\+\_\+server}
+\item 
+int \hyperlink{class_game_a8ece0b988b3b61990806f15c85a696cd}{m\+\_\+nb\+Of\+Servers}
+\item 
+int \hyperlink{class_game_aa5ecceb630ef75f3a2098c14aa32bdf6}{m\+\_\+nb\+Player}
+\item 
+\hyperlink{gamelib_8hpp_af30e2030635a69690f85e48bc6ef202f}{Player} \hyperlink{class_game_a38d250490b02207c472dabff033b2698}{m\+\_\+players} \mbox{[}4\mbox{]}
+\item 
+Texture \hyperlink{class_game_a1598f69be155189c3bb11085f1c09941}{m\+\_\+array\+Connection\+Texture}
+\item 
+vector$<$ Sprite $\ast$ $>$ \hyperlink{class_game_abf146b48291f9181101f3e9f64fc79fd}{m\+\_\+array\+Sprites}
+\item 
+vector$<$ Text $\ast$ $>$ \hyperlink{class_game_af0962fd29c65da3b252af011b97112c7}{m\+\_\+array\+Text}
+\item 
+char \hyperlink{class_game_aaad584aa5af55ff622aed20b100e84b6}{m\+\_\+array\+Players\+Names} \mbox{[}4\mbox{]}\mbox{[}20\mbox{]}
+\item 
+char \hyperlink{class_game_a07b6b5690df46f10f6162af2d0448a82}{m\+\_\+array\+Players\+I\+Paddr} \mbox{[}4\mbox{]}\mbox{[}20\mbox{]}
+\item 
+int \hyperlink{class_game_a5725f31c673785a45c5a6c37433ba253}{m\+\_\+array\+Players\+Port} \mbox{[}4\mbox{]}
+\item 
+Render\+Window \hyperlink{class_game_a8773f0f2562575ce000b0a6abb6c87ed}{window}
+\item 
+Text \hyperlink{class_game_ac6f5762c0f546512838893970fd9436e}{m\+\_\+title}
+\item 
+Font \hyperlink{class_game_a2141a4a7b82e11a9c4f4dd1ec62bb0eb}{m\+\_\+font}
+\item 
+Texture \hyperlink{class_game_acd7b0bcfc0ef3d114455432d2fe8e137}{m\+\_\+button\+Texture}
+\item 
+\hyperlink{class_button}{Button} \hyperlink{class_game_a16e92942e7362adb169b98e56e59aa0e}{button}
+\item 
+vector$<$ \hyperlink{class_button}{Button} $\ast$ $>$ \hyperlink{class_game_ae699e93a493eb14c7009054c5ddab8d7}{buttons}
+\item 
+Vector2i \hyperlink{class_game_a5caae82a187e433175a08de88a17b4db}{ms\+Pos}
+\item 
+vector$<$ Texture $\ast$ $>$ \hyperlink{class_game_a9ce381e463f20cfa4b02e7883a911562}{perso\+Textures}
+\item 
+vector$<$ Sprite $\ast$ $>$ \hyperlink{class_game_a2e6e306ff053106fef09e037c8d1e6ba}{perso\+Sprites}
+\item 
+vector$<$ Sprite $\ast$ $>$ \hyperlink{class_game_ae97b872af441bf853ee3af3129cba962}{player\+Plate\+Sprites}
+\item 
+vector$<$ Text $\ast$ $>$ \hyperlink{class_game_a5cecd29f9b4f439703dd67331a9a7d1d}{label\+Player\+Name}
+\item 
+vector$<$ Text $\ast$ $>$ \hyperlink{class_game_a8d9bb8f6fa70f8377a1c1c9e8de04d05}{label\+Player\+IP}
+\item 
+vector$<$ Texture $\ast$ $>$ \hyperlink{class_game_a40e4eab46df384695bc73ff0f36b171f}{icons\+Textures}
+\item 
+vector$<$ Sprite $\ast$ $>$ \hyperlink{class_game_a4f4ef83dc173252517c1e91667bd6239}{icons\+Sprites}
+\item 
+Font \hyperlink{class_game_aa9c5aff719d0bde89121da263e9c1b1c}{font}
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class represent the game application. It owns the different methods running the game. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Game@{Game}!Game@{Game}}
+\index{Game@{Game}!Game@{Game}}
+\subsubsection[{\texorpdfstring{Game()}{Game()}}]{\setlength{\rightskip}{0pt plus 5cm}Game\+::\+Game (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_game_ad59df6562a58a614fda24622d3715b65}{}\label{class_game_ad59df6562a58a614fda24622d3715b65}
+
+
+Constructor. 
+
+\index{Game@{Game}!````~Game@{$\sim$\+Game}}
+\index{````~Game@{$\sim$\+Game}!Game@{Game}}
+\subsubsection[{\texorpdfstring{$\sim$\+Game()}{~Game()}}]{\setlength{\rightskip}{0pt plus 5cm}Game\+::$\sim$\+Game (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_game_ae3d112ca6e0e55150d2fdbc704474530}{}\label{class_game_ae3d112ca6e0e55150d2fdbc704474530}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Game@{Game}!create\+Game\+Context@{create\+Game\+Context}}
+\index{create\+Game\+Context@{create\+Game\+Context}!Game@{Game}}
+\subsubsection[{\texorpdfstring{create\+Game\+Context()}{createGameContext()}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+::create\+Game\+Context (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a4e497a8b5bf1e585a66324f4884f055b}{}\label{class_game_a4e497a8b5bf1e585a66324f4884f055b}
+
+
+Generate the graphics of the different game\textquotesingle{}s states of the game. It\textquotesingle{}s mainly S\+F\+ML sprites/\+Text/\+Buttons creation. 
+
+\index{Game@{Game}!create\+Menu@{create\+Menu}}
+\index{create\+Menu@{create\+Menu}!Game@{Game}}
+\subsubsection[{\texorpdfstring{create\+Menu()}{createMenu()}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+::create\+Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a3bce2a9f8f79bd9ce6878a1afd51994d}{}\label{class_game_a3bce2a9f8f79bd9ce6878a1afd51994d}
+
+
+Generate the graphics of the different menu\textquotesingle{}s states of the game. It\textquotesingle{}s mainly S\+F\+ML sprites/\+Text/\+Buttons creation. 
+
+\index{Game@{Game}!get\+State@{get\+State}}
+\index{get\+State@{get\+State}!Game@{Game}}
+\subsubsection[{\texorpdfstring{get\+State()}{getState()}}]{\setlength{\rightskip}{0pt plus 5cm}int Game\+::get\+State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_game_a80324d4742c70ca5b52171382cfb2327}{}\label{class_game_a80324d4742c70ca5b52171382cfb2327}
+
+
+Accessor method to get the state of the game from the main loop. 
+
+\index{Game@{Game}!init@{init}}
+\index{init@{init}!Game@{Game}}
+\subsubsection[{\texorpdfstring{init()}{init()}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_game_a6f3a33940524b6ba9d83f627ccb14bbf}{}\label{class_game_a6f3a33940524b6ba9d83f627ccb14bbf}
+
+
+Initialization methode. Some parametere are initialize inside. 
+
+\index{Game@{Game}!is\+Host@{is\+Host}}
+\index{is\+Host@{is\+Host}!Game@{Game}}
+\subsubsection[{\texorpdfstring{is\+Host()}{isHost()}}]{\setlength{\rightskip}{0pt plus 5cm}int Game\+::is\+Host (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_game_a6e10e827638cabd577ce12ab68497d31}{}\label{class_game_a6e10e827638cabd577ce12ab68497d31}
+
+
+Accessor method to get the host of the game from the main loop. 
+
+\index{Game@{Game}!is\+My\+Turn@{is\+My\+Turn}}
+\index{is\+My\+Turn@{is\+My\+Turn}!Game@{Game}}
+\subsubsection[{\texorpdfstring{is\+My\+Turn()}{isMyTurn()}}]{\setlength{\rightskip}{0pt plus 5cm}int Game\+::is\+My\+Turn (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_game_ac978133ca5e0a54ab72f8c1da13e9fbd}{}\label{class_game_ac978133ca5e0a54ab72f8c1da13e9fbd}
+
+
+Accessor method to get the turn of the game from the main loop. 
+
+\index{Game@{Game}!menu@{menu}}
+\index{menu@{menu}!Game@{Game}}
+\subsubsection[{\texorpdfstring{menu()}{menu()}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+::menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_game_a463932fa7ca2f1ce243279bf2422fc48}{}\label{class_game_a463932fa7ca2f1ce243279bf2422fc48}
+
+
+Process the \textquotesingle{}menu\textquotesingle{} state of the game. It\textquotesingle{}s mainly a event loop. 
+
+\index{Game@{Game}!online\+Game@{online\+Game}}
+\index{online\+Game@{online\+Game}!Game@{Game}}
+\subsubsection[{\texorpdfstring{online\+Game()}{onlineGame()}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+::online\+Game (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_game_adc94b469c429df61f845891b45805061}{}\label{class_game_adc94b469c429df61f845891b45805061}
+
+
+launch an online game. The game have to be setted (through \hyperlink{class_game_a463932fa7ca2f1ce243279bf2422fc48}{menu()} ) 
+
+\index{Game@{Game}!process\+Buffer@{process\+Buffer}}
+\index{process\+Buffer@{process\+Buffer}!Game@{Game}}
+\subsubsection[{\texorpdfstring{process\+Buffer()}{processBuffer()}}]{\setlength{\rightskip}{0pt plus 5cm}int Game\+::process\+Buffer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a087cbce66aa1586d8da688c67755c641}{}\label{class_game_a087cbce66aa1586d8da688c67755c641}
+
+
+Process a buffer filled by the tcp thread. 
+
+\index{Game@{Game}!set\+Player@{set\+Player}}
+\index{set\+Player@{set\+Player}!Game@{Game}}
+\subsubsection[{\texorpdfstring{set\+Player(int no, char $\ast$name, char $\ast$\+I\+Paddr, int port)}{setPlayer(int no, char *name, char *IPaddr, int port)}}]{\setlength{\rightskip}{0pt plus 5cm}int Game\+::set\+Player (
+\begin{DoxyParamCaption}
+\item[{int}]{no, }
+\item[{char $\ast$}]{name, }
+\item[{char $\ast$}]{I\+Paddr, }
+\item[{int}]{port}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a4cbb03c1c0cd47feb713ba9883654ab3}{}\label{class_game_a4cbb03c1c0cd47feb713ba9883654ab3}
+
+
+Set new data in the players array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em no} & \+: the numero of the player. \\
+\hline
+{\em name} & \+: the name of the player. \\
+\hline
+{\em I\+Paddr} & \+: the IP address of the player. \\
+\hline
+{\em port} & \+: the port of the player. \\
+\hline
+\end{DoxyParams}
+\index{Game@{Game}!start\+Server@{start\+Server}}
+\index{start\+Server@{start\+Server}!Game@{Game}}
+\subsubsection[{\texorpdfstring{start\+Server()}{startServer()}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+::start\+Server (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_aed51d3d3760d9c052cdf33144ead0fba}{}\label{class_game_aed51d3d3760d9c052cdf33144ead0fba}
+
+
+Launch a sh13 server. 
+
+\index{Game@{Game}!tcp\+Watchdog@{tcp\+Watchdog}}
+\index{tcp\+Watchdog@{tcp\+Watchdog}!Game@{Game}}
+\subsubsection[{\texorpdfstring{tcp\+Watchdog(void $\ast$p\+\_\+data)}{tcpWatchdog(void *p_data)}}]{\setlength{\rightskip}{0pt plus 5cm}void $\ast$ Game\+::tcp\+Watchdog (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{p\+\_\+data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{class_game_a1de7811d3b61dcf66cc4371200b3f64a}{}\label{class_game_a1de7811d3b61dcf66cc4371200b3f64a}
+
+
+Process the different connection to the client and fill up a shared buffer with incomming data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+data} & \+: the shared buffer. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Game@{Game}!button@{button}}
+\index{button@{button}!Game@{Game}}
+\subsubsection[{\texorpdfstring{button}{button}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Button} Game\+::button\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a16e92942e7362adb169b98e56e59aa0e}{}\label{class_game_a16e92942e7362adb169b98e56e59aa0e}
+\index{Game@{Game}!buttons@{buttons}}
+\index{buttons@{buttons}!Game@{Game}}
+\subsubsection[{\texorpdfstring{buttons}{buttons}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf Button} $\ast$$>$ Game\+::buttons\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_ae699e93a493eb14c7009054c5ddab8d7}{}\label{class_game_ae699e93a493eb14c7009054c5ddab8d7}
+\index{Game@{Game}!font@{font}}
+\index{font@{font}!Game@{Game}}
+\subsubsection[{\texorpdfstring{font}{font}}]{\setlength{\rightskip}{0pt plus 5cm}Font Game\+::font\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_aa9c5aff719d0bde89121da263e9c1b1c}{}\label{class_game_aa9c5aff719d0bde89121da263e9c1b1c}
+\index{Game@{Game}!icons\+Sprites@{icons\+Sprites}}
+\index{icons\+Sprites@{icons\+Sprites}!Game@{Game}}
+\subsubsection[{\texorpdfstring{icons\+Sprites}{iconsSprites}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$Sprite$\ast$$>$ Game\+::icons\+Sprites\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a4f4ef83dc173252517c1e91667bd6239}{}\label{class_game_a4f4ef83dc173252517c1e91667bd6239}
+\index{Game@{Game}!icons\+Textures@{icons\+Textures}}
+\index{icons\+Textures@{icons\+Textures}!Game@{Game}}
+\subsubsection[{\texorpdfstring{icons\+Textures}{iconsTextures}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$Texture$\ast$$>$ Game\+::icons\+Textures\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a40e4eab46df384695bc73ff0f36b171f}{}\label{class_game_a40e4eab46df384695bc73ff0f36b171f}
+\index{Game@{Game}!label\+Player\+IP@{label\+Player\+IP}}
+\index{label\+Player\+IP@{label\+Player\+IP}!Game@{Game}}
+\subsubsection[{\texorpdfstring{label\+Player\+IP}{labelPlayerIP}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$Text$\ast$$>$ Game\+::label\+Player\+IP\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a8d9bb8f6fa70f8377a1c1c9e8de04d05}{}\label{class_game_a8d9bb8f6fa70f8377a1c1c9e8de04d05}
+\index{Game@{Game}!label\+Player\+Name@{label\+Player\+Name}}
+\index{label\+Player\+Name@{label\+Player\+Name}!Game@{Game}}
+\subsubsection[{\texorpdfstring{label\+Player\+Name}{labelPlayerName}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$Text$\ast$$>$ Game\+::label\+Player\+Name\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a5cecd29f9b4f439703dd67331a9a7d1d}{}\label{class_game_a5cecd29f9b4f439703dd67331a9a7d1d}
+\index{Game@{Game}!m\+\_\+array\+Connection\+Texture@{m\+\_\+array\+Connection\+Texture}}
+\index{m\+\_\+array\+Connection\+Texture@{m\+\_\+array\+Connection\+Texture}!Game@{Game}}
+\subsubsection[{\texorpdfstring{m\+\_\+array\+Connection\+Texture}{m_arrayConnectionTexture}}]{\setlength{\rightskip}{0pt plus 5cm}Texture Game\+::m\+\_\+array\+Connection\+Texture\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a1598f69be155189c3bb11085f1c09941}{}\label{class_game_a1598f69be155189c3bb11085f1c09941}
+\index{Game@{Game}!m\+\_\+array\+Players\+I\+Paddr@{m\+\_\+array\+Players\+I\+Paddr}}
+\index{m\+\_\+array\+Players\+I\+Paddr@{m\+\_\+array\+Players\+I\+Paddr}!Game@{Game}}
+\subsubsection[{\texorpdfstring{m\+\_\+array\+Players\+I\+Paddr}{m_arrayPlayersIPaddr}}]{\setlength{\rightskip}{0pt plus 5cm}char Game\+::m\+\_\+array\+Players\+I\+Paddr\mbox{[}4\mbox{]}\mbox{[}20\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a07b6b5690df46f10f6162af2d0448a82}{}\label{class_game_a07b6b5690df46f10f6162af2d0448a82}
+\index{Game@{Game}!m\+\_\+array\+Players\+Names@{m\+\_\+array\+Players\+Names}}
+\index{m\+\_\+array\+Players\+Names@{m\+\_\+array\+Players\+Names}!Game@{Game}}
+\subsubsection[{\texorpdfstring{m\+\_\+array\+Players\+Names}{m_arrayPlayersNames}}]{\setlength{\rightskip}{0pt plus 5cm}char Game\+::m\+\_\+array\+Players\+Names\mbox{[}4\mbox{]}\mbox{[}20\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_aaad584aa5af55ff622aed20b100e84b6}{}\label{class_game_aaad584aa5af55ff622aed20b100e84b6}
+\index{Game@{Game}!m\+\_\+array\+Players\+Port@{m\+\_\+array\+Players\+Port}}
+\index{m\+\_\+array\+Players\+Port@{m\+\_\+array\+Players\+Port}!Game@{Game}}
+\subsubsection[{\texorpdfstring{m\+\_\+array\+Players\+Port}{m_arrayPlayersPort}}]{\setlength{\rightskip}{0pt plus 5cm}int Game\+::m\+\_\+array\+Players\+Port\mbox{[}4\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a5725f31c673785a45c5a6c37433ba253}{}\label{class_game_a5725f31c673785a45c5a6c37433ba253}
+\index{Game@{Game}!m\+\_\+array\+Sprites@{m\+\_\+array\+Sprites}}
+\index{m\+\_\+array\+Sprites@{m\+\_\+array\+Sprites}!Game@{Game}}
+\subsubsection[{\texorpdfstring{m\+\_\+array\+Sprites}{m_arraySprites}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$Sprite$\ast$$>$ Game\+::m\+\_\+array\+Sprites\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_abf146b48291f9181101f3e9f64fc79fd}{}\label{class_game_abf146b48291f9181101f3e9f64fc79fd}
+\index{Game@{Game}!m\+\_\+array\+Text@{m\+\_\+array\+Text}}
+\index{m\+\_\+array\+Text@{m\+\_\+array\+Text}!Game@{Game}}
+\subsubsection[{\texorpdfstring{m\+\_\+array\+Text}{m_arrayText}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$Text$\ast$$>$ Game\+::m\+\_\+array\+Text\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_af0962fd29c65da3b252af011b97112c7}{}\label{class_game_af0962fd29c65da3b252af011b97112c7}
+\index{Game@{Game}!m\+\_\+buffer@{m\+\_\+buffer}}
+\index{m\+\_\+buffer@{m\+\_\+buffer}!Game@{Game}}
+\subsubsection[{\texorpdfstring{m\+\_\+buffer}{m_buffer}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Buffer} Game\+::m\+\_\+buffer\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a82c4007d09ac390cb7f783868f7b6279}{}\label{class_game_a82c4007d09ac390cb7f783868f7b6279}
+\index{Game@{Game}!m\+\_\+button\+Texture@{m\+\_\+button\+Texture}}
+\index{m\+\_\+button\+Texture@{m\+\_\+button\+Texture}!Game@{Game}}
+\subsubsection[{\texorpdfstring{m\+\_\+button\+Texture}{m_buttonTexture}}]{\setlength{\rightskip}{0pt plus 5cm}Texture Game\+::m\+\_\+button\+Texture\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_acd7b0bcfc0ef3d114455432d2fe8e137}{}\label{class_game_acd7b0bcfc0ef3d114455432d2fe8e137}
+\index{Game@{Game}!m\+\_\+font@{m\+\_\+font}}
+\index{m\+\_\+font@{m\+\_\+font}!Game@{Game}}
+\subsubsection[{\texorpdfstring{m\+\_\+font}{m_font}}]{\setlength{\rightskip}{0pt plus 5cm}Font Game\+::m\+\_\+font\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a2141a4a7b82e11a9c4f4dd1ec62bb0eb}{}\label{class_game_a2141a4a7b82e11a9c4f4dd1ec62bb0eb}
+\index{Game@{Game}!m\+\_\+host@{m\+\_\+host}}
+\index{m\+\_\+host@{m\+\_\+host}!Game@{Game}}
+\subsubsection[{\texorpdfstring{m\+\_\+host}{m_host}}]{\setlength{\rightskip}{0pt plus 5cm}int Game\+::m\+\_\+host\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_ae668e9c38c6d79fd8115ba23983ffdd6}{}\label{class_game_ae668e9c38c6d79fd8115ba23983ffdd6}
+\index{Game@{Game}!m\+\_\+my\+No@{m\+\_\+my\+No}}
+\index{m\+\_\+my\+No@{m\+\_\+my\+No}!Game@{Game}}
+\subsubsection[{\texorpdfstring{m\+\_\+my\+No}{m_myNo}}]{\setlength{\rightskip}{0pt plus 5cm}int Game\+::m\+\_\+my\+No\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_ad1bcd562d4abde5c4c4cba9d3ce65113}{}\label{class_game_ad1bcd562d4abde5c4c4cba9d3ce65113}
+\index{Game@{Game}!m\+\_\+nb\+Of\+Servers@{m\+\_\+nb\+Of\+Servers}}
+\index{m\+\_\+nb\+Of\+Servers@{m\+\_\+nb\+Of\+Servers}!Game@{Game}}
+\subsubsection[{\texorpdfstring{m\+\_\+nb\+Of\+Servers}{m_nbOfServers}}]{\setlength{\rightskip}{0pt plus 5cm}int Game\+::m\+\_\+nb\+Of\+Servers\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a8ece0b988b3b61990806f15c85a696cd}{}\label{class_game_a8ece0b988b3b61990806f15c85a696cd}
+\index{Game@{Game}!m\+\_\+nb\+Player@{m\+\_\+nb\+Player}}
+\index{m\+\_\+nb\+Player@{m\+\_\+nb\+Player}!Game@{Game}}
+\subsubsection[{\texorpdfstring{m\+\_\+nb\+Player}{m_nbPlayer}}]{\setlength{\rightskip}{0pt plus 5cm}int Game\+::m\+\_\+nb\+Player\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_aa5ecceb630ef75f3a2098c14aa32bdf6}{}\label{class_game_aa5ecceb630ef75f3a2098c14aa32bdf6}
+\index{Game@{Game}!m\+\_\+players@{m\+\_\+players}}
+\index{m\+\_\+players@{m\+\_\+players}!Game@{Game}}
+\subsubsection[{\texorpdfstring{m\+\_\+players}{m_players}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Player} Game\+::m\+\_\+players\mbox{[}4\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a38d250490b02207c472dabff033b2698}{}\label{class_game_a38d250490b02207c472dabff033b2698}
+\index{Game@{Game}!m\+\_\+server@{m\+\_\+server}}
+\index{m\+\_\+server@{m\+\_\+server}!Game@{Game}}
+\subsubsection[{\texorpdfstring{m\+\_\+server}{m_server}}]{\setlength{\rightskip}{0pt plus 5cm}int Game\+::m\+\_\+server\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a7d466d7035c178e0bda6213097a5494e}{}\label{class_game_a7d466d7035c178e0bda6213097a5494e}
+\index{Game@{Game}!m\+\_\+servers@{m\+\_\+servers}}
+\index{m\+\_\+servers@{m\+\_\+servers}!Game@{Game}}
+\subsubsection[{\texorpdfstring{m\+\_\+servers}{m_servers}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Server} Game\+::m\+\_\+servers\mbox{[}5\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_ae5ed3302bc0b3e8b25aca8437cf4a9fa}{}\label{class_game_ae5ed3302bc0b3e8b25aca8437cf4a9fa}
+\index{Game@{Game}!m\+\_\+state@{m\+\_\+state}}
+\index{m\+\_\+state@{m\+\_\+state}!Game@{Game}}
+\subsubsection[{\texorpdfstring{m\+\_\+state}{m_state}}]{\setlength{\rightskip}{0pt plus 5cm}int Game\+::m\+\_\+state\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_aa6fd7fa82d311756848b0e6fe3e636ee}{}\label{class_game_aa6fd7fa82d311756848b0e6fe3e636ee}
+\index{Game@{Game}!m\+\_\+thread\+\_\+server@{m\+\_\+thread\+\_\+server}}
+\index{m\+\_\+thread\+\_\+server@{m\+\_\+thread\+\_\+server}!Game@{Game}}
+\subsubsection[{\texorpdfstring{m\+\_\+thread\+\_\+server}{m_thread_server}}]{\setlength{\rightskip}{0pt plus 5cm}pthread\+\_\+t Game\+::m\+\_\+thread\+\_\+server\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a0d5f7576bfcb537e6b13faa3712e6c70}{}\label{class_game_a0d5f7576bfcb537e6b13faa3712e6c70}
+\index{Game@{Game}!m\+\_\+title@{m\+\_\+title}}
+\index{m\+\_\+title@{m\+\_\+title}!Game@{Game}}
+\subsubsection[{\texorpdfstring{m\+\_\+title}{m_title}}]{\setlength{\rightskip}{0pt plus 5cm}Text Game\+::m\+\_\+title\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_ac6f5762c0f546512838893970fd9436e}{}\label{class_game_ac6f5762c0f546512838893970fd9436e}
+\index{Game@{Game}!m\+\_\+turn@{m\+\_\+turn}}
+\index{m\+\_\+turn@{m\+\_\+turn}!Game@{Game}}
+\subsubsection[{\texorpdfstring{m\+\_\+turn}{m_turn}}]{\setlength{\rightskip}{0pt plus 5cm}int Game\+::m\+\_\+turn\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a9442e9eb5eacee1fd1bac6ab9e0737dc}{}\label{class_game_a9442e9eb5eacee1fd1bac6ab9e0737dc}
+\index{Game@{Game}!ms\+Pos@{ms\+Pos}}
+\index{ms\+Pos@{ms\+Pos}!Game@{Game}}
+\subsubsection[{\texorpdfstring{ms\+Pos}{msPos}}]{\setlength{\rightskip}{0pt plus 5cm}Vector2i Game\+::ms\+Pos\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a5caae82a187e433175a08de88a17b4db}{}\label{class_game_a5caae82a187e433175a08de88a17b4db}
+\index{Game@{Game}!perso\+Sprites@{perso\+Sprites}}
+\index{perso\+Sprites@{perso\+Sprites}!Game@{Game}}
+\subsubsection[{\texorpdfstring{perso\+Sprites}{persoSprites}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$Sprite$\ast$$>$ Game\+::perso\+Sprites\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a2e6e306ff053106fef09e037c8d1e6ba}{}\label{class_game_a2e6e306ff053106fef09e037c8d1e6ba}
+\index{Game@{Game}!perso\+Textures@{perso\+Textures}}
+\index{perso\+Textures@{perso\+Textures}!Game@{Game}}
+\subsubsection[{\texorpdfstring{perso\+Textures}{persoTextures}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$Texture$\ast$$>$ Game\+::perso\+Textures\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a9ce381e463f20cfa4b02e7883a911562}{}\label{class_game_a9ce381e463f20cfa4b02e7883a911562}
+\index{Game@{Game}!player\+Plate\+Sprites@{player\+Plate\+Sprites}}
+\index{player\+Plate\+Sprites@{player\+Plate\+Sprites}!Game@{Game}}
+\subsubsection[{\texorpdfstring{player\+Plate\+Sprites}{playerPlateSprites}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$Sprite$\ast$$>$ Game\+::player\+Plate\+Sprites\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_ae97b872af441bf853ee3af3129cba962}{}\label{class_game_ae97b872af441bf853ee3af3129cba962}
+\index{Game@{Game}!serv\+\_\+addr@{serv\+\_\+addr}}
+\index{serv\+\_\+addr@{serv\+\_\+addr}!Game@{Game}}
+\subsubsection[{\texorpdfstring{serv\+\_\+addr}{serv_addr}}]{\setlength{\rightskip}{0pt plus 5cm}struct sockaddr\+\_\+in Game\+::serv\+\_\+addr\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_adbda5d55bf70435c7f4bcbe27af49dcc}{}\label{class_game_adbda5d55bf70435c7f4bcbe27af49dcc}
+\index{Game@{Game}!serv\+\_\+buff@{serv\+\_\+buff}}
+\index{serv\+\_\+buff@{serv\+\_\+buff}!Game@{Game}}
+\subsubsection[{\texorpdfstring{serv\+\_\+buff}{serv_buff}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Buffer} Game\+::serv\+\_\+buff\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a38fa2f0f4350dfa47bd85fd13e3e558c}{}\label{class_game_a38fa2f0f4350dfa47bd85fd13e3e558c}
+\index{Game@{Game}!serv\+\_\+client\+Addr@{serv\+\_\+client\+Addr}}
+\index{serv\+\_\+client\+Addr@{serv\+\_\+client\+Addr}!Game@{Game}}
+\subsubsection[{\texorpdfstring{serv\+\_\+client\+Addr}{serv_clientAddr}}]{\setlength{\rightskip}{0pt plus 5cm}struct sockaddr\+\_\+in Game\+::serv\+\_\+client\+Addr\mbox{[}4\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_aad42b135b7c7c3fcb96a5faa6ecd086a}{}\label{class_game_aad42b135b7c7c3fcb96a5faa6ecd086a}
+\index{Game@{Game}!serv\+\_\+client\+I\+P\+Addr@{serv\+\_\+client\+I\+P\+Addr}}
+\index{serv\+\_\+client\+I\+P\+Addr@{serv\+\_\+client\+I\+P\+Addr}!Game@{Game}}
+\subsubsection[{\texorpdfstring{serv\+\_\+client\+I\+P\+Addr}{serv_clientIPAddr}}]{\setlength{\rightskip}{0pt plus 5cm}char Game\+::serv\+\_\+client\+I\+P\+Addr\mbox{[}4\mbox{]}\mbox{[}16\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a4f7f8e29dc9f799e221a38493c7d43ca}{}\label{class_game_a4f7f8e29dc9f799e221a38493c7d43ca}
+\index{Game@{Game}!serv\+\_\+client\+Port\+No@{serv\+\_\+client\+Port\+No}}
+\index{serv\+\_\+client\+Port\+No@{serv\+\_\+client\+Port\+No}!Game@{Game}}
+\subsubsection[{\texorpdfstring{serv\+\_\+client\+Port\+No}{serv_clientPortNo}}]{\setlength{\rightskip}{0pt plus 5cm}int Game\+::serv\+\_\+client\+Port\+No\mbox{[}4\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a90aab94315524e741e90fb8e29cbe8dd}{}\label{class_game_a90aab94315524e741e90fb8e29cbe8dd}
+\index{Game@{Game}!serv\+\_\+clilen@{serv\+\_\+clilen}}
+\index{serv\+\_\+clilen@{serv\+\_\+clilen}!Game@{Game}}
+\subsubsection[{\texorpdfstring{serv\+\_\+clilen}{serv_clilen}}]{\setlength{\rightskip}{0pt plus 5cm}socklen\+\_\+t Game\+::serv\+\_\+clilen\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a4a261876196ef61c4808c3e34a06e0b1}{}\label{class_game_a4a261876196ef61c4808c3e34a06e0b1}
+\index{Game@{Game}!serv\+\_\+cpsfd@{serv\+\_\+cpsfd}}
+\index{serv\+\_\+cpsfd@{serv\+\_\+cpsfd}!Game@{Game}}
+\subsubsection[{\texorpdfstring{serv\+\_\+cpsfd}{serv_cpsfd}}]{\setlength{\rightskip}{0pt plus 5cm}int Game\+::serv\+\_\+cpsfd\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_aa1c8c267903168ca92facc373399531b}{}\label{class_game_aa1c8c267903168ca92facc373399531b}
+\index{Game@{Game}!serv\+\_\+port\+No@{serv\+\_\+port\+No}}
+\index{serv\+\_\+port\+No@{serv\+\_\+port\+No}!Game@{Game}}
+\subsubsection[{\texorpdfstring{serv\+\_\+port\+No}{serv_portNo}}]{\setlength{\rightskip}{0pt plus 5cm}int Game\+::serv\+\_\+port\+No\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_afeb6f705821e63812c7479d05c0c8447}{}\label{class_game_afeb6f705821e63812c7479d05c0c8447}
+Liste des morceaux \index{Game@{Game}!serv\+\_\+sfd@{serv\+\_\+sfd}}
+\index{serv\+\_\+sfd@{serv\+\_\+sfd}!Game@{Game}}
+\subsubsection[{\texorpdfstring{serv\+\_\+sfd}{serv_sfd}}]{\setlength{\rightskip}{0pt plus 5cm}int Game\+::serv\+\_\+sfd\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_ac698cf1904287abc3021f0b6fa7411a4}{}\label{class_game_ac698cf1904287abc3021f0b6fa7411a4}
+\index{Game@{Game}!time@{time}}
+\index{time@{time}!Game@{Game}}
+\subsubsection[{\texorpdfstring{time}{time}}]{\setlength{\rightskip}{0pt plus 5cm}float Game\+::time\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_ace6d6f7c808735dabb0e4d46e9f95495}{}\label{class_game_ace6d6f7c808735dabb0e4d46e9f95495}
+\index{Game@{Game}!window@{window}}
+\index{window@{window}!Game@{Game}}
+\subsubsection[{\texorpdfstring{window}{window}}]{\setlength{\rightskip}{0pt plus 5cm}Render\+Window Game\+::window\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{class_game_a8773f0f2562575ce000b0a6abb6c87ed}{}\label{class_game_a8773f0f2562575ce000b0a6abb6c87ed}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-src/gamelib.\+hpp\item 
-src/gamelib.\+cpp\end{DoxyCompactItemize}
+src/\hyperlink{gamelib_8hpp}{gamelib.\+hpp}\item 
+src/\hyperlink{gamelib_8cpp}{gamelib.\+cpp}\end{DoxyCompactItemize}

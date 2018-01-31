@@ -1,0 +1,62 @@
+\hypertarget{netlib_8cpp}{}\section{src/netlib.cpp File Reference}
+\label{netlib_8cpp}\index{src/netlib.\+cpp@{src/netlib.\+cpp}}
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$sys/types.\+h$>$}\\*
+{\ttfamily \#include $<$sys/socket.\+h$>$}\\*
+{\ttfamily \#include $<$netinet/in.\+h$>$}\\*
+{\ttfamily \#include $<$netdb.\+h$>$}\\*
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\\*
+{\ttfamily \#include $<$sys/ioctl.\+h$>$}\\*
+{\ttfamily \#include $<$net/if.\+h$>$}\\*
+{\ttfamily \#include $<$sys/wait.\+h$>$}\\*
+{\ttfamily \#include $<$fcntl.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}netlib.\+hpp\char`\"{}}\\*
+{\ttfamily \#include $<$err.\+h$>$}\\*
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}vector\char`\"{}}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+Include dependency graph for netlib.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{netlib_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{netlib_8cpp_a09d73a7c513d94589e8150ea2df254b7}{send\+T\+CP} (const char $\ast$I\+Paddress, int port, \hyperlink{netlib_8hpp_a2e50028ebd48ce86d5b1fc983d6ef155}{Buffer} $\ast$buff)
+\item 
+int \hyperlink{netlib_8cpp_ab73c457f96397f02201e8124c8493377}{scan\+Servers} (\hyperlink{netlib_8hpp_a95e7ffbda40674e59bb208b9c6c9a22a}{Server} servers\mbox{[}5\mbox{]})
+\begin{DoxyCompactList}\small\item\em Scan the different IP address and store the servers sh13 found inside the servers array passed in argument. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{netlib.\+cpp@{netlib.\+cpp}!scan\+Servers@{scan\+Servers}}
+\index{scan\+Servers@{scan\+Servers}!netlib.\+cpp@{netlib.\+cpp}}
+\subsubsection[{\texorpdfstring{scan\+Servers(\+Server servers[5])}{scanServers(Server servers[5])}}]{\setlength{\rightskip}{0pt plus 5cm}scan\+Servers (
+\begin{DoxyParamCaption}
+\item[{{\bf Server}}]{servers\mbox{[}5\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{netlib_8cpp_ab73c457f96397f02201e8124c8493377}{}\label{netlib_8cpp_ab73c457f96397f02201e8124c8493377}
+
+
+Scan the different IP address and store the servers sh13 found inside the servers array passed in argument. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em server\mbox{[}5\mbox{]}} & Arrays of servers found. \\
+\hline
+\end{DoxyParams}
+\index{netlib.\+cpp@{netlib.\+cpp}!send\+T\+CP@{send\+T\+CP}}
+\index{send\+T\+CP@{send\+T\+CP}!netlib.\+cpp@{netlib.\+cpp}}
+\subsubsection[{\texorpdfstring{send\+T\+C\+P(const char $\ast$\+I\+Paddress, int port, Buffer $\ast$buff)}{sendTCP(const char *IPaddress, int port, Buffer *buff)}}]{\setlength{\rightskip}{0pt plus 5cm}int send\+T\+CP (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{I\+Paddress, }
+\item[{int}]{port, }
+\item[{{\bf Buffer} $\ast$}]{buff}
+\end{DoxyParamCaption}
+)}\hypertarget{netlib_8cpp_a09d73a7c513d94589e8150ea2df254b7}{}\label{netlib_8cpp_a09d73a7c513d94589e8150ea2df254b7}
